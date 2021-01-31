@@ -1,0 +1,24 @@
+# / 除外
+
+# /database/ 除外
+/database/
+
+# /web/ 除外
+/web/*
+/web/app/Console
+/web/app/Exceptions
+
+# /web/ 管理
+!/web/app/
+!/web/app/models/
+!/web/config/
+!/web/database/
+!/web/public/
+!/web/resources/
+!/web/routes/
+!/web/tests/
+!/web/webpack.mix.js
+!/web/server.php
+!/web/composer.json
+!/web/package.json
+!/web/.gitattributes
