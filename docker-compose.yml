@@ -1,0 +1,25 @@
+version: '3'
+services:
+  web:
+    build: .
+    volumes:
+      - ./web:/var/www/html/relief_market
+    ports:
+      - 8081:8081
+      - 3000:3000
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: relief_market_database
+      MYSQL_USER: docker
+      MYSQL_PASSWORD: docker
+      TZ: 'Asia/Tokyo'
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - ./database/data:/var/lib/mysql
+      - ./database/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./database/sql:/docker-entrypoint-initdb.d
+    ports:
+      - 3306:3306
