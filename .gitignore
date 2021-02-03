@@ -9,6 +9,7 @@
 /web/app/Exceptions
 
 # /web/ 管理
+!*.md
 !/web/app/
 !/web/app/models/
 !/web/config/
