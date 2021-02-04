@@ -1,0 +1,6 @@
+# 管理しないファイル
+node_modules
+vendor
+
+database
+storage
