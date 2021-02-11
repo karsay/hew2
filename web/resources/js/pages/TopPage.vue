@@ -1,8 +1,8 @@
 <template>
   <div>
-    <img src="" alt="" srcset="" />
+    <v-img src="" alt="" srcset="" height="240" class="primary_dark" />
 
-    <v-card class="card">
+    <v-card class="pb-12 card card__position">
 
       <v-container class="py-10 px-6">
         <v-card-title class="pl-0">
@@ -73,8 +73,25 @@
         <template #button-text>登録する</template>
       </site-overview>
 
-      <v-container class="pt-8 px-6">
-        <site-overview-card></site-overview-card>
+      <v-container class="pt-8 pb-12 px-6">
+        <v-row>
+          <v-col cols="12">
+            <site-overview-card>
+              <template #icon-face>{{ certificationOverview.iconAccount }}</template>
+              <template #icon-fing>{{ certificationOverview.iconFingerprint }}</template>
+              <template #title>{{ certificationOverview.title }}</template>
+              <template #text>
+                <p
+                  v-for="text in certificationOverview.text"
+                  :key="text"
+                  class="ma-0 text-body-1 font-weight-regular"
+                >
+                  {{ text }}
+                </p>
+              </template>
+            </site-overview-card>
+          </v-col>
+        </v-row>
       </v-container>
 
     </v-card>
@@ -157,6 +174,21 @@ export default {
           "Relief Marketでは会員登録、ログイン、商品の出品、購入する際にユーザー本人であるかどうかを顔認証、指紋情報二つの生体情報を用いて登録、確認を行います。",
           "認証情報を取得する際、Relief Marketではユーザーに指紋認証、顔認証を可能とするIoTデバイスを利用していただき、サービスを使えるようにします。",
           "",
+        ],
+      },
+      certificationOverview: {
+        iconAccount: "mdi-account",
+        iconFingerprint: "mdi-fingerprint",
+        title: "生体認証によるメリット",
+        text: [
+          "生体認証とは、指紋や静脈、声など、身体の一部やそれに準ずる要素を使い",
+          "ユーザーを特定する仕組みです。",
+          "Relief Marketでは多くのフリーマーケットの課題である、ユーザーの",
+          "複数アカウント作成、転売等のトラブルを限りなく少なくすることができます。",
+          "これらの多くのトラブルは生体情報を使うことで画面の向こう側のユーザーを、",
+          "間接的に特定し、問題に応じた処置を素早く行うことを実現します。",
+          "Relief Marketではユーザーに厳しいルールを押し付けるのではなく、",
+          "ユーザーに安心を与えるサービスを目指します。"
         ]
       }
     }
@@ -167,5 +199,10 @@ export default {
 <style lang="scss" scoped>
 .card {
   border-radius: 16px !important;
+}
+
+.card__position {
+  position: relative;
+  top: -16px;
 }
 </style>
