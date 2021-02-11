@@ -47,7 +47,7 @@
 
 export default {
   props: {
-    isLoginStatus: Boolean
+    isLoginStatus: Boolean,
   },
   data() {
     return {

@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer app v-model="drawer">
+  <v-navigation-drawer app v-model="drawerState" :temporary="true" >
     <v-list>
       <v-list-item>
         <v-list-item-content class="justify-center">
@@ -83,6 +83,7 @@ export default {
   },
   data() {
     return {
+      drawerState: this.drawer,
       navButtonLists: [
         {
           icon: "mdi-account-circle",
@@ -119,6 +120,11 @@ export default {
         icon: "mdi-logout-variant",
         text: "ログアウト"
       }
+    }
+  },
+  watch: {
+    drawer() {
+      this.drawerState = !this.drawerState
     }
   },
 }
