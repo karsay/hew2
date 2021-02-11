@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 
 import TopPage from './pages/TopPage.vue'
 import Login from './pages/Login.vue'
+import ProductListsPage from './pages/ProductListsPage.vue'
 
 Vue.use(VueRouter)
 
@@ -14,6 +15,10 @@ const routes = [
   {
     path: '/login',
     component: Login
+  },
+  {
+    path: '/productList/:page',
+    component: ProductListsPage,
   }
 ]
 
