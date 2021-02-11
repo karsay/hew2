@@ -3,7 +3,7 @@
     <TheNavigation />
     <!-- アプリケーションのコンポーネントに基づいてコンテンツのサイズを決定 -->
 
-    <v-main>
+    <v-main class="common">
       <!-- アプリケーションに適切なgutterを提供します -->
       <v-container class="pa-0">
         <!-- vue-routerを使用している場合 -->
@@ -36,3 +36,9 @@ export default {
 
 }
 </script>
+
+<style scoped>
+.common {
+  background-color: #fafafa;
+}
+</style>
