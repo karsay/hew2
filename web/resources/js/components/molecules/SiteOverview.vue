@@ -15,7 +15,7 @@
         ></v-img>
       </v-col>
 
-      <v-col cols="6 d-flex flex-column">
+      <v-col cols="6" class="d-flex flex-column">
         <v-card-subtitle class="pt-0 pl-0">
           <h4 class="text--primary text-h4">
             <slot name="overview-subtitle"></slot>

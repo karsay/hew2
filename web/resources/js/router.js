@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 import TopPage from './pages/TopPage.vue'
 import Login from './pages/Login.vue'
 import ProductListsPage from './pages/ProductListsPage.vue'
+import SellProductPage from './pages/SellProductPage.vue'
 
 Vue.use(VueRouter)
 
@@ -17,8 +18,12 @@ const routes = [
     component: Login
   },
   {
-    path: '/productList/:page',
+    path: '/product-list/:page',
     component: ProductListsPage,
+  },
+  {
+    path: '/sell-product',
+    component: SellProductPage,
   }
 ]
 
