@@ -24,6 +24,7 @@
           :key="button.text"
           :depressed="true"
           :class="'primary_light white--text'"
+          @click="toSellProduct"
         >
           <v-icon class="mr-1">{{ button.icon }}</v-icon>
           {{ button.text }}
@@ -87,6 +88,9 @@ export default {
     },
     toLogin() {
       this.$emit('to-login')
+    },
+    toSellProduct() {
+      this.$emit('to-sell-product')
     }
   }
 }
