@@ -8,7 +8,11 @@
       <v-row>
         <v-app-bar-nav-icon @click="isDrawer" class="white--text"></v-app-bar-nav-icon>
         <v-spacer></v-spacer>
-        <v-toolbar-title class="white--text">{{ title }}</v-toolbar-title>
+          <v-toolbar-title @click="toTop" >
+            <h1 class="text-h5 white--text title">
+              {{ title }}
+            </h1>
+          </v-toolbar-title>
         <v-spacer></v-spacer>
 
         <v-app-bar-nav-icon><v-icon class="white--text">mdi-magnify</v-icon></v-app-bar-nav-icon>
@@ -28,6 +32,7 @@
         <v-btn
           v-if="isLoginStatus !== true"
           :depressed="true"
+          @click="toLogin"
           class="secondary"
         >
           <v-icon
@@ -76,12 +81,21 @@ export default {
   methods: {
     isDrawer() {
       this.$emit("is-drawer")
+    },
+    toTop() {
+      this.$emit('to-top')
+    },
+    toLogin() {
+      this.$emit('to-login')
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+.title {
+  cursor: pointer;
+}
 h1 {
   font-size: 24px;
 }
