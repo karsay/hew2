@@ -36,6 +36,7 @@
             <v-btn
               width="176"
               class="primary"
+              @click="toLogin"
             >
               <slot name="button-text"></slot>
             </v-btn>
@@ -51,6 +52,11 @@
 
 <script>
 export default {
+  methods: {
+    toLogin() {
+      this.$router.push('/login')
+    },
+  },
 }
 </script>
 

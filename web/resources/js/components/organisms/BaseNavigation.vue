@@ -2,7 +2,7 @@
   <div
     class="white--text"
   >
-    <HeaderNavigation @is-drawer="drawer = !drawer" :is-login-status="isLoginStatus" />
+    <HeaderNavigation @is-drawer="drawer = !drawer" @to-top="toTop" @to-login="toLogin" :is-login-status="isLoginStatus" />
     <SideNavigation :drawer="drawer" />
     <v-btn
       :fab="true"
@@ -33,6 +33,17 @@ export default {
   data() {
     return {
       drawer: false,
+    }
+  },
+  methods: {
+    isDrawer() {
+      this.drawer = !this.drawer
+    },
+    toTop() {
+      this.$router.push({ path: '/' })
+    },
+    toLogin() {
+      this.$router.push({ path: '/login' })
     }
   },
   computed: {
