@@ -1,6 +1,9 @@
-# 管理しないファイル
+# 管理外
+
 node_modules
 vendor
 public
 /database
-storage
+
+/web/storage/*
+!/web/storage/framework/
