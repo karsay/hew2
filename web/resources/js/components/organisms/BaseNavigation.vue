@@ -2,17 +2,24 @@
   <div
     class="white--text"
   >
-    <HeaderNavigation @is-drawer="drawer = !drawer" @to-top="toTop" @to-login="toLogin" :is-login-status="isLoginStatus" />
+    <HeaderNavigation
+      @is-drawer="drawer = !drawer"
+      @to-top="toTop"
+      @to-login="toLogin"
+      @to-sell-product="toSellProduct"
+      :is-login-status="isLoginStatus"
+    />
     <SideNavigation :drawer="drawer" />
     <v-btn
+      class="secondary"
+      @click="toSellProduct"
       :fab="true"
       :large="true"
       :fixed="true"
       :bottom="true"
       :right="true"
-      class="secondary"
     >
-      <v-icon>mdi-camera</v-icon>
+      <v-icon>mdi-camera-plus</v-icon>
     </v-btn>
 
   </div>
@@ -44,6 +51,9 @@ export default {
     },
     toLogin() {
       this.$router.push({ path: '/login' })
+    },
+    toSellProduct() {
+      this.$router.push({ path: '/sell-product' })
     }
   },
   computed: {
