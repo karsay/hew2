@@ -9,12 +9,7 @@
           新着アイテム
         </v-card-title>
 
-        <v-pagination
-          v-model="pageNum"
-          :length="6"
-          @input="pagenationHandle"
-        >
-        </v-pagination>
+        <Pagenation :current-page="currentPage" :last-page="lastPage" />
       </v-container>
 
     </v-card>
@@ -22,17 +17,55 @@
 </template>
 
 <script>
+import Pagenation from './../components/molecules/Pagenation'
+
   export default {
+    components: {
+      Pagenation,
+    },
+    props: {
+      page: {
+        type: Number,
+        required: false,
+        default: 1
+      }
+    },
     data() {
       return {
-        pageNum: 1
+        products: [],
+        currentPage: 0,
+        lastPage: 0,
+        pageVal: 0
       }
     },
     methods: {
-      pagenationHandle() {
-        this.$router.push(`/productList/${this.pageNum}`)
-      }
+      /* api完成後 */
+      async fetchProductsData() {
+        // const res = await axios.get(`/api/photos/?page=${this.page}`)
+
+        // 仮レスポンス
+        const res = {
+          data: {
+            data: [],
+            currentPage: this.pageVal += 1,
+            lastPage: 10
+          }
+        }
+
+        this.products = res.data.data
+        this.currentPage = res.data.currentPage
+        this.lastPage = res.data.lastPage
+      },
+
     },
+    watch: {
+      $route: {
+        async handler () {
+          await this.fetchProductsData()
+        },
+        immediate: true
+      }
+    }
   }
 </script>
 
