@@ -5,6 +5,8 @@ import TopPage from './pages/TopPage.vue'
 import Login from './pages/Login.vue'
 import ProductListsPage from './pages/ProductListsPage.vue'
 import SellProductPage from './pages/SellProductPage.vue'
+import ProductCheckPage from './pages/ProductCheckPage.vue'
+import ProductPicturePage from './pages/ProductPicturePage.vue'
 
 Vue.use(VueRouter)
 
@@ -18,12 +20,34 @@ const routes = [
     component: Login
   },
   {
-    path: '/product-list/:page',
+    path: '/product-list/',
     component: ProductListsPage,
+    props: route => {
+      const page = route.query.page
+      return { page: /^[1-9][0-9]*$/.test(page) ? page * 1 : 1 }
+    }
+  },
+  {
+    path: '/product-list',
+    redirect: '/product-list/?page=1',
+  },
+  {
+    // 720pxなのでsell/urlでform, check->previewに起きたら変える, pictureでわけてもいいかも、、
+    path: '/sell-product/form',
+    name: 'sell-product',
+    component: SellProductPage,
   },
   {
     path: '/sell-product',
-    component: SellProductPage,
+    redirect: { name: 'sell-product' }
+  },
+  {
+    path: '/sell-product/check',
+    component: ProductCheckPage
+  },
+  {
+    path: '/sell-product/picture',
+    component: ProductPicturePage
   }
 ]
 
