@@ -6,7 +6,7 @@
   >
     <v-container>
       <v-row>
-        <v-app-bar-nav-icon @click="isDrawer" class="white--text"></v-app-bar-nav-icon>
+        <v-app-bar-nav-icon @click="isDrawer(drawer)" class="white--text"></v-app-bar-nav-icon>
         <v-spacer></v-spacer>
           <v-toolbar-title @click="toTop" >
             <h1 class="text-h5 white--text title">
@@ -47,41 +47,16 @@
 </template>
 
 <script>
-/*
-  - isLoginはvuexから受け取る
-*/
-
 export default {
   props: {
     isLoginStatus: Boolean,
-  },
-  data() {
-    return {
-      title: 'Relief Market',
-      buttons: [
-        {
-          text: "カテゴリ",
-          icon: "mdi-store"
-        },
-        {
-          text: "出品",
-          icon: "mdi-camera"
-        },
-        {
-          text: "取引",
-          icon: "mdi-message-text"
-        },
-        
-        {
-          text: "通知",
-          icon: "mdi-bell"
-        },
-      ]
-    }
+    title: String,
+    buttons: Array,
+    drawer: Boolean
   },
   methods: {
-    isDrawer() {
-      this.$emit("is-drawer")
+    isDrawer(bool) {
+      this.$emit("is-drawer", !bool)
     },
     toTop() {
       this.$emit('to-top')

@@ -1,6 +1,9 @@
 <template>
   <v-app>
-    <TheNavigation />
+    <div class="white--text">
+      <TheHeaderNavigation />
+      <TheSideNavigation />
+    </div>
     <!-- アプリケーションのコンポーネントに基づいてコンテンツのサイズを決定 -->
 
     <v-main class="common pt-0 mb-0">
@@ -15,15 +18,16 @@
 </template>
 
 <script>
-import TheNavigation from './components/container/TheNavigation'
+import TheHeaderNavigation from './components/container/TheHeaderNavigation'
+import TheSideNavigation from './components/container/TheSideNavigation'
 
 export default {
   components: {
-    TheNavigation
+    TheHeaderNavigation,
+    TheSideNavigation
   },
   data(){
     return{
-      drawer: null,
       supports:[
         '1',
         '2',
