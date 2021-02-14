@@ -5,7 +5,7 @@ import TopPage from './pages/TopPage.vue'
 import Login from './pages/Login.vue'
 import ProductListsPage from './pages/ProductListsPage.vue'
 import SellProductPage from './pages/SellProductPage.vue'
-import ProductCheckPage from './pages/ProductCheckPage.vue'
+import ProductPreviewPage from './pages/ProductPreviewPage.vue'
 import ProductPicturePage from './pages/ProductPicturePage.vue'
 
 Vue.use(VueRouter)
@@ -42,8 +42,8 @@ const routes = [
     redirect: { name: 'sell-product' }
   },
   {
-    path: '/sell-product/check',
-    component: ProductCheckPage
+    path: '/sell-product/preview',
+    component: ProductPreviewPage
   },
   {
     path: '/sell-product/picture',
