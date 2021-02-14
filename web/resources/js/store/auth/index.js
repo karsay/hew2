@@ -2,7 +2,7 @@
 
 const state = {
   // ログイン済みユーザーを保持
-  isLoginStatus: null,
+  isLoginStatus: true,
   // Api通信の成功、失敗の保持
   apiStatus: null,
   // ログインのエラーメッセージの保持
@@ -11,7 +11,12 @@ const state = {
   registerErrorMessages: null,
 }
 
+const getters = {
+  getIsLoginStatus: state => !! state.isLoginStatus
+}
+
 export default {
   namespaced: true,
-  state
+  state,
+  getters,
 }

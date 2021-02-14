@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer app v-model="drawerState" :temporary="true" >
+  <v-navigation-drawer app @input="isDrawer" :value="drawer" :temporary="true" >
     <v-list>
       <v-list-item>
         <v-list-item-content class="justify-center">
@@ -77,56 +77,17 @@
 <script>
 export default {
   props: {
-    drawer: {
-      type: Boolean
-    }
+    navButtonLists: Array,
+    navButtonLogout: Object,
+    navDropdown: Object,
+    drawer: Boolean,
   },
-  data() {
-    return {
-      drawerState: this.drawer,
-      navButtonLists: [
-        {
-          icon: "mdi-account-circle",
-          text: "プロフィール"
-        },
-        {
-          icon: "mdi-heart",
-          text: "いいね一覧"
-        },
-        {
-          icon: "mdi-package-up",
-          text: "出品情報"
-        },
-        {
-          icon: "mdi-package-down",
-          text: "購入情報"
-        },
-        {
-          icon: "mdi-email",
-          text: "お問い合わせ"
-        },
-      ],
-      navDropdown: {
-        icon: "mdi-cog",
-        text: "設定",
-        settingLists: [
-          "プロフィール設定",
-          "アカウント情報設定",
-          "お支払方法設定",
-          "認証情報再設定"
-        ]
-      },
-      navButtonLogout: {
-        icon: "mdi-logout-variant",
-        text: "ログアウト"
-      }
-    }
+  methods: {
+    isDrawer(e) {
+      this.$emit('is-drawer', e)
+    },
   },
-  watch: {
-    drawer() {
-      this.drawerState = !this.drawerState
-    }
-  },
+
 }
 </script>
 
