@@ -15,11 +15,12 @@
 </template>
 
 <script>
-  export default {
-    props: {
-      inputItems: Array
-    }
+
+export default {
+  props: {
+    inputItems: Array
   }
+}
 </script>
 
 <style scoped>

@@ -2,7 +2,7 @@
   <v-container class="py-10 px-6">
     <v-card-title class="pl-0">
       <h3 class="text-h3">
-        <slot name="overview-title"></slot>
+        {{ title }}
       </h3>
     </v-card-title>
 
@@ -18,12 +18,18 @@
       <v-col cols="6" class="d-flex flex-column">
         <v-card-subtitle class="pt-0 pl-0">
           <h4 class="text--primary text-h4">
-            <slot name="overview-subtitle"></slot>
+            {{ subtitle }}
           </h4>
         </v-card-subtitle>
 
         <v-card-text class="pa-0">
-          <slot name="iot-overview"></slot>
+          <p
+            v-for="text in overviewText"
+            :key="text"
+            class="ma-0 text-body-1 font-weight-regular"
+          >
+            {{ text }}
+          </p>
         </v-card-text>
 
         <v-card-actions class="mt-auto pa-0">
@@ -38,7 +44,7 @@
               class="primary"
               @click="toLogin"
             >
-              <slot name="button-text"></slot>
+              {{ buttonText }}
             </v-btn>
           </v-col>
         </v-card-actions>
@@ -52,6 +58,12 @@
 
 <script>
 export default {
+  props: {
+    title: String,
+    subtitle: String,
+    overviewText: Array,
+    buttonText: String
+  },
   methods: {
     toLogin() {
       this.$router.push('/login')

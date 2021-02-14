@@ -3,13 +3,13 @@
     <v-row>
       <v-col cols="6" class="pa-0 my-auto text-center">
         <v-col cols="12">
-          <v-icon size="80"><slot name="icon-face"></slot></v-icon>
+          <v-icon size="80">{{ iconAccount }}</v-icon>
           <v-icon size="40" class="primary--text">mdi-forward</v-icon>
           <v-icon size="80">mdi-database-search</v-icon>
         </v-col>
 
         <v-col cols="12">
-          <v-icon size="80"><slot name="icon-fing"></slot></v-icon>
+          <v-icon size="80">{{ iconFingerprint }}</v-icon>
           <v-icon size="40" class="primary--text">mdi-forward</v-icon>
           <v-icon size="80">mdi-database-search</v-icon>
         </v-col>
@@ -18,11 +18,17 @@
       <v-col cols="6">
         <v-card-title class="pa-0">
           <h4 class="text-h4">
-            <slot name="title"></slot>
+            {{ title }}
           </h4>
         </v-card-title>
         <v-card-text class="pa-0 mt-4">
-          <slot name="text"></slot>
+          <p
+            v-for="overviewText in text"
+            :key="overviewText"
+            class="ma-0 text-body-1 font-weight-regular"
+          >
+            {{ overviewText }}
+          </p>
         </v-card-text>
       </v-col>
 
@@ -32,7 +38,12 @@
 
 <script>
   export default {
-    
+    props: {
+      iconAccount: String,
+      iconFingerprint: String,
+      title: String,
+      text: Array
+    },
   }
 </script>
 
