@@ -3,6 +3,17 @@
     <div class="white--text">
       <TheHeaderNavigation />
       <TheSideNavigation />
+      <v-btn
+        class="secondary"
+        to="/sell-product/form"
+        :fab="true"
+        :large="true"
+        :fixed="true"
+        :bottom="true"
+        :right="true"
+      >
+        <v-icon>mdi-camera-plus</v-icon>
+      </v-btn>
     </div>
     <!-- アプリケーションのコンポーネントに基づいてコンテンツのサイズを決定 -->
 
