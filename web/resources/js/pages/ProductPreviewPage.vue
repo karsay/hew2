@@ -14,7 +14,7 @@
                 <p class="ma-0">商品名</p>
               </v-card-subtitle>
               <v-card-text class="pb-2 px-0">
-                <p class="ma-0 text-h6 card__text">{{ getSellProductData.name }}</p>
+                <p class="ma-0 text-h6 card__text">{{ getInputItems.name }}</p>
               </v-card-text>
             </div>
 
@@ -23,7 +23,7 @@
                 <p class="ma-0">価格</p>
               </v-card-subtitle>
               <v-card-text class="pb-2 px-0">
-                <p class="ma-0 text-h6 card__text">{{ getSellProductData.price }}</p>
+                <p class="ma-0 text-h6 card__text">{{ getInputItems.price }}</p>
               </v-card-text>
             </div>
 
@@ -32,7 +32,7 @@
                 <p class="ma-0">商品の状態</p>
               </v-card-subtitle>
               <v-card-text class="pb-2 px-0">
-                <p class="ma-0 text-h6 card__text">{{ getSellProductData.state }}</p>
+                <p class="ma-0 text-h6 card__text">{{ getInputItems.state }}</p>
               </v-card-text>
             </div>
 
@@ -60,7 +60,7 @@ import { mapGetters } from 'vuex'
 export default {
   computed: {
     ...mapGetters(
-      'sellProduct', ['getSellProductData']
+      'sellProduct', ['getInputItems']
     )
   },
 }
