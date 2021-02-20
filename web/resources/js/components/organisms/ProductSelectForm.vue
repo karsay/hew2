@@ -2,8 +2,9 @@
   <v-card class="px-4 py-6">
     <v-select
       v-for="selectItem in selectItems"
-      :key="selectItem.subText"
+      :key="selectItem.prop"
       v-model="selectItem.selected"
+      @change="setSelectItems(selectItem.prop, selectItem.selected)"
       :label="selectItem.subText"
       :items="selectItem.item"
       outlined
@@ -15,7 +16,14 @@
 <script>
 export default {
   props: {
-    selectItems: Array
+    selectItems: Array,
+    selectedItems: Array
   },
+  methods: {
+    setSelectItems(prop, item) {
+      this.$emit('set-select-item', prop, item)
+    },
+  },
+
 }
 </script>
