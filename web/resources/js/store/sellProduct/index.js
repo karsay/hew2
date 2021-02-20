@@ -3,6 +3,7 @@
 // formの値を変更するときのmutationを定義するstateの取得変更はすべてstoreでやったほうがいい？？
 
 const state = {
+  flag: false,
   selectItems: {
     category: '',
     state: '',
@@ -12,7 +13,7 @@ const state = {
   },
   inputItems: {
     name: 'aaa',
-    price: 0,
+    price: '',
     detail: '',
   }
 }
@@ -27,17 +28,13 @@ const getters = {
 }
 
 const mutations = {
-  setSelectItems: () => {},
-  setSellProductData: (state, productData) => {
-    state = {
-      ...state,
-      ...productData
-    }
-    // state.productData = {
-    //   ...state.productData,
-    //   ...productData
-    // }
+  setSelectItems: (state, selectItem) => {
+    state.selectItems[selectItem.prop] = selectItem.selected
   },
+  setInputItems: (state) => {},
+  isFlag: state => {
+    state.flag = !state.flag
+  }
 }
 
 export default {

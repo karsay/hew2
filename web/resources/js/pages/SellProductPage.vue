@@ -1,6 +1,6 @@
 <template>
   <v-container class="pt-0 d-flex justify-center">
-    <v-sheet width="720" class="px-6 mt-10 background">
+    <v-sheet width="720" color="#fafafa" class="px-6 mt-10">
       <h4 class="text-h4">商品情報入力フォーム</h4>
       <h5 class="mt-10 text-h5">商品を撮影する</h5>
 
@@ -44,10 +44,3 @@ export default {
   },
 }
 </script>
-
-<style scoped>
-.background {
-  background-color: #fafafa;
-}
-
-</style>

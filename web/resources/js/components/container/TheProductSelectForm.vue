@@ -1,26 +1,21 @@
 <template>
   <ProductSelectForm
     :selectItems="selectItems"
+    @set-select-item="setSelectItem"
   />
 </template>
 
 <script>
 import ProductSelectForm from './../organisms/ProductSelectForm'
-import { mapGetters, mapMutations } from 'vuex'
+import { mapMutations } from 'vuex'
 
 export default {
   components: { ProductSelectForm },
   data() {
     return {
-      selectedItems: {
-        category: '',
-        state: '',
-        shippingCost: '',
-        shippingFrom: '',
-        shippingDays: ''
-      },
       selectItems: [
         {
+          prop: 'category',
           selected: "",
           subText: "商品のカテゴリ",
           item: [
@@ -34,6 +29,7 @@ export default {
           ]
         },
         {
+          prop: 'state',
           selected: "",
           subText: "商品の状態",
           item: [
@@ -45,6 +41,7 @@ export default {
           ],
         },
         {
+          prop: 'shippingCost',
           selected: "",
           subText: "配送料の負担",
           item: [
@@ -53,6 +50,7 @@ export default {
           ],
         },
         {
+          prop: 'shippingFrom',
           selected: "",
           subText: "発送元の地域",
           item: [
@@ -68,6 +66,7 @@ export default {
           ],
         },
         {
+          prop: 'shippingDays',
           selected: "",
           subText: "発送までの日数",
           item: [
@@ -81,17 +80,14 @@ export default {
     }
   },
   methods: {
-    ...mapMutations('sellProduct', ['setSellProductData'])
-  },
-  computed: {
-    ...mapGetters("sellProduct", ["getSellProductData"]),
-    mergeProductData() {
-      
+    ...mapMutations('sellProduct', ['setSelectItems']),
+    setSelectItem(prop, item) {
+      const payload = {
+        prop: prop,
+        selected: item
+      }
+      this.setSelectItems(payload)
     }
-  }
+  },
 }
 </script>
-
-<style scoped>
-
-</style>
