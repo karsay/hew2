@@ -1,6 +1,6 @@
 <template>
   <v-container class="pt-0 d-flex justify-center">
-    <v-sheet width="720" class="px-6 mt-10">
+    <v-sheet width="720" class="px-6 mt-10 background">
       <h4 class="text-h4">商品情報入力フォーム</h4>
       <h5 class="mt-10 text-h5">商品を撮影する</h5>
 
@@ -17,7 +17,7 @@
         <v-col cols="6">
           <TheProductInputForm />
 
-          <SellProductActions />
+          <TheSellProductActions />
         </v-col>
       </v-row>
 
@@ -29,14 +29,14 @@
 import TheProductImgList from '../components/container/TheProductImgList'
 import TheProductInputForm from './../components/container/TheProductInputForm'
 import TheProductSelectForm from './../components/container/TheProductSelectForm'
-import SellProductActions from '../components/molecules/SellProductActions'
+import TheSellProductActions from '../components/container/TheSellProductActions'
 
 export default {
   components: {
     TheProductImgList,
     TheProductInputForm,
     TheProductSelectForm,
-    SellProductActions
+    TheSellProductActions
   },
   data() {
     return {
@@ -46,5 +46,8 @@ export default {
 </script>
 
 <style scoped>
+.background {
+  background-color: #fafafa;
+}
 
 </style>

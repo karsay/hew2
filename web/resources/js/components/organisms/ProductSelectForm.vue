@@ -3,6 +3,7 @@
     <v-select
       v-for="selectItem in selectItems"
       :key="selectItem.subText"
+      v-model="selectItem.selected"
       :label="selectItem.subText"
       :items="selectItem.item"
       outlined
@@ -15,6 +16,6 @@
 export default {
   props: {
     selectItems: Array
-  }
+  },
 }
 </script>

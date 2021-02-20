@@ -6,13 +6,22 @@
 
 <script>
 import ProductSelectForm from './../organisms/ProductSelectForm'
+import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   components: { ProductSelectForm },
   data() {
     return {
+      selectedItems: {
+        category: '',
+        state: '',
+        shippingCost: '',
+        shippingFrom: '',
+        shippingDays: ''
+      },
       selectItems: [
         {
+          selected: "",
           subText: "商品のカテゴリ",
           item: [
             "レディース",
@@ -22,10 +31,10 @@ export default {
             "スポーツ",
             "本・音楽・ゲーム",
             "家電・スマホ・カメラ",
-
           ]
         },
         {
+          selected: "",
           subText: "商品の状態",
           item: [
             "新品、未使用品",
@@ -36,6 +45,7 @@ export default {
           ],
         },
         {
+          selected: "",
           subText: "配送料の負担",
           item: [
             "出品者負担",
@@ -43,6 +53,7 @@ export default {
           ],
         },
         {
+          selected: "",
           subText: "発送元の地域",
           item: [
             "北海道地方",
@@ -57,6 +68,7 @@ export default {
           ],
         },
         {
+          selected: "",
           subText: "発送までの日数",
           item: [
             "当日",
@@ -68,6 +80,15 @@ export default {
       ]
     }
   },
+  methods: {
+    ...mapMutations('sellProduct', ['setSellProductData'])
+  },
+  computed: {
+    ...mapGetters("sellProduct", ["getSellProductData"]),
+    mergeProductData() {
+      
+    }
+  }
 }
 </script>
 
