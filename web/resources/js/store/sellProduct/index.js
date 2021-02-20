@@ -13,7 +13,7 @@ const state = {
   },
   inputItems: {
     name: 'aaa',
-    price: '',
+    price: '0',
     detail: '',
   }
 }
@@ -28,10 +28,14 @@ const getters = {
 }
 
 const mutations = {
-  setSelectItems: (state, selectItem) => {
-    state.selectItems[selectItem.prop] = selectItem.selected
+  setSelectItems: (state, { prop, selected }) => {
+    state.selectItems[prop] = selected
   },
-  setInputItems: (state) => {},
+  setInputItems: (state, { prop, value }) => {
+    value = prop == 'price' ?
+    String(value).replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,') : value
+    state.inputItems[prop] = value
+  },
   isFlag: state => {
     state.flag = !state.flag
   }

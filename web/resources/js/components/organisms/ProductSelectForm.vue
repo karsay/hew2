@@ -20,8 +20,8 @@ export default {
     selectedItems: Array
   },
   methods: {
-    setSelectItems(prop, item) {
-      this.$emit('set-select-item', prop, item)
+    setSelectItems(prop, selected) {
+      this.$emit('set-select-items', { prop, selected })
     },
   },
 
