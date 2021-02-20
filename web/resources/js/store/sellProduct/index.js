@@ -12,8 +12,8 @@ const state = {
     shippingDays: ''
   },
   inputItems: {
-    name: 'aaa',
-    price: '0',
+    name: '',
+    price: '',
     detail: '',
   }
 }
@@ -25,6 +25,12 @@ const getters = {
   getInputItems: state => (
     state.inputItems
   ),
+  getProductItems: state => (
+    {
+      ...state.selectItems,
+      ...state.inputItems
+    }
+  )
 }
 
 const mutations = {
