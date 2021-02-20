@@ -1,7 +1,7 @@
 <template>
   <ProductSelectForm
     :selectItems="selectItems"
-    @set-select-item="setSelectItem"
+    @set-select-items="setSelectItems"
   />
 </template>
 
@@ -81,13 +81,6 @@ export default {
   },
   methods: {
     ...mapMutations('sellProduct', ['setSelectItems']),
-    setSelectItem(prop, item) {
-      const payload = {
-        prop: prop,
-        selected: item
-      }
-      this.setSelectItems(payload)
-    }
   },
 }
 </script>
