@@ -9,13 +9,12 @@
       :alt="name"
     ></v-img>
 
-    <v-card-subtitle class="pa-2 text--primary d-flex justify-space-between">
-      <v-card-text class="pa-0">
+    <v-card-subtitle class="pa-2 text--primary d-flex">
+      <v-card-text class="pa-0 d-flex my-auto">
         {{ price }}yen
       </v-card-text>
       <v-card-text class="pa-0 text-right">
-        <v-icon medium>mdi-heart</v-icon>
-          {{ likeValue }}
+        <TheToggleHeart />
       </v-card-text>
     </v-card-subtitle>
     <v-card-title class="pt-0 pl-2 pb-2">
@@ -25,13 +24,14 @@
 </template>
 
 <script>
+import TheToggleHeart from '../container/TheToggleHeart'
 // 商品カード
 
 export default {
+  components: { TheToggleHeart },
   props: {
     path: String,
     price: String,
-    likeValue: Number,
     name: String,
   }
 }

@@ -7,7 +7,6 @@
       <ProductCard
         :path="product.path"
         :price="product.price"
-        :like-value="product.likeValue"
         :name="product.name"
       />
     </v-col>
@@ -26,31 +25,26 @@ export default {
         {
           path: '',
           price: "1,000",
-          likeValue: 50,
           name: '商品名'
         },
         {
           path: '',
           price: "1,000",
-          likeValue: 50,
           name: '商品名'
         },
         {
           path: '',
           price: "1,000",
-          likeValue: 50,
           name: '商品名'
         },
         {
           path: '',
           price: "1,000",
-          likeValue: 50,
           name: '商品名'
         },
         {
           path: '',
           price: "1,000",
-          likeValue: 50,
           name: '商品名'
         },
       ],
