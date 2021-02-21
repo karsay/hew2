@@ -1,7 +1,7 @@
 <template>
   <v-container class="pt-0 d-flex justify-center">
-    <v-sheet width="720" class="px-6">
-      <v-img fixed src="" width="672" height="448" class="img" />
+    <v-sheet width="720" color="#fafafa" class="px-6">
+      <v-img fixed src="" width="100%" height="448" class="img" />
       <v-card class="py-6 px-6 card card__position">
         <v-row>
           <v-col cols="6">
@@ -16,44 +16,52 @@
             />
           </v-col>
 
-          <v-col cols="6">
-            <v-card-subtitle class="pa-0">
-              <p>userName</p>
+          <v-col cols="6" class="d-flex flex-column">
+            <v-card-subtitle class="pa-0 d-flex">
+              <p class="text-body-1 py-1">userName</p>
+              <v-spacer></v-spacer>
+
+              <!-- component -->
+              <v-btn-toggle
+                borderless
+                :value="isHeart"
+                @change="toggleHeart"
+              >
+                <v-btn
+                  text 
+                  small
+                  class="text-caption"
+                  :class="{ 'secondary--text': isHeart }"
+                >
+                  <v-icon
+                    small
+                    :class="{ 'secondary--text': isHeart }"
+                  >
+                    mdi-heart
+                  </v-icon>
+                  いいね！
+                </v-btn>
+              </v-btn-toggle>
+              <!-- component -->
+
             </v-card-subtitle>
+
             <v-card-title class="py-0 px-0 mb-2">
               <h5 class="pt-0 text-h5 primary--text">商品説明</h5>
             </v-card-title>
 
-            <div>
-              <v-card-text class="card__textarea">
-                <p>
-                  {{ detailTexts }}
-                </p>
-              </v-card-text>
-              <v-card-actions class="px-0">
-                
-  <!-- <v-col class="d-flex px-0">
-    <v-btn
-      width="150"
-      color="primary"
-      class="mr-6"
-      to="preview"
-    >
-      出品プレビュー
-    </v-btn>
+            <v-card-text class="card__textarea pa-2">
+              <p class="text-body-1">
+                {{ description }}
+              </p>
+            </v-card-text>
 
-    <v-spacer></v-spacer>
-
-    <v-btn
-      width="150"
-      color="primary"
-      text
-    >
-      キャンセル
-    </v-btn>
-  </v-col> -->
-              </v-card-actions>
-            </div>
+            <v-card-actions class="pa-0 pt-auto">
+              <AdjacentButtons
+                :buttons="buttons"
+                @on-click="onClick"
+              />
+            </v-card-actions>
           </v-col>
         </v-row>
       </v-card>
@@ -63,13 +71,27 @@
 
 <script>
 import ProductDetailItem from './../molecules/ProductDetailItem'
+import AdjacentButtons from '../molecules/AdjacentButtons'
 
 export default {
-  components: { ProductDetailItem },
+  components: {
+    ProductDetailItem,
+    AdjacentButtons
+  },
   props: {
     details: Array,
-    detailTexts: String
-  }
+    description: String,
+    buttons: Object,
+    isHeart: Boolean
+  },
+  methods: {
+    onClick() {
+      this.$emit('on-click')
+    },
+    toggleHeart() {
+      this.$emit('toggle-heart')
+    }
+  },
 }
 </script>
 
