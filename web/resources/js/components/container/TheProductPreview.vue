@@ -1,7 +1,11 @@
 <template>
   <ProductDetail
     :details="details"
-    :detailTexts="detailTexts"
+    :description="description"
+    :buttons="buttons"
+    :isHeart="isHeart"
+    @toggle-heart="toggleHeart"
+    @on-click="onPreview"
   />
 </template>
 
@@ -11,10 +15,25 @@ import { mapGetters } from 'vuex'
 
 export default {
   components: { ProductDetail },
+  data() {
+    return {
+      isHeart: false,
+      buttons: {
+        text: "出品を確定する"
+      }
+    }
+  },
+  methods: {
+    onPreview() {
+      console.log('previewのeventやで')
+    },
+    toggleHeart() {
+      this.isHeart = !this.isHeart
+    }
+  },
   computed: {
     ...mapGetters('sellProduct', ['getProductItems']),
-    // detailTextsは名前変えたほうがいいかも
-    detailTexts() {
+    description() {
       return this.getProductItems['detail']
     },
     details() {

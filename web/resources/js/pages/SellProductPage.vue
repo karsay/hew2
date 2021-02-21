@@ -17,7 +17,7 @@
         <v-col cols="6">
           <TheProductInputForm />
 
-          <TheSellProductActions />
+          <TheSellAdjacentButtons class="pt-4" />
         </v-col>
       </v-row>
 
@@ -29,14 +29,14 @@
 import TheProductImgList from '../components/container/TheProductImgList'
 import TheProductInputForm from './../components/container/TheProductInputForm'
 import TheProductSelectForm from './../components/container/TheProductSelectForm'
-import TheSellProductActions from '../components/container/TheSellProductActions'
+import TheSellAdjacentButtons from '../components/container/TheSellAdjacentButtons'
 
 export default {
   components: {
     TheProductImgList,
     TheProductInputForm,
     TheProductSelectForm,
-    TheSellProductActions
+    TheSellAdjacentButtons
   },
   data() {
     return {
