@@ -2,10 +2,8 @@
   <ProductDetail
     :details="details"
     :description="description"
-    :buttons="buttons"
     :isHeart="isHeart"
     @toggle-heart="toggleHeart"
-    @on-click="onPreview"
   />
 </template>
 
@@ -18,15 +16,9 @@ export default {
   data() {
     return {
       isHeart: false,
-      buttons: {
-        text: "出品を確定する"
-      }
     }
   },
   methods: {
-    onPreview() {
-      console.log('previewのeventやで')
-    },
     toggleHeart() {
       this.isHeart = !this.isHeart
     }

@@ -57,10 +57,7 @@
             </v-card-text>
 
             <v-card-actions class="pa-0 pt-auto">
-              <AdjacentButtons
-                :buttons="buttons"
-                @on-click="onClick"
-              />
+              <ThePreviewAdjacentButtons />
             </v-card-actions>
           </v-col>
         </v-row>
@@ -71,12 +68,12 @@
 
 <script>
 import ProductDetailItem from './../molecules/ProductDetailItem'
-import AdjacentButtons from '../molecules/AdjacentButtons'
+import ThePreviewAdjacentButtons from '../container/ThePreviewAdjacentButtons'
 
 export default {
   components: {
     ProductDetailItem,
-    AdjacentButtons
+    ThePreviewAdjacentButtons
   },
   props: {
     details: Array,
