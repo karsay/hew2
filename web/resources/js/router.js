@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 import TopPage from './pages/TopPage.vue'
 import Login from './pages/Login.vue'
 import ProductListsPage from './pages/ProductListsPage.vue'
+import ProductDetailPage from './pages/ProductDetailPage.vue'
 import SellProductPage from './pages/SellProductPage.vue'
 import ProductPreviewPage from './pages/ProductPreviewPage.vue'
 import ProductPicturePage from './pages/ProductPicturePage.vue'
@@ -25,7 +26,12 @@ const routes = [
     props: route => {
       const page = route.query.page
       return { page: /^[1-9][0-9]*$/.test(page) ? page * 1 : 1 }
-    }
+    },
+  },
+  {
+    path: '/product-list/:id',
+    component: ProductDetailPage,
+    props: true
   },
   {
     path: '/product-list',
