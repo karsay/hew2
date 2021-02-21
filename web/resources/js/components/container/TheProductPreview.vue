@@ -2,8 +2,6 @@
   <ProductDetail
     :details="details"
     :description="description"
-    :isHeart="isHeart"
-    @toggle-heart="toggleHeart"
   />
 </template>
 
@@ -13,16 +11,6 @@ import { mapGetters } from 'vuex'
 
 export default {
   components: { ProductDetail },
-  data() {
-    return {
-      isHeart: false,
-    }
-  },
-  methods: {
-    toggleHeart() {
-      this.isHeart = !this.isHeart
-    }
-  },
   computed: {
     ...mapGetters('sellProduct', ['getProductItems']),
     description() {
