@@ -2,6 +2,7 @@
   <v-card
     height="238"
     tile
+    @click="toDetail"
   >
     <v-img
       height="152"
@@ -30,10 +31,21 @@ import TheToggleHeart from '../container/TheToggleHeart'
 export default {
   components: { TheToggleHeart },
   props: {
+    id: String,
     path: String,
     price: String,
     name: String,
-  }
+  },
+  data() {
+    return {
+      productId: this.id
+    }
+  },
+  methods: {
+    toDetail() {
+      this.$router.push(`/product-list/${this.productId}`)
+    },
+  },
 }
 </script>
 

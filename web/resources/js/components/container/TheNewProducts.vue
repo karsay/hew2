@@ -1,10 +1,11 @@
 <template>
   <v-row>
     <v-col
-      v-for="(product, i) in products"
-      :key="i"
+      v-for="product in products"
+      :key="product.id"
     >
       <ProductCard
+        :id="product.id"
         :path="product.path"
         :price="product.price"
         :name="product.name"
@@ -23,26 +24,31 @@ export default {
     return {
       products: [
         {
+          id: "01",
           path: '',
           price: "1,000",
           name: '商品名'
         },
         {
+          id: "02",
           path: '',
           price: "1,000",
           name: '商品名'
         },
         {
+          id: "03",
           path: '',
           price: "1,000",
           name: '商品名'
         },
         {
+          id: "04",
           path: '',
           price: "1,000",
           name: '商品名'
         },
         {
+          id: "05",
           path: '',
           price: "1,000",
           name: '商品名'

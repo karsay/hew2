@@ -36,7 +36,10 @@
             </v-card-text>
 
             <v-card-actions class="pa-0 pt-auto">
-              <ThePreviewAdjacentButtons />
+              <AdjacentButtons
+                :buttons="buttons"
+                @on-click="onClick"
+              />
             </v-card-actions>
           </v-col>
         </v-row>
@@ -48,19 +51,18 @@
 <script>
 import ProductDetailItem from './../molecules/ProductDetailItem'
 import TheToggleHeart from '../container/TheToggleHeart'
-import ThePreviewAdjacentButtons from '../container/ThePreviewAdjacentButtons'
+import AdjacentButtons from '../molecules/AdjacentButtons'
 
 export default {
   components: {
     ProductDetailItem,
     TheToggleHeart,
-    ThePreviewAdjacentButtons
+    AdjacentButtons
   },
   props: {
     details: Array,
     description: String,
-    buttons: Object,
-    isHeart: Boolean
+    buttons: Object
   },
   methods: {
     onClick() {
