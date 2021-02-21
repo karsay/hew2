@@ -2,6 +2,8 @@
   <ProductDetail
     :details="details"
     :description="description"
+    :buttons="buttons"
+    @on-click="onPreview"
   />
 </template>
 
@@ -11,6 +13,18 @@ import { mapGetters } from 'vuex'
 
 export default {
   components: { ProductDetail },
+  data() {
+    return {
+      buttons: {
+        text: "出品を確定する"
+      }
+    }
+  },
+  methods: {
+    onPreview() {
+      console.log('previewのeventやで')
+    },
+  },
   computed: {
     ...mapGetters('sellProduct', ['getProductItems']),
     description() {
