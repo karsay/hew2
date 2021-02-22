@@ -4,7 +4,7 @@
       min-width="102"
       color="primary"
       class="px-4 py-2"
-      @click="onClick"
+      @click="onClick($event)"
     >
       {{ buttons.text }}
     </v-btn>
@@ -28,8 +28,8 @@ export default {
     buttons: Object
   },
   methods: {
-    onClick() {
-      this.$emit('on-click')
+    onClick(e) {
+      this.$emit('on-click', e)
     },
   },
 }
