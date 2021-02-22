@@ -16,3 +16,15 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/products', 'ProductController@topShow');
+
+//Route::group(['middleware' => 'api'],function(){
+//
+//
+//    Route::get('/products', 'ProductController@home')->name('form.home');
+//
+//});
+
+
+

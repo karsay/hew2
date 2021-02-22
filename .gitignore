@@ -1,5 +1,6 @@
 # 管理外
 
+.DS_Store
 node_modules
 vendor
 /database
