@@ -2,12 +2,12 @@
   <v-card
     height="238"
     tile
-    @click="toDetail"
   >
     <v-img
       height="152"
       :src="path"
       :alt="name"
+      @click="toDetail"
     ></v-img>
 
     <v-card-subtitle class="pa-2 text--primary d-flex">
