@@ -5,6 +5,7 @@ import TopPage from './pages/TopPage.vue'
 import Login from './pages/Login.vue'
 import ProductListsPage from './pages/ProductListsPage.vue'
 import ProductDetailPage from './pages/ProductDetailPage.vue'
+import BuyPhasePage from './pages/BuyPhasePage.vue'
 import SellProductPage from './pages/SellProductPage.vue'
 import ProductPreviewPage from './pages/ProductPreviewPage.vue'
 import ProductPicturePage from './pages/ProductPicturePage.vue'
@@ -31,7 +32,15 @@ const routes = [
   {
     path: '/product-list/:id',
     component: ProductDetailPage,
-    props: true
+    props: true,
+  },
+  {
+    path: `/product-list/:id/buy`,
+    name: 'buy',
+    component: BuyPhasePage,
+    props: route => ({
+      details: route.params.details
+    })
   },
   {
     path: '/product-list',
