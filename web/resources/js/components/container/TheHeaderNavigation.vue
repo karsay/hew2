@@ -46,13 +46,13 @@ export default {
   methods: {
     ...mapMutations("navigation", ["isDrawer"]),
     toTop() {
-      this.$router.push({ path: '/' })
+      this.$router.push({ path: '/' }).catch(err => {})
     },
     toLogin() {
-      this.$router.push({ path: '/login' })
+      this.$router.push({ path: '/login' }).catch(err => {})
     },
     toSellProduct() {
-      this.$router.push({ path: '/sell-product' })
+      this.$router.push({ path: '/sell-product' }).catch(err => {})
     }
   },
   computed: {
