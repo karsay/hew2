@@ -58,6 +58,24 @@ class ProductController extends Controller
 
     }
 
+    public function selectProduct($id){
+
+
+        $product = new product();
+
+        $queryProduct = product::with('detail')
+            ->with(['user','image','like'])
+            ->where('products_id','=',$id)
+            ->orderBy('created_at','desc')
+            ->limit(3)
+            ->get();
+
+
+        return $product->detailProduct($queryProduct);
+        //return $queryProduct;
+
+    }
+
 
 
 }
