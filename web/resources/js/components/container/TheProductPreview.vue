@@ -20,9 +20,9 @@ export default {
     return {
       dialog: false,
       dialogDetail: {
-        title: "Dialog",
-        text: "this is dialog",
-        buttonText: "商品一覧へ",
+        title: "出品完了",
+        text: "商品の出品に成功しました！",
+        buttonText: "ok",
       },
       buttons: {
         text: "出品を確定する"
