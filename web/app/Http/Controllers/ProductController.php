@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\product;
@@ -79,7 +80,23 @@ class ProductController extends Controller
 
     public function sellProduct(Request $request){
         $product = new product();
-        $product->insertProduct($request);
+
+        $userId = $request->input('users_id');
+        $productDate = Carbon::now();
+
+        $product->users_id = $userId;
+        $product->products_date = $productDate;
+        $product->created_at = $productDate;
+        $product->updated_at = $productDate;
+        $product->save();
+
+        $query = product::where('users_id','=',$userId)
+            ->whereTime('created_at','=',$productDate)->get()->first();
+
+
+        return $query->products_id;
+
+
     }
 
 

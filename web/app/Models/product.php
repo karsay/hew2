@@ -150,9 +150,17 @@ class product extends Model
 
     }
 
-    public function insertProduct(Request $request){
+    public function insertProduct($userId, $productDate){
 
 
+        $searchQuery = product::
+            select('products_id')
+            ->where('users_id','=',$userId)
+            ->where('products_date','=',$productDate)
+            ->get();
+
+
+        return $searchQuery;
     }
 
 

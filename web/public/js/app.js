@@ -246,7 +246,18 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _organisms_BuyPhase__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../organisms/BuyPhase */ "./resources/js/components/organisms/BuyPhase.vue");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _organisms_BuyPhase__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../organisms/BuyPhase */ "./resources/js/components/organisms/BuyPhase.vue");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
 //
 //
 //
@@ -262,10 +273,16 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    BuyPhase: _organisms_BuyPhase__WEBPACK_IMPORTED_MODULE_0__["default"]
+    BuyPhase: _organisms_BuyPhase__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   data: function data() {
     return {
+      dialog: false,
+      dialogDetail: {
+        title: "購入完了",
+        text: "商品の購入に成功しました！",
+        buttonText: "ok"
+      },
       radio: true,
       buttons: {
         text: '購入する'
@@ -276,8 +293,33 @@ __webpack_require__.r(__webpack_exports__);
     isRadio: function isRadio() {
       this.radio = !this.radio;
     },
-    onClick: function onClick(e) {
-      console.log('buyPhaseやで');
+    showDialog: function showDialog(e) {
+      e.stopPropagation();
+      this.dialog = true;
+    },
+    closeDialog: function closeDialog() {
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return function () {
+                  _this.dialog = false;
+                };
+
+              case 2:
+                _this.$router.push('/product-list/?page=1');
+
+              case 3:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
     }
   },
   computed: {
@@ -347,17 +389,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     toTop: function toTop() {
       this.$router.push({
         path: '/'
-      });
+      })["catch"](function (err) {});
     },
     toLogin: function toLogin() {
       this.$router.push({
         path: '/login'
-      });
+      })["catch"](function (err) {});
     },
     toSellProduct: function toSellProduct() {
       this.$router.push({
         path: '/sell-product'
-      });
+      })["catch"](function (err) {});
     }
   }),
   computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])("auth", ["getIsLoginStatus"])), Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])("navigation", ["getDrawer"]))
@@ -732,13 +774,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _organisms_ProductPreview__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../organisms/ProductPreview */ "./resources/js/components/organisms/ProductPreview.vue");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _organisms_ProductPreview__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../organisms/ProductPreview */ "./resources/js/components/organisms/ProductPreview.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 //
 //
@@ -756,15 +806,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    ProductPreview: _organisms_ProductPreview__WEBPACK_IMPORTED_MODULE_0__["default"]
+    ProductPreview: _organisms_ProductPreview__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   data: function data() {
     return {
       dialog: false,
       dialogDetail: {
-        title: "Dialog",
-        text: "this is dialog",
-        buttonText: "商品一覧へ"
+        title: "出品完了",
+        text: "商品の出品に成功しました！",
+        buttonText: "ok"
       },
       buttons: {
         text: "出品を確定する"
@@ -777,10 +827,31 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.dialog = true;
     },
     closeDialog: function closeDialog() {
-      this.dialog = false;
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return function () {
+                  _this.dialog = false;
+                };
+
+              case 2:
+                _this.$router.push('/product-list/?page=1');
+
+              case 3:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
     }
   },
-  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])('sellProduct', ['getProductItems'])), {}, {
+  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapGetters"])('sellProduct', ['getProductItems'])), {}, {
     description: function description() {
       return this.getProductItems['detail'];
     },
@@ -1204,6 +1275,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     dialog: Boolean,
@@ -1537,6 +1612,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _molecules_ProductDetailItem__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../molecules/ProductDetailItem */ "./resources/js/components/molecules/ProductDetailItem.vue");
 /* harmony import */ var _molecules_AdjacentButtons__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../molecules/AdjacentButtons */ "./resources/js/components/molecules/AdjacentButtons.vue");
 /* harmony import */ var _molecules_PaymentMethod__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../molecules/PaymentMethod */ "./resources/js/components/molecules/PaymentMethod.vue");
+/* harmony import */ var _molecules_HandleDialog__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../molecules/HandleDialog */ "./resources/js/components/molecules/HandleDialog.vue");
 //
 //
 //
@@ -1588,6 +1664,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+
 
 
 
@@ -1595,9 +1677,12 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     ProductDetailItem: _molecules_ProductDetailItem__WEBPACK_IMPORTED_MODULE_0__["default"],
     AdjacentButtons: _molecules_AdjacentButtons__WEBPACK_IMPORTED_MODULE_1__["default"],
-    PaymentMethod: _molecules_PaymentMethod__WEBPACK_IMPORTED_MODULE_2__["default"]
+    PaymentMethod: _molecules_PaymentMethod__WEBPACK_IMPORTED_MODULE_2__["default"],
+    HandleDialog: _molecules_HandleDialog__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
   props: {
+    dialog: Boolean,
+    dialogDetail: Object,
     radio: Boolean,
     buttons: Object,
     details: {
@@ -1617,8 +1702,11 @@ __webpack_require__.r(__webpack_exports__);
     isRadio: function isRadio() {
       this.$emit('is-radio');
     },
-    onClick: function onClick(e) {
-      this.$emit('on-click');
+    showDialog: function showDialog(e) {
+      this.$emit('on-click', e);
+    },
+    closeDialog: function closeDialog() {
+      this.$emit('close-dialog');
     }
   }
 });
@@ -4940,8 +5028,18 @@ var render = function() {
     "div",
     [
       _c("BuyPhase", {
-        attrs: { details: _vm.details, radio: _vm.radio, buttons: _vm.buttons },
-        on: { "is-radio": _vm.isRadio, "on-click": _vm.onClick }
+        attrs: {
+          details: _vm.details,
+          radio: _vm.radio,
+          buttons: _vm.buttons,
+          dialog: _vm.dialog,
+          dialogDetail: _vm.dialogDetail
+        },
+        on: {
+          "on-click": _vm.showDialog,
+          "is-radio": _vm.isRadio,
+          "close-dialog": _vm.closeDialog
+        }
       })
     ],
     1
@@ -5495,12 +5593,16 @@ var render = function() {
         "v-card",
         [
           _c("v-card-title", [
-            _vm._v("\n      " + _vm._s(_vm.dialogDetail.title) + "\n    ")
+            _c("div", { staticClass: "primary--text" }, [
+              _vm._v("\n        " + _vm._s(_vm.dialogDetail.title) + "\n      ")
+            ])
           ]),
           _vm._v(" "),
           _c("v-card-text", [
             _vm._v("\n      " + _vm._s(_vm.dialogDetail.text) + "\n    ")
           ]),
+          _vm._v(" "),
+          _c("v-divider", { staticClass: "mt-6" }),
           _vm._v(" "),
           _c(
             "v-card-actions",
@@ -5509,7 +5611,10 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "v-btn",
-                { attrs: { text: "" }, on: { click: _vm.closeDialog } },
+                {
+                  attrs: { text: "", color: "primary" },
+                  on: { click: _vm.closeDialog }
+                },
                 [
                   _vm._v(
                     "\n        " +
@@ -5918,6 +6023,11 @@ var render = function() {
     "v-container",
     { staticClass: "d-flex justify-center" },
     [
+      _c("HandleDialog", {
+        attrs: { dialog: _vm.dialog, dialogDetail: _vm.dialogDetail },
+        on: { "close-dialog": _vm.closeDialog }
+      }),
+      _vm._v(" "),
       _c(
         "v-card",
         { attrs: { width: "720", elevation: "1" } },
@@ -6008,7 +6118,7 @@ var render = function() {
                   _c("AdjacentButtons", {
                     staticClass: "px-4",
                     attrs: { buttons: _vm.buttons },
-                    on: { "on-click": _vm.onClick }
+                    on: { "on-click": _vm.showDialog }
                   })
                 ],
                 1
