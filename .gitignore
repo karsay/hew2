@@ -1,5 +1,6 @@
 # 管理外
 
+.DS_Store
 node_modules
 vendor
 /database
@@ -7,5 +8,5 @@ vendor
 /web/public/js/app.js
 /web/public/mix-manifest.json
 
-/web/storage/logs/
-/web/storage/framework/sessions/*
+/web/storage/*
+!/web/storage/framework/
