@@ -4,6 +4,8 @@
     :details="details"
     :radio="radio"
     @is-radio="isRadio"
+    :buttons="buttons"
+    @on-click="onClick"
   />
   </div>
 </template>
@@ -15,13 +17,19 @@ export default {
   components: { BuyPhase },
   data() {
     return {
-      radio: true
+      radio: true,
+      buttons: {
+        text: '購入する'
+      }
     }
   },
   methods: {
     isRadio() {
       this.radio = !this.radio
     },
+    onClick(e) {
+      console.log('buyPhaseやで');
+    }
   },
   computed: {
     details() {
