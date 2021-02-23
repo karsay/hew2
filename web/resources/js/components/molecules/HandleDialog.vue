@@ -6,16 +6,20 @@
   >
     <v-card>
       <v-card-title>
-        {{ dialogDetail.title }}
+        <div class="primary--text">
+          {{ dialogDetail.title }}
+        </div>
       </v-card-title>
       <v-card-text>
         {{ dialogDetail.text}}
       </v-card-text>
 
+      <v-divider class="mt-6"></v-divider>
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn
           text
+          color="primary"
           @click="closeDialog"
         >
           {{ dialogDetail.buttonText }}
