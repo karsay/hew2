@@ -4,5 +4,8 @@ node_modules
 vendor
 /database
 
-/web/storage/*
-!/web/storage/framework/
+/web/public/js/app.js
+/web/public/mix-manifest.json
+
+/web/storage/logs/
+/web/storage/framework/sessions/*
