@@ -1,28 +1,41 @@
 <template>
-  <ProductDetail
+  <ProductPreview
+    :dialog="dialog"
+    :dialogDetail="dialogDetail"
     :details="details"
     :description="description"
     :buttons="buttons"
-    @on-click="onPreview"
+    @on-click="showDialog"
+    @close-dialog="closeDialog"
   />
 </template>
 
 <script>
-import ProductDetail from '../organisms/ProductDetail'
+import ProductPreview from '../organisms/ProductPreview'
 import { mapGetters } from 'vuex'
 
 export default {
-  components: { ProductDetail },
+  components: { ProductPreview },
   data() {
     return {
+      dialog: false,
+      dialogDetail: {
+        title: "Dialog",
+        text: "this is dialog",
+        buttonText: "商品一覧へ",
+      },
       buttons: {
         text: "出品を確定する"
       }
     }
   },
   methods: {
-    onPreview() {
-      console.log('previewのeventやで')
+    showDialog(e) {
+      e.stopPropagation()
+      this.dialog = true
+    },
+    closeDialog() {
+      this.dialog = false
     },
   },
   computed: {

@@ -3,7 +3,7 @@
     :details="details"
     :description="description"
     :buttons="buttons"
-    @on-click="onDetail"
+    @on-click="toBuyPhase"
   />
 </template>
 
@@ -14,16 +14,33 @@ export default {
   components: { ProductDetail },
   data() {
     return {
-      details: [],
+      details: [
+        {
+          label: "商品名",
+          productItem: 'aaaa',
+        },
+        {
+          label: "価格",
+          productItem: '1,000',
+        },
+      ],
       description: "",
       buttons: {
-        text: '商品を購入する'
-      }
+        text: '購入画面へ進む'
+      },
+    }
+  },
+  computed: {
+    payloadData() {
+      return this.details.filter(({ label }) => label == "商品名" || "価格")
     }
   },
   methods: {
-    onDetail() {
-      console.log('detailのeventやで')
+    toBuyPhase(e) {
+      this.$router.push({
+        name: 'buy',
+        params: { details: this.payloadData }
+      })
     },
   },
 }

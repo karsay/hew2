@@ -65,8 +65,8 @@ export default {
     buttons: Object
   },
   methods: {
-    onClick() {
-      this.$emit('on-click')
+    onClick(e) {
+      this.$emit('on-click', e)
     },
     toggleHeart() {
       this.$emit('toggle-heart')
