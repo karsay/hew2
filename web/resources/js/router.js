@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import TopPage from './pages/TopPage.vue'
+import Top from './pages/TopPage.vue'
 import Login from './pages/Login.vue'
 import ProductListsPage from './pages/ProductListsPage.vue'
 import ProductDetailPage from './pages/ProductDetailPage.vue'
