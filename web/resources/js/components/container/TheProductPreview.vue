@@ -34,8 +34,12 @@ export default {
       e.stopPropagation()
       this.dialog = true
     },
-    closeDialog() {
-      this.dialog = false
+    async closeDialog() {
+      await (() => {
+        this.dialog = false
+      })
+
+      this.$router.push('/product-list/?page=1')
     },
   },
   computed: {
