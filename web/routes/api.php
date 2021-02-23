@@ -20,6 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/topProducts', 'ProductController@topShow');
 Route::get('/allProducts', 'ProductController@showAllProducts');
 Route::get('/products/{id}', 'ProductController@selectProduct');
+Route::post('/sellProduct', 'ProductController@sellProduct');
 
 //Route::group(['middleware' => 'api'],function(){
 //

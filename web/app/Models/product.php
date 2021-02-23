@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use http\Env\Request;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 
@@ -111,15 +112,7 @@ class product extends Model
 
     public function detailProduct(Collection $collection){
 
-        $query = collect();
-//        $imgpath = [];
-//        $i = 0;
-//
-//        foreach ($collection as $item){
-//            $imgpath[$i] = $item->images_path;
-//            $i++;
-//        }
-
+        $collectionGetQuery = collect();
 
         foreach ($collection as $item) {
 
@@ -135,15 +128,16 @@ class product extends Model
                     "product_description" => $item->detail->details_description,
                     "product_state" => $item->detail->details_state,
                     "product_shipping_fee" => $item->detail->details_shipping_fee,
+                    "product_area" => $item->detail->details_area,
                     "product_date" => $item->detail->shipping_date,
                     'product_price' => $item->detail->details_price,
                     "users_gender" => $item->user->users_gender,
                     "users_birthday" => $item->user->users_birthday,
                     'user_image' => $item->user->users_images_path,
                     "users_profile" => $item->user->users_profile,
-                    "image_path1" => $item->image->images_path[0],
-                    "image_path2" => $item->image->images_path[1],
-                    "image_path3" => $item->image->images_path[2],
+                    "image_path1" => $item->image[0]->images_path,
+                    "image_path2" => $item->image[1]->images_path,
+                    "image_path3" => $item->image[2]->images_path,
                     'likes' => $item->like->count(),
                     'data' => $item->created_at,
                 ]
@@ -153,6 +147,11 @@ class product extends Model
         }
 
         return $collectionGetQuery;
+
+    }
+
+    public function insertProduct(Request $request){
+
 
     }
 

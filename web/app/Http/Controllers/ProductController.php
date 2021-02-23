@@ -77,5 +77,11 @@ class ProductController extends Controller
     }
 
 
+    public function sellProduct(Request $request){
+        $product = new product();
+        $product->insertProduct($request);
+    }
+
+
 
 }
