@@ -3,9 +3,12 @@
   <BuyPhase
     :details="details"
     :radio="radio"
-    @is-radio="isRadio"
+    @on-click="showDialog"
     :buttons="buttons"
-    @on-click="onClick"
+    :dialog="dialog"
+    :dialogDetail="dialogDetail"
+    @is-radio="isRadio"
+    @close-dialog="closeDialog"
   />
   </div>
 </template>
@@ -17,6 +20,12 @@ export default {
   components: { BuyPhase },
   data() {
     return {
+      dialog: false,
+      dialogDetail: {
+        title: "購入完了",
+        text: "商品の購入に成功しました！",
+        buttonText: "ok",
+      },
       radio: true,
       buttons: {
         text: '購入する'
@@ -27,9 +36,17 @@ export default {
     isRadio() {
       this.radio = !this.radio
     },
-    onClick(e) {
-      console.log('buyPhaseやで');
-    }
+    showDialog(e) {
+        e.stopPropagation()
+        this.dialog = true
+    },
+    async closeDialog() {
+      await (() => {
+        this.dialog = false
+      })
+
+      this.$router.push('/product-list/?page=1')
+    },
   },
   computed: {
     details() {
