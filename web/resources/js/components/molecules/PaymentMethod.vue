@@ -1,12 +1,13 @@
 <template>
   <v-radio-group
+    hide-details
     :value="radio"
     @change="isRadio"
-    class="d-flex radio"
+    class="d-flex mx-4 my-0 pa-0 radio"
   >
     <div class="d-flex justify-space-between">
       <v-radio
-        class="pa-4"
+        class="py-4"
         :value="true"
         
       >
@@ -28,7 +29,7 @@
     
     <div class="d-flex justify-space-between">
       <v-radio
-        class="pa-4"
+        class="py-4"
         :value="false"
       >
         <template #label>
