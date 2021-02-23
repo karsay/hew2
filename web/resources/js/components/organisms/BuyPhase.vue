@@ -1,5 +1,10 @@
 <template>
   <v-container class="d-flex justify-center">
+    <HandleDialog
+      :dialog="dialog"
+      :dialogDetail="dialogDetail"
+      @close-dialog="closeDialog"
+    />
     <v-card width="720" elevation="1">
       <v-img width="100%" height="270" class="bg"></v-img>
 
@@ -39,7 +44,7 @@
         <v-col cols="6" class="pt-1">
           <AdjacentButtons
             class="px-4"
-            @on-click="onClick"
+            @on-click="showDialog"
             :buttons="buttons"
           />
         </v-col>
@@ -53,14 +58,18 @@
 import ProductDetailItem from '../molecules/ProductDetailItem'
 import AdjacentButtons from '../molecules/AdjacentButtons'
 import PaymentMethod from '../molecules/PaymentMethod'
+import HandleDialog from '../molecules/HandleDialog'
 
 export default {
   components: {
     ProductDetailItem,
     AdjacentButtons,
-    PaymentMethod
+    PaymentMethod,
+    HandleDialog
   },
   props: {
+    dialog: Boolean,
+    dialogDetail: Object,
     radio: Boolean,
     buttons: Object,
     details: {
@@ -81,9 +90,12 @@ export default {
     isRadio() {
       this.$emit('is-radio')
     },
-    onClick(e) {
-      this.$emit('on-click')
-    }
+    showDialog(e) {
+      this.$emit('on-click', e)
+    },
+    closeDialog() {
+      this.$emit('close-dialog')
+    },
   },
 }
 </script>
