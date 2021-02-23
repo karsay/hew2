@@ -1,75 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="13ceed66-9bf0-46df-ae28-e8f310fc7b5f" name="Default Changelist" comment="・マイグレーション作成&#10;・モデル作成&#10;・TopページのAPI作成&#10;をしました。">
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/hew2.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/app/Http/Controllers/ProductController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/app/Models/category.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/app/Models/comment.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/app/Models/contact.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/app/Models/credit.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/app/Models/detail.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/app/Models/face.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/app/Models/finger.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/app/Models/follow.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/app/Models/history.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/app/Models/image.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/app/Models/like.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/app/Models/product.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/app/Models/trademassa.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/app/Models/user.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/database/migrations/2021_02_17_111613_create_credits_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/database/migrations/2021_02_17_111635_create_contacts_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/database/migrations/2021_02_17_111640_create_follows_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/database/migrations/2021_02_17_111642_create_faces_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/database/migrations/2021_02_17_111644_create_fingers_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/database/migrations/2021_02_17_111646_create_products_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/database/migrations/2021_02_17_111647_create_images_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/database/migrations/2021_02_17_111648_create_categories_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/database/migrations/2021_02_17_111649_create_details_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/database/migrations/2021_02_17_111652_create_trademassas_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/database/migrations/2021_02_17_111654_create_histories_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/database/migrations/2021_02_17_111655_create_comments_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/database/migrations/2021_02_17_130822_create_likes_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/database/seeds/CategoriesTableSeeder.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/database/seeds/DetailsTableSeeder.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/database/seeds/ImagesTableSeeder.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/database/seeds/LikesTableSeeder.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/database/seeds/ProductsTableSeeder.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/database/seeds/UsersTableSeeder.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/resources/js/pages/Top.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/storage/framework/cache/data/44/d1/44d142505dd1a3b497197e2f459d2aec779e9ed6" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/storage/framework/cache/data/c2/4f/c24f92750673b2169c8cb7bfbc999cfa8457dc7c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/storage/framework/sessions/1U0aQp6zPEDmf5PMf80IHoaiuqAUrfo3YykyXpm2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/storage/framework/sessions/3gP8bbgxAuC425vpvCQV1dH6NLMp5VEKct6mdhNM" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/storage/framework/sessions/46qeAnDmHJ39qeBnIByegPUyPsOcpGwsSGni2hyn" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/storage/framework/sessions/R6bzlOJx3sU06o1G9tiDjULYnyniY2gyJGbPWQOY" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/storage/framework/views/2dec7d5d1bd52246c096463fda1e5fcaaf72cfe7.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/storage/framework/views/ce291de18cdd259e0383f79405c1dac554bd19e7.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/init-setup.sh" beforeDir="false" afterPath="$PROJECT_DIR$/init-setup.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/.env" beforeDir="false" afterPath="$PROJECT_DIR$/web/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/bootstrap/cache/packages.php" beforeDir="false" afterPath="$PROJECT_DIR$/web/bootstrap/cache/packages.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/bootstrap/cache/services.php" beforeDir="false" afterPath="$PROJECT_DIR$/web/bootstrap/cache/services.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/database/migrations/2014_10_12_000000_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/web/database/migrations/2014_10_12_000000_create_users_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/database/seeds/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/web/database/seeds/DatabaseSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/web/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/web/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/public/mix-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/web/public/mix-manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/resources/js/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/web/resources/js/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/resources/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/resources/js/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/resources/js/router.js" afterDir="false" />
+    <list default="true" id="13ceed66-9bf0-46df-ae28-e8f310fc7b5f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/app/Http/Controllers/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/web/app/Http/Controllers/ProductController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/app/Models/category.php" beforeDir="false" afterPath="$PROJECT_DIR$/web/app/Models/category.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/app/Models/detail.php" beforeDir="false" afterPath="$PROJECT_DIR$/web/app/Models/detail.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/app/Models/product.php" beforeDir="false" afterPath="$PROJECT_DIR$/web/app/Models/product.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/web/routes/api.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/web/routes/web.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/storage/framework/sessions/2J1ZS87Qgc9aWEXBfAdbC2Nt3VEKWZjq19x6SkDn" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/storage/framework/sessions/rhj1e2WEl7UmDA728UdqSmTaYob5UsCHBnlGpIq3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/webpack.mix.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/webpack.mix.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/storage/framework/cache/data/44/d1/44d142505dd1a3b497197e2f459d2aec779e9ed6" beforeDir="false" afterPath="$PROJECT_DIR$/web/storage/framework/cache/data/44/d1/44d142505dd1a3b497197e2f459d2aec779e9ed6" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/storage/framework/cache/data/c2/4f/c24f92750673b2169c8cb7bfbc999cfa8457dc7c" beforeDir="false" afterPath="$PROJECT_DIR$/web/storage/framework/cache/data/c2/4f/c24f92750673b2169c8cb7bfbc999cfa8457dc7c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -207,8 +147,16 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1613921385159</updated>
-      <workItem from="1613921386553" duration="35826000" />
+      <workItem from="1613921386553" duration="38393000" />
     </task>
+    <task id="LOCAL-00001" summary="・マイグレーション作成&#10;・モデル作成&#10;・TopページのAPI作成&#10;をしました。">
+      <created>1614019550875</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1614019550875</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -223,9 +171,13 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="183" y="109" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.900@0.0.1440.900" timestamp="1614019260447" />
-    <state x="303" y="0" key="CommitChangelistDialog2" timestamp="1614019493510">
+    <state x="575" y="0" key="CommitChangelistDialog2" timestamp="1614019550472">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="303" y="0" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1614019493510" />
+    <state x="575" y="0" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1614019550472" />
+    <state x="320" y="183" key="Vcs.Push.Dialog.v2" timestamp="1614019596259">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="320" y="183" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1614019596259" />
   </component>
 </project>

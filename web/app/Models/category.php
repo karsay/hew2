@@ -7,7 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class category extends Model
 {
     //
-    public  function category(){
-        return $this->belongsTo('App\Models\category', 'categories_id');
+    protected $table = 'categories';
+    protected $primaryKey = 'categories_id';
+
+    public  function detail(){
+        return $this->hasOne('App\Models\detail', 'categories_id');
     }
 }

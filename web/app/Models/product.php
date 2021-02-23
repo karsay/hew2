@@ -49,6 +49,7 @@ class product extends Model
 
         $collectionQuery = collect();
 
+
         foreach ($collection as $item) {
 
 
@@ -77,6 +78,8 @@ class product extends Model
         $collectionQuery = collect();
         $i = 0;
 
+
+
         foreach ($collection as $item) {
 
             if($cateNum == $item->detail->categories_id){
@@ -85,6 +88,7 @@ class product extends Model
                         'product_id' => $item->products_id,
                         'user_id' => $item->users_id,
                         'category_id' => $item->detail->categories_id,
+                        'category_name' => category::find($item->detail->categories_id)->categories_name,
                         'product_price' => $item->detail->details_price,
                         'user_image' => $item->user->users_images_path,
                         'likes' => $item->like->count(),

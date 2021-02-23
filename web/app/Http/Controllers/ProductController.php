@@ -40,6 +40,24 @@ class ProductController extends Controller
 
     }
 
+    public function showAllProducts(){
+
+
+        $product = new product();
+
+        $queryProduct = product::with('detail')
+            ->with('user')
+            ->with('image')
+            ->with('like')
+            ->orderBy('created_at','desc')
+            ->limit(3)
+            ->get();
+
+
+        return $product->showNewProducts($queryProduct);
+
+    }
+
 
 
 }
