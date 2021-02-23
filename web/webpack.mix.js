@@ -11,21 +11,6 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.webpackConfig({
-    devServer: {
-        host: '0.0.0.0',
-        port: 3000,
-        proxy: {
-            '*': 'http://0.0.0.0:8081'
-        },
-        // Windows（Docker for windows）の場合は下記を追加する
-        watchOptions:{
-            aggregateTimeout:200,
-            poll:5000
-        },
-    }
-});
-
 mix.browserSync({
     proxy: '0.0.0.0:8081', // アプリの起動アドレス
     open: false // ブラウザを自動で開かない
