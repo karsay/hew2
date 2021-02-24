@@ -16,7 +16,6 @@
       </v-btn>
     </div>
     <!-- アプリケーションのコンポーネントに基づいてコンテンツのサイズを決定 -->
-
     <v-main class="common pt-0 mb-0">
       <!-- アプリケーションに適切なgutterを提供します -->
       <v-container class="pa-0">
@@ -25,13 +24,10 @@
       </v-container>
     </v-main>
   </v-app>
-
 </template>
-
 <script>
 import TheHeaderNavigation from './components/container/TheHeaderNavigation'
 import TheSideNavigation from './components/container/TheSideNavigation'
-
 export default {
   components: {
     TheHeaderNavigation,
@@ -48,10 +44,8 @@ export default {
       ]
     }
   },
-
 }
 </script>
-
 <style scoped>
 .common {
   margin-top: 116px;

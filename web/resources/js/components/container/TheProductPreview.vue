@@ -1,35 +1,46 @@
 <template>
-  <ProductDetail
+  <ProductPreview
+    :dialog="dialog"
+    :dialogDetail="dialogDetail"
     :details="details"
     :description="description"
     :buttons="buttons"
-    :isHeart="isHeart"
-    @toggle-heart="toggleHeart"
-    @on-click="onPreview"
+    @on-click="showDialog"
+    @close-dialog="closeDialog"
   />
 </template>
 
 <script>
-import ProductDetail from '../organisms/ProductDetail'
+import ProductPreview from '../organisms/ProductPreview'
 import { mapGetters } from 'vuex'
 
 export default {
-  components: { ProductDetail },
+  components: { ProductPreview },
   data() {
     return {
-      isHeart: false,
+      dialog: false,
+      dialogDetail: {
+        title: "出品完了",
+        text: "商品の出品に成功しました！",
+        buttonText: "ok",
+      },
       buttons: {
         text: "出品を確定する"
       }
     }
   },
   methods: {
-    onPreview() {
-      console.log('previewのeventやで')
+    showDialog(e) {
+      e.stopPropagation()
+      this.dialog = true
     },
-    toggleHeart() {
-      this.isHeart = !this.isHeart
-    }
+    async closeDialog() {
+      await (() => {
+        this.dialog = false
+      })
+
+      this.$router.push('/product-list/?page=1')
+    },
   },
   computed: {
     ...mapGetters('sellProduct', ['getProductItems']),

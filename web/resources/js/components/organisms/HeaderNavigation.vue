@@ -5,17 +5,26 @@
     class="primary"
   >
     <v-container>
-      <v-row>
-        <v-app-bar-nav-icon @click="isDrawer(drawer)" class="white--text"></v-app-bar-nav-icon>
-        <v-spacer></v-spacer>
-          <v-toolbar-title @click="toTop" >
-            <h1 class="text-h5 white--text title">
+      <v-row
+      >
+        <v-col cols="4" class="pa-0 d-flex">
+          <v-app-bar-nav-icon
+            @click="isDrawer(drawer)"
+            class="white--text my-auto"
+            ></v-app-bar-nav-icon>
+        </v-col>
+        <v-col cols="4" class="pa-0 d-flex">
+          <v-toolbar-title class="ma-auto" @click="toTop" >
+            <h1 class="text-h5 my-auto white--text title">
               {{ title }}
             </h1>
           </v-toolbar-title>
-        <v-spacer></v-spacer>
-
-        <v-app-bar-nav-icon><v-icon class="white--text">mdi-magnify</v-icon></v-app-bar-nav-icon>
+        </v-col>
+        <v-col cols="4" class="pa-0 d-flex">
+          <v-toolbar-items class="my-auto ml-auto">
+            <TheProductSearch />
+          </v-toolbar-items>
+        </v-col>
       </v-row>
       <v-row>
         <v-btn
@@ -58,7 +67,10 @@
 </template>
 
 <script>
+import TheProductSearch from '../container/TheProductSearch'
+
 export default {
+  components: { TheProductSearch },
   props: {
     isLoginStatus: Boolean,
     title: String,
@@ -94,6 +106,7 @@ export default {
 <style lang="scss" scoped>
 .title {
   cursor: pointer;
+  text-align: center;
 }
 h1 {
   font-size: 24px;

@@ -21,28 +21,7 @@
               <p class="text-body-1 py-1">userName</p>
               <v-spacer></v-spacer>
 
-              <!-- component -->
-              <v-btn-toggle
-                borderless
-                :value="isHeart"
-                @change="toggleHeart"
-              >
-                <v-btn
-                  text 
-                  small
-                  class="text-caption"
-                  :class="{ 'secondary--text': isHeart }"
-                >
-                  <v-icon
-                    small
-                    :class="{ 'secondary--text': isHeart }"
-                  >
-                    mdi-heart
-                  </v-icon>
-                  いいね！
-                </v-btn>
-              </v-btn-toggle>
-              <!-- component -->
+              <TheToggleHeart />
 
             </v-card-subtitle>
 
@@ -71,22 +50,23 @@
 
 <script>
 import ProductDetailItem from './../molecules/ProductDetailItem'
+import TheToggleHeart from '../container/TheToggleHeart'
 import AdjacentButtons from '../molecules/AdjacentButtons'
 
 export default {
   components: {
     ProductDetailItem,
+    TheToggleHeart,
     AdjacentButtons
   },
   props: {
     details: Array,
     description: String,
-    buttons: Object,
-    isHeart: Boolean
+    buttons: Object
   },
   methods: {
-    onClick() {
-      this.$emit('on-click')
+    onClick(e) {
+      this.$emit('on-click', e)
     },
     toggleHeart() {
       this.$emit('toggle-heart')

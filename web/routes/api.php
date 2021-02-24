@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
@@ -29,3 +28,9 @@ Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
 
 // ログインユーザー
 Route::get('/user', fn() => Auth::user())->name('user');
+
+Route::get('/topProducts', 'ProductController@topShow');
+Route::get('/allProducts', 'ProductController@showAllProducts');
+
+
+
