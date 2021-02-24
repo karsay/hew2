@@ -9,14 +9,48 @@ const state = {
   loginErrorMessages: null,
   // 登録のエラーメッセージの保持
   registerErrorMessages: null,
+
+  user: null
+}
+
+const mutations = {
+  setUser (state, user) {
+    state.user = user
+  }
+}
+
+const actions = {
+  async register (context, data) {
+    const response = await axios.post('/api/register', data)
+    context.commit('setUser', response.data)
+  },
+  async login () {
+    // authストアのloginアクションを呼び出す
+    await this.$store.dispatch('auth/login', this.loginForm)
+    // トップページに移動する
+    this.$router.push('/')
+  },
+  async logout (context) {
+    const response = await axios.post('/api/logout')
+    context.commit('setUser', null)
+  },
+  async currentUser (context) {
+    const response = await axios.get('/api/user')
+    const user = response.data || null
+    context.commit('setUser', user)
+  }
 }
 
 const getters = {
-  getIsLoginStatus: state => !! state.isLoginStatus
+  // getIsLoginStatus: state => !! state.isLoginStatus,
+  check: state => !! state.user,
+  username: state => state.user ? state.user.users_name : ''
 }
 
 export default {
   namespaced: true,
   state,
   getters,
+  actions,
+  mutations
 }

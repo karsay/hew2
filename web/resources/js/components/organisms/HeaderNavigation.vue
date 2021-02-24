@@ -40,7 +40,18 @@
         </v-btn>
         <v-spacer></v-spacer>
         <v-btn
-          v-if="isLoginStatus !== true"
+          v-if="isLogin"
+          :depressed="true"
+          @click="logout"
+          class="secondary"
+        >
+          <v-icon
+            class="mr-1"
+          >mdi-logout</v-icon>
+          ログアウト
+        </v-btn>
+        <v-btn
+          v-else
           :depressed="true"
           @click="toLogin"
           class="secondary"
@@ -78,7 +89,16 @@ export default {
     },
     toSellProduct() {
       this.$emit('to-sell-product')
+    },
+    async logout () {
+      await this.$store.dispatch('auth/logout')
+      this.$router.push('/')
     }
+  },
+  computed: {
+    isLogin () {
+      return this.$store.getters['auth/check']
+    },
   }
 }
 </script>
