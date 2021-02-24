@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use http\Env\Request;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 
 class product extends Model
 {
@@ -171,30 +172,54 @@ class product extends Model
             $detail->updated_at = Carbon::now();
             $detail->save();
 
-            foreach ($request->image as $item) {
-                $image = new image();
-                $image->products_id = $productId;
-                $image->images_path = $item["images_path"];
-                $image->images_date = Carbon::now();
-                $image->save();
+
+
+            try {
+                foreach ($request->image as $item) {
+                    $image = new image();
+                    $image->products_id = $productId;
+                    $image->images_path = $item["images_path"];
+                    $image->images_date = Carbon::now();
+                    $image->save();
+
+                }
+
+                $collectResult = collect(
+                    ["saveresult" => true]
+                );
+
+                $collect->push($collectResult);
+            }catch (\Exception $e){
+                $collectResult = collect(
+                    [
+                        "saveresult" => false,
+                        "resultDtail" => $e
+                    ]
+                );
+
+                $collect->push($collectResult);
+
+                DB::table('details')->where('products_id', '=', $productId)->delete();
+                DB::table('products')->where('products_id', '=', $productId)->delete();
             }
-
-
-            $collectResult = collect(
-                ["saveresult" => true]
-            );
-
-            $collect->push($collectResult);
-
 
         }catch (\Exception $e){
 
             $collectResult = collect(
-                ["saveresult" => false]
+                [
+                    "saveresult" => false,
+                    "resultDtail" => $e
+
+                ]
             );
 
             $collect->push($collectResult);
+
+            DB::table('products')->where('products_id', '=', $productId)->delete();
         }
+
+
+
 
         return $collect;
     }

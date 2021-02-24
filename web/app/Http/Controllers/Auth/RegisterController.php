@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
-use App\User;
+use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
+
 
 class RegisterController extends Controller
 {
@@ -50,9 +52,9 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            // 'name' => ['required', 'string', 'max:255'],
+            // 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            // 'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
 
@@ -65,9 +67,23 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            // 'users_id' => $data['userId'],
+            'users_name' => $data['userName'],
+            'users_email' => $data['userEmail'],
+            'users_gender' => $data['userGender'],
+            'users_birthday' => $data['userBirthday'],
+            'users_postal_code' => $data['userPostalCode'],
+            'users_state' => $data['userState'],
+            'users_city' => $data['userCity'],
+            'users_suburb' => $data['userSuburb'],
         ]);
+    }
+    // function register (Request $request){
+    //     return $request;
+    // }
+
+    protected function registered(Request $request, $user)
+    {
+        return $user;
     }
 }

@@ -9,11 +9,10 @@
 
       <v-list-item>
         <v-list-item-content>
-          <v-list-item-title class="text-center">UserName</v-list-item-title>
+          <v-list-item-title class="text-center">{{ username }}</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
     </v-list>
-    
     <v-divider></v-divider>
 
     <v-list
@@ -76,6 +75,10 @@
 
 <script>
 export default {
+  data() {
+    return {
+    }
+  },
   props: {
     navButtonLists: Array,
     navButtonLogout: Object,
@@ -87,6 +90,11 @@ export default {
       this.$emit('is-drawer', e)
     },
   },
+  computed: {
+    username () {
+      return this.$store.getters['auth/username']
+    }
+  }
 
 }
 </script>

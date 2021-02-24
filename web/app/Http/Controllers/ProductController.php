@@ -27,7 +27,6 @@ class ProductController extends Controller
             ->with('image')
             ->with('like')
             ->orderBy('created_at','desc')
-            ->limit(3)
             ->get();
 
         //return $product->showTopProducts($queryProduct);
@@ -51,7 +50,6 @@ class ProductController extends Controller
             ->with('image')
             ->with('like')
             ->orderBy('created_at','desc')
-            ->limit(3)
             ->get();
 
 
@@ -68,7 +66,6 @@ class ProductController extends Controller
             ->with(['user','image','like'])
             ->where('products_id','=',$id)
             ->orderBy('created_at','desc')
-            ->limit(3)
             ->get();
 
 
@@ -84,16 +81,28 @@ class ProductController extends Controller
         $userId = $request->input('users_id');
         $productDate = Carbon::now();
 
-        $product->users_id = $userId;
-        $product->products_date = $productDate;
-        $product->created_at = $productDate;
-        $product->updated_at = $productDate;
-        $product->save();
+        try {
+            $product->users_id = $userId;
+            $product->products_date = $productDate;
+            $product->created_at = $productDate;
+            $product->updated_at = $productDate;
+            $product->save();
 
-        $query = product::where('users_id','=',$userId)
-            ->whereTime('created_at','=',$productDate)->get()->first();
+            $query = product::where('users_id','=',$userId)
+                ->whereTime('created_at','=',$productDate)->get()->first();
 
-        return  $product->insertProduct($request, $query->products_id);
+            return  $product->insertProduct($request, $query->products_id);
+
+        }catch (\Exception $e){
+            return ollect(
+                [
+                    "saveresult" => false,
+                    "resultDtail" => $e
+
+                ]
+            );
+        }
+
 
     }
 
