@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use http\Env\Request;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
@@ -150,17 +151,52 @@ class product extends Model
 
     }
 
-    public function insertProduct($userId, $productDate){
+    public function insertProduct($request, $productId){
+
+        $collect = collect();
 
 
-        $searchQuery = product::
-            select('products_id')
-            ->where('users_id','=',$userId)
-            ->where('products_date','=',$productDate)
-            ->get();
+        try {
+            $detail = new detail();
+            $detail->products_id = $productId;
+            $detail->details_title = $request->input('details_title');
+            $detail->categories_id = $request->input('categories_id');
+            $detail->details_description = $request->input('details_description');
+            $detail->details_price = $request->input('details_price');
+            $detail->details_state = $request->input('details_state');
+            $detail->details_shipping_fee = $request->input('details_shipping_fee');
+            $detail->details_area = $request->input('details_area');
+            $detail->shipping_date = $request->input('shipping_date');
+            $detail->created_at = Carbon::now();
+            $detail->updated_at = Carbon::now();
+            $detail->save();
+
+            foreach ($request->image as $item) {
+                $image = new image();
+                $image->products_id = $productId;
+                $image->images_path = $item["images_path"];
+                $image->images_date = Carbon::now();
+                $image->save();
+            }
 
 
-        return $searchQuery;
+            $collectResult = collect(
+                ["saveresult" => true]
+            );
+
+            $collect->push($collectResult);
+
+
+        }catch (\Exception $e){
+
+            $collectResult = collect(
+                ["saveresult" => false]
+            );
+
+            $collect->push($collectResult);
+        }
+
+        return $collect;
     }
 
 

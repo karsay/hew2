@@ -93,9 +93,7 @@ class ProductController extends Controller
         $query = product::where('users_id','=',$userId)
             ->whereTime('created_at','=',$productDate)->get()->first();
 
-
-        return $query->products_id;
-
+        return  $product->insertProduct($request, $query->products_id);
 
     }
 
