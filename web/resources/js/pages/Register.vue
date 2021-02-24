@@ -1,105 +1,145 @@
 <template>
-<v-container fill-height>
-  <v-row align="center" justify="center">
-    <div class=area @dblclick ="click"></div>
-    <v-col align="center">
-      <v-btn depressed color="error" large> リセット </v-btn>
-      <router-link to="/login">
-        <v-btn depressed color="secondary" large> ログイン </v-btn>
-      </router-link>
-      <iframe :src="streamUrl" width="600" height="400" frameborder="0" style="border:0" allowfullscreen class="mt-5"></iframe>
-    </v-col>
-    <v-col>
-      <v-form ref="form" @submit.prevent="registration">
-        <h1>新規登録</h1>
-        <h2 class="green--text">{{msg}}</h2>
-        <h2 class="green--text">{{msg1}}</h2>
-        <h2 class="red--text">{{errorMsg}}</h2>
-        <h2 v-if="registFlag" class="green">登録完了！！！</h2>
-        <v-text-field
-          v-model="registForm.userId"
-          :rules="nameRules"
-          label="ユーザーID"
-          required
-        ></v-text-field>
-        <v-btn depressed color="success" type="submit" large> 登録開始 </v-btn>
-      </v-form>
-    </v-col>
-  </v-row>
-</v-container>
+  <v-container fill-height>
+    <v-card
+      width="100%"
+      height="100%"
+      class="mx-auto mt-16"
+      color="#F0F3F5"
+      elevation-10
+    >
+    <div class="area" @dblclick="click"></div>
+      <v-row>
+        <v-col align="center">
+          <iframe
+            v-if="streamUrl"
+            :src="streamUrl"
+            width="400"
+            height="600"
+            frameborder="0"
+            style="border: 0"
+            allowfullscreen
+          ></iframe>
+          <img v-else src="/assets/img/Video.png" class="defalt_img" />
+        </v-col>
+        <v-col>
+          <v-form ref="form" @submit.prevent="registration">
+            <h1 class="mt-5">新規登録</h1>
+            <h2 class="my-2">生体情報を登録します</h2>
+            <!-- <v-text-field
+              v-model="registForm.userId"
+              :rules="nameRules"
+              label="ユーザーID"
+              required
+            ></v-text-field> -->
+            <v-row align="center">
+              <v-col md="4">
+                <img src="/assets/img/user_icon.png" class="ma-5" width="150px" height="150px" />
+              </v-col>
+              <v-col>
+                <h2 v-if="flag1 == false" class="red--text hoge">カメラを顔に向けて画面を<br>ダブルクリックしてください</h2>
+                <h1 v-else class="green--text hoge">OK!!!</h1>
+              </v-col>
+            </v-row>
+            <v-row align="center">
+              <v-col md="4">
+                <img src="/assets/img/finger_icon.png" class="ma-5" width="150px" height="150px">
+              </v-col>
+              <v-col justifu="center">
+                <h2 v-if="flag2 == false" class="red--text hoge">指紋を登録してください</h2>
+                <h1 v-else class="green--text hoge">OK!!!</h1>
+              </v-col>
+            </v-row>
+            <div class="mt-10" align="center">
+              <router-link to="/register-form">
+                <v-btn :disabled="isDisabled" color="primary" rounded x-large width="250">
+                  アカウント情報入力へ進む
+                </v-btn>
+              </router-link>
+            </div>
+            <div class="my-5" align="center">
+              <router-link to="/login">
+                <v-btn text color="primary"> ログインはこちら </v-btn>
+              </router-link>
+            </div>
+          </v-form>
+        </v-col>
+      </v-row>
+    </v-card>
+  </v-container>
 </template>
 
 <script>
-
 export default {
-  data(){
-    return{
-      registFlag:false,
-      raspAddress:"192.168.0.26",
-      hostAddress:"192.168.0.14",
-      frame:"",
-      // raspAddress:"192.168.43.108",
-      // hostAddress:"192.168.43.6",
-      msg:"",
-      msg1:"",
-      errorMsg:"",
-      streamUrl:"",
+  data() {
+    return {
+      // raspAddress: "192.168.0.26",
+      // hostAddress: "192.168.0.14",
+      raspAddress:"192.168.43.108",
+      hostAddress:"192.168.43.6",
+      flag1:false,
+      flag2:false,
+      isDisabled:true,
+      streamUrl: "",
 
       registForm: {
-        userId:null,
+        userId: 1,
       },
 
-      nameRules: [
-        v => !!v || 'ユーザーIDは必須です',
-      ],
-    }
+    };
+  },
+  watch: {
+    $route: {
+      async handler() {
+        await this.registration();
+      },
+      immediate: true,
+    },
   },
   methods: {
     async click() {
-      if(this.loading == true) {
-        await axios.post(`http://${this.raspAddress}:5000/shutter`)
-      }
+      await axios.post(`http://${this.raspAddress}:5000/shutter`);
     },
     // 認証開始
     async registration() {
-      this.loading = true
-      this.errorMsg = ""
-      this.streamUrl = `http://${this.raspAddress}:5000/video_feed`
-
-      this.msg = "カメラを顔に向けて画面をダブルクリックしてください"
+      this.streamUrl = `http://${this.raspAddress}:5000/video_feed`;
       // 顔登録
       // ここのipアドレスをラズパイのアドレスに書き換えること
-      await axios.post(`http://${this.raspAddress}:5000`,{
-        reqFlag: 'registration',
+      await axios.post(`http://${this.raspAddress}:5000`, {
+        reqFlag: "registration",
       });
 
-      this.msg = "顔登録完了"
-      this.msg1 = "指を乗せてください"
+      this.flag1 = true;
 
       // 指紋登録
       // ここのipアドレスをラズパイのアドレスに書き換えること
-      const fingerInfo = await axios.post(`http://${this.raspAddress}:5000/fingerprint`,{
-        fingerFlag:1
-      });
+      const fingerInfo = await axios.post(
+        `http://${this.raspAddress}:5000/fingerprint`,
+        {
+          fingerFlag: 1,
+        }
+      );
+      this.flag2 = true;
 
       if (fingerInfo.data == "error") {
-        this.errorMsg = "登録に失敗しました。もう一度やり直してください"
+        alert("登録に失敗しました。もう一度やり直してください");
+        this.flag1 = false;
+        this.flag2 = false;
       } else {
         // 認証情報登録
         // ここのipアドレスを認証サーバーのアドレスに書き換えること
-        const response = await axios.post(`http://${this.hostAddress}:5000/authenticationregistration`,{
-          userId:this.registForm.userId,
-          fingerPass:fingerInfo.data
-        });
-        this.msg = ""
-        this.msg1 = ""
-        this.registFlag = response.data;
+        const response = await axios.post(
+          `http://${this.hostAddress}:5000/authenticationregistration`,
+          {
+            userId: this.registForm.userId,
+            fingerPass: fingerInfo.data,
+          }
+        );
+        this.isDisabled = false
       }
-      this.streamUrl = ""
+      this.streamUrl = "";
     },
-
-  }
-}
+  },
+};
 </script>
 
 <style scoped>
@@ -107,8 +147,22 @@ export default {
   text-decoration: none;
 }
 .area {
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   position: absolute;
+}
+iframe {
+  border: none;
+  width: 100%;
+  height: 100%;
+  min-height: 650px;
+  padding: 0;
+  margin: 0;
+}
+.defalt_img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  min-height: 650px;
 }
 </style>

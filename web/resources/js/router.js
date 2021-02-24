@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 import TopPage from './pages/TopPage.vue'
 import Login from './pages/Login.vue'
 import Register from './pages/Register.vue'
+import RegisterForm from './pages/RegisterForm.vue'
 import ProductListsPage from './pages/ProductListsPage.vue'
 import SellProductPage from './pages/SellProductPage.vue'
 import ProductPreviewPage from './pages/ProductPreviewPage.vue'
@@ -23,6 +24,10 @@ const routes = [
   {
     path: '/register',
     component: Register
+  },
+  {
+    path: '/register-form',
+    component: RegisterForm
   },
   {
     path: '/product-list/',

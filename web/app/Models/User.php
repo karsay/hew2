@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -10,22 +10,12 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
+    protected $table = 'users';
+    protected $primaryKey = 'users_id';
     protected $fillable = [
-        'name', 'email', 'password',
-    ];
-
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password', 'remember_token',
+    'users_name', 'users_email', 'users_gender',
+    'users_birthday', 'users_postal_code', 'users_state',
+    'users_city', 'users_suburb'
     ];
 
     /**
@@ -36,4 +26,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function product()
+    {
+      return $this->hasMany('App\Models\product','users_id');
+    }
 }
