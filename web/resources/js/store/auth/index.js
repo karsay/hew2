@@ -24,12 +24,11 @@ const actions = {
     const response = await axios.post('/api/register', data)
     context.commit('setUser', response.data)
   },
-  async login () {
-    // authストアのloginアクションを呼び出す
-    await this.$store.dispatch('auth/login', this.loginForm)
-    // トップページに移動する
-    this.$router.push('/')
+  async login (context, data) {
+    const response = await axios.post('/api/login', data)
+    context.commit('setUser', response.data[0])
   },
+
   async logout (context) {
     const response = await axios.post('/api/logout')
     context.commit('setUser', null)

@@ -6,12 +6,12 @@
       class="mx-auto mt-16"
       color="#F0F3F5"
       elevation-10
+      max-height="680"
     >
     <div class="area" @dblclick="click"></div>
       <v-row>
         <v-col align="center">
           <iframe
-            v-if="streamUrl"
             :src="streamUrl"
             width="400"
             height="600"
@@ -19,18 +19,11 @@
             style="border: 0"
             allowfullscreen
           ></iframe>
-          <img v-else src="/assets/img/Video.png" class="defalt_img" />
         </v-col>
         <v-col>
           <v-form ref="form" @submit.prevent="registration">
             <h1 class="mt-5">新規登録</h1>
             <h2 class="my-2">生体情報を登録します</h2>
-            <!-- <v-text-field
-              v-model="registForm.userId"
-              :rules="nameRules"
-              label="ユーザーID"
-              required
-            ></v-text-field> -->
             <v-row align="center">
               <v-col md="4">
                 <img src="/assets/img/user_icon.png" class="ma-5" width="150px" height="150px" />
@@ -72,17 +65,17 @@
 export default {
   data() {
     return {
-      // raspAddress: "192.168.0.26",
-      // hostAddress: "192.168.0.14",
-      raspAddress:"192.168.43.108",
-      hostAddress:"192.168.43.6",
+      raspAddress: "192.168.0.18",
+      hostAddress: "192.168.0.16",
+      // raspAddress:"192.168.43.108",
+      // hostAddress:"192.168.43.6",
       flag1:false,
       flag2:false,
       isDisabled:true,
       streamUrl: "",
 
       registForm: {
-        userId: 1,
+        userId: "",
       },
 
     };
@@ -90,6 +83,7 @@ export default {
   watch: {
     $route: {
       async handler() {
+        await this.fetchId();
         await this.registration();
       },
       immediate: true,
@@ -99,9 +93,13 @@ export default {
     async click() {
       await axios.post(`http://${this.raspAddress}:5000/shutter`);
     },
+    async fetchId(){
+      const response = await axios.get(`/api/fetchId`);
+      this.registForm.userId = response.data["users_id"] + 1;
+    },
     // 認証開始
     async registration() {
-      this.streamUrl = `http://${this.raspAddress}:5000/video_feed`;
+      this.streamUrl = `http://${this.raspAddress}:5000/stream`;
       // 顔登録
       // ここのipアドレスをラズパイのアドレスに書き換えること
       await axios.post(`http://${this.raspAddress}:5000`, {
@@ -118,6 +116,7 @@ export default {
           fingerFlag: 1,
         }
       );
+
       this.flag2 = true;
 
       if (fingerInfo.data == "error") {
@@ -163,6 +162,7 @@ iframe {
   object-fit: cover;
   width: 100%;
   height: 100%;
-  min-height: 650px;
+  /* min-height: 650px; */
 }
+
 </style>

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 
 class LoginController extends Controller
@@ -40,16 +41,34 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    protected function authenticated(Request $request, $user)
-    {
-        return $user;
-    }
-
     protected function loggedOut(Request $request)
     {
         // セッションを再生成する
         $request->session()->regenerate();
 
         return response()->json();
+    }
+
+    // ログインメソッドのオーバーライド
+    public function login(Request $request)
+    {
+        return $this->sendLoginResponse($request);
+    }
+
+    protected function sendLoginResponse(Request $request)
+    {
+        $request->session()->regenerate();
+
+        $this->clearLoginAttempts($request);
+
+        $user = User::where('users_id', $request->input("userId"))->get();
+
+        return $user;
+    }
+
+    protected function getLoginInfo(Request $request)
+    {
+        $userName = User::where('users_id', $request->input("userId"))->value("users_name");
+        return $userName;
     }
 }

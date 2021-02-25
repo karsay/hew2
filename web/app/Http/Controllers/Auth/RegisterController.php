@@ -78,9 +78,11 @@ class RegisterController extends Controller
             'users_suburb' => $data['userSuburb'],
         ]);
     }
-    // function register (Request $request){
-    //     return $request;
-    // }
+
+    protected function fetchId() {
+        $userId = User::latest()->first("users_id");
+        return $userId;
+    }
 
     protected function registered(Request $request, $user)
     {
