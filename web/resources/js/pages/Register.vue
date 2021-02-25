@@ -19,18 +19,11 @@
             style="border: 0"
             allowfullscreen
           ></iframe>
-          <!-- <img v-else src="/assets/img/Video.png" class="defalt_img" height="600"/> -->
         </v-col>
         <v-col>
           <v-form ref="form" @submit.prevent="registration">
             <h1 class="mt-5">新規登録</h1>
             <h2 class="my-2">生体情報を登録します</h2>
-            <!-- <v-text-field
-              v-model="registForm.userId"
-              :rules="nameRules"
-              label="ユーザーID"
-              required
-            ></v-text-field> -->
             <v-row align="center">
               <v-col md="4">
                 <img src="/assets/img/user_icon.png" class="ma-5" width="150px" height="150px" />

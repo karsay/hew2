@@ -31,6 +31,11 @@ Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
 // ログインユーザー
 Route::get('/user', fn() => Auth::user())->name('user');
 
+// ログイン時のユーザ情報取得
+Route::post('/getlogininfo','Auth\LoginController@getlogininfo');
+
+
+
 
 Route::get('/topProducts', 'ProductController@topShow');
 Route::get('/allProducts', 'ProductController@showAllProducts');
