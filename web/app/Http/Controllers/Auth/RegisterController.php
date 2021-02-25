@@ -80,7 +80,7 @@ class RegisterController extends Controller
     }
 
     protected function fetchId() {
-        $userId = User::latest()->first();
+        $userId = User::latest()->first("users_id");
         return $userId;
     }
 

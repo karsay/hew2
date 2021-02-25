@@ -6,12 +6,12 @@
       class="mx-auto mt-16"
       color="#F0F3F5"
       elevation-10
+      max-height="680"
     >
     <div class="area" @dblclick="click"></div>
       <v-row>
         <v-col align="center">
           <iframe
-            v-if="streamUrl"
             :src="streamUrl"
             width="400"
             height="600"
@@ -19,7 +19,7 @@
             style="border: 0"
             allowfullscreen
           ></iframe>
-          <img v-else src="/assets/img/Video.png" class="defalt_img" />
+          <!-- <img v-else src="/assets/img/Video.png" class="defalt_img" height="600"/> -->
         </v-col>
         <v-col>
           <v-form ref="form" @submit.prevent="registration">
@@ -72,17 +72,17 @@
 export default {
   data() {
     return {
-      // raspAddress: "192.168.0.26",
-      // hostAddress: "192.168.0.14",
-      raspAddress:"192.168.43.108",
-      hostAddress:"192.168.43.6",
+      raspAddress: "192.168.0.18",
+      hostAddress: "192.168.0.16",
+      // raspAddress:"192.168.43.108",
+      // hostAddress:"192.168.43.6",
       flag1:false,
       flag2:false,
       isDisabled:true,
       streamUrl: "",
 
       registForm: {
-        userId: 1,
+        userId: "",
       },
 
     };
@@ -90,8 +90,8 @@ export default {
   watch: {
     $route: {
       async handler() {
-        // await this.registration();
         await this.fetchId();
+        await this.registration();
       },
       immediate: true,
     },
@@ -102,11 +102,11 @@ export default {
     },
     async fetchId(){
       const response = await axios.get(`/api/fetchId`);
-      this.registForm.userId = response.data;
+      this.registForm.userId = response.data["users_id"] + 1;
     },
     // 認証開始
     async registration() {
-      this.streamUrl = `http://${this.raspAddress}:5000/video_feed`;
+      this.streamUrl = `http://${this.raspAddress}:5000/stream`;
       // 顔登録
       // ここのipアドレスをラズパイのアドレスに書き換えること
       await axios.post(`http://${this.raspAddress}:5000`, {
@@ -169,6 +169,7 @@ iframe {
   object-fit: cover;
   width: 100%;
   height: 100%;
-  min-height: 650px;
+  /* min-height: 650px; */
 }
+
 </style>

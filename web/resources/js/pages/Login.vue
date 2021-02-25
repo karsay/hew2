@@ -7,11 +7,11 @@
       class="mx-auto mt-16"
       color="#F0F3F5"
       elevation-10
+      max-height="680"
     >
       <v-row>
         <v-col align="center">
           <iframe
-            v-if="streamUrl"
             :src="streamUrl"
             width="400"
             height="600"
@@ -19,7 +19,6 @@
             style="border: 0"
             allowfullscreen
           ></iframe>
-          <img v-else src="/assets/img/Video.png" class="defalt_img" />
         </v-col>
         <v-col>
           <v-form ref="form" @submit.prevent="registration">
@@ -150,6 +149,6 @@ iframe {
   object-fit: cover;
   width: 100%;
   height: 100%;
-  min-height: 650px;
+  /* min-height: 650px; */
 }
 </style>
