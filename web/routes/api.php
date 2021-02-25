@@ -19,6 +19,8 @@ use Illuminate\Support\Facades\Route;
 
 // 会員登録
 Route::post('/register', 'Auth\RegisterController@register')->name('register');
+// 最後のid取得
+Route::get('/fetchId', 'Auth\RegisterController@fetchId')->name('fetchId');
 
 // ログイン
 Route::post('/login', 'Auth\LoginController@login')->name('login');
@@ -28,6 +30,7 @@ Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
 
 // ログインユーザー
 Route::get('/user', fn() => Auth::user())->name('user');
+
 
 Route::get('/topProducts', 'ProductController@topShow');
 Route::get('/allProducts', 'ProductController@showAllProducts');

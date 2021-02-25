@@ -90,7 +90,8 @@ export default {
   watch: {
     $route: {
       async handler() {
-        await this.registration();
+        // await this.registration();
+        await this.fetchId();
       },
       immediate: true,
     },
@@ -98,6 +99,10 @@ export default {
   methods: {
     async click() {
       await axios.post(`http://${this.raspAddress}:5000/shutter`);
+    },
+    async fetchId(){
+      const response = await axios.get(`/api/fetchId`);
+      this.registForm.userId = response.data;
     },
     // 認証開始
     async registration() {
@@ -118,6 +123,7 @@ export default {
           fingerFlag: 1,
         }
       );
+
       this.flag2 = true;
 
       if (fingerInfo.data == "error") {
