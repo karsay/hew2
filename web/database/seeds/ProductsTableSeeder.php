@@ -30,18 +30,6 @@ class ProductsTableSeeder extends Seeder
                 'products_date' => new DateTime(),
                 'created_at' => new DateTime(),
                 'updated_at' => new DateTime(),
-            ],
-            [
-                'users_id' => 1,
-                'products_date' => new DateTime(),
-                'created_at' => new DateTime(),
-                'updated_at' => new DateTime(),
-            ],
-            [
-                'users_id' => 2,
-                'products_date' => new DateTime(),
-                'created_at' => new DateTime(),
-                'updated_at' => new DateTime(),
             ]
         ]);
     }

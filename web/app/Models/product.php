@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
+use http\Env\Request;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 
 class product extends Model
 {
@@ -29,7 +32,9 @@ class product extends Model
         return $this->hasMany('App\Models\like', 'products_id');
     }
 
-
+    public  function likeCount(){
+        return $this->like()->count();
+    }
 
 
     public function getLikesProduct(Collection $collection){
@@ -59,6 +64,7 @@ class product extends Model
                     'user_id' => $item->users_id,
                     'product_price' => $item->detail->details_price,
                     'user_image' => $item->user->users_images_path,
+                    'product_is_selled' => $item->products_is_selled,
                     'likes' => $item->like->count(),
                     'data' => $item->created_at,
                 ]
@@ -79,7 +85,6 @@ class product extends Model
         $i = 0;
 
 
-
         foreach ($collection as $item) {
 
             if($cateNum == $item->detail->categories_id){
@@ -90,6 +95,7 @@ class product extends Model
                         'category_id' => $item->detail->categories_id,
                         'category_name' => category::find($item->detail->categories_id)->categories_name,
                         'product_price' => $item->detail->details_price,
+                        'product_is_selled' => $item->products_is_selled,
                         'user_image' => $item->user->users_images_path,
                         'likes' => $item->like->count(),
                         'data' => $item->created_at,
@@ -103,10 +109,119 @@ class product extends Model
                 $i++;
             }
         }
-
         return $collectionQuery;
+    }
+
+    public function detailProduct(Collection $collection){
+
+        $collectionGetQuery = collect();
+
+        foreach ($collection as $item) {
 
 
+            $collectionGetQuery = collect(
+                [
+                    'product_id' => $item->products_id,
+                    'user_id' => $item->users_id,
+                    "products_date" => $item->products_date,
+                    "product_title"=> $item->detail->details_title,
+                    "category_id" => $item->detail->categories_id,
+                    'category_name' => category::find($item->detail->categories_id)->categories_name,
+                    "product_description" => $item->detail->details_description,
+                    "product_state" => $item->detail->details_state,
+                    "product_shipping_fee" => $item->detail->details_shipping_fee,
+                    "product_area" => $item->detail->details_area,
+                    "product_date" => $item->detail->shipping_date,
+                    'product_price' => $item->detail->details_price,
+                    "users_gender" => $item->user->users_gender,
+                    "users_birthday" => $item->user->users_birthday,
+                    'user_image' => $item->user->users_images_path,
+                    "users_profile" => $item->user->users_profile,
+                    "image_path1" => $item->image[0]->images_path,
+                    "image_path2" => $item->image[1]->images_path,
+                    "image_path3" => $item->image[2]->images_path,
+                    'likes' => $item->like->count(),
+                    'data' => $item->created_at,
+                ]
+            );
+
+
+        }
+
+        return $collectionGetQuery;
+
+    }
+
+    public function insertProduct($request, $productId){
+
+        $collect = collect();
+
+
+        try {
+            $detail = new detail();
+            $detail->products_id = $productId;
+            $detail->details_title = $request->input('details_title');
+            $detail->categories_id = $request->input('categories_id');
+            $detail->details_description = $request->input('details_description');
+            $detail->details_price = $request->input('details_price');
+            $detail->details_state = $request->input('details_state');
+            $detail->details_shipping_fee = $request->input('details_shipping_fee');
+            $detail->details_area = $request->input('details_area');
+            $detail->shipping_date = $request->input('shipping_date');
+            $detail->created_at = Carbon::now();
+            $detail->updated_at = Carbon::now();
+            $detail->save();
+
+
+
+            try {
+                foreach ($request->image as $item) {
+                    $image = new image();
+                    $image->products_id = $productId;
+                    $image->images_path = $item["images_path"];
+                    $image->images_date = Carbon::now();
+                    $image->save();
+
+                }
+
+                $collectResult = collect(
+                    ["saveresult" => true]
+                );
+
+                $collect->push($collectResult);
+            }catch (\Exception $e){
+                $collectResult = collect(
+                    [
+                        "saveresult" => false,
+                        "resultDtail" => $e
+                    ]
+                );
+
+                $collect->push($collectResult);
+
+                DB::table('details')->where('products_id', '=', $productId)->delete();
+                DB::table('products')->where('products_id', '=', $productId)->delete();
+            }
+
+        }catch (\Exception $e){
+
+            $collectResult = collect(
+                [
+                    "saveresult" => false,
+                    "resultDtail" => $e
+
+                ]
+            );
+
+            $collect->push($collectResult);
+
+            DB::table('products')->where('products_id', '=', $productId)->delete();
+        }
+
+
+
+
+        return $collect;
     }
 
 

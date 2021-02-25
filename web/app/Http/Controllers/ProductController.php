@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\product;
@@ -26,7 +27,6 @@ class ProductController extends Controller
             ->with('image')
             ->with('like')
             ->orderBy('created_at','desc')
-            ->limit(3)
             ->get();
 
         //return $product->showTopProducts($queryProduct);
@@ -50,11 +50,59 @@ class ProductController extends Controller
             ->with('image')
             ->with('like')
             ->orderBy('created_at','desc')
-            ->limit(3)
             ->get();
 
 
         return $product->showNewProducts($queryProduct);
+
+    }
+
+    public function selectProduct($id){
+
+
+        $product = new product();
+
+        $queryProduct = product::with('detail')
+            ->with(['user','image','like'])
+            ->where('products_id','=',$id)
+            ->orderBy('created_at','desc')
+            ->get();
+
+
+        return $product->detailProduct($queryProduct);
+        //return $queryProduct;
+
+    }
+
+
+    public function sellProduct(Request $request){
+        $product = new product();
+
+        $userId = $request->input('users_id');
+        $productDate = Carbon::now();
+
+        try {
+            $product->users_id = $userId;
+            $product->products_date = $productDate;
+            $product->created_at = $productDate;
+            $product->updated_at = $productDate;
+            $product->save();
+
+            $query = product::where('users_id','=',$userId)
+                ->whereTime('created_at','=',$productDate)->get()->first();
+
+            return  $product->insertProduct($request, $query->products_id);
+
+        }catch (\Exception $e){
+            return ollect(
+                [
+                    "saveresult" => false,
+                    "resultDtail" => $e
+
+                ]
+            );
+        }
+
 
     }
 
