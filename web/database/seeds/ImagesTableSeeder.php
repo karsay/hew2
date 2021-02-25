@@ -68,12 +68,7 @@ class ImagesTableSeeder extends Seeder
                 'created_at' => new DateTime(),
                 'updated_at' => new DateTime(),
             ],
-            [
-                'products_id' => 4,
-                'image_path' => "img10.JPG",
-                'created_at' => new DateTime(),
-                'updated_at' => new DateTime(),
-            ],
+
         ]);
     }
 }
