@@ -3,7 +3,7 @@
     <v-card
       width="100%"
       height="100%"
-      class="mx-auto mt-16"
+      class="mx-auto"
       color="#F0F3F5"
       elevation-10
       max-height="680"
@@ -13,8 +13,6 @@
         <v-col align="center">
           <iframe
             :src="streamUrl"
-            width="400"
-            height="600"
             frameborder="0"
             style="border: 0"
             allowfullscreen
@@ -29,8 +27,8 @@
                 <img src="/assets/img/user_icon.png" class="ma-5" width="150px" height="150px" />
               </v-col>
               <v-col>
-                <h2 v-if="flag1 == false" class="red--text hoge">カメラを顔に向けて画面を<br>ダブルクリックしてください</h2>
-                <h1 v-else class="green--text hoge">OK!!!</h1>
+                <h2 v-if="flag1 == false" class="red--text">カメラを顔に向けて画面を<br>ダブルクリックしてください</h2>
+                <h1 v-else class="green--text">OK!!!</h1>
               </v-col>
             </v-row>
             <v-row align="center">
@@ -38,8 +36,8 @@
                 <img src="/assets/img/finger_icon.png" class="ma-5" width="150px" height="150px">
               </v-col>
               <v-col justifu="center">
-                <h2 v-if="flag2 == false" class="red--text hoge">指紋を登録してください</h2>
-                <h1 v-else class="green--text hoge">OK!!!</h1>
+                <h2 v-if="flag2 == false" class="red--text">指紋を登録してください</h2>
+                <h1 v-else class="green--text">OK!!!</h1>
               </v-col>
             </v-row>
             <div class="mt-10" align="center">
@@ -133,7 +131,7 @@ export default {
             fingerPass: fingerInfo.data,
           }
         );
-        this.isDisabled = false
+        this.isDisabled = false;
       }
       this.streamUrl = "";
     },
@@ -154,7 +152,6 @@ iframe {
   border: none;
   width: 100%;
   height: 100%;
-  min-height: 650px;
   padding: 0;
   margin: 0;
 }
@@ -162,7 +159,6 @@ iframe {
   object-fit: cover;
   width: 100%;
   height: 100%;
-  /* min-height: 650px; */
 }
 
 </style>
