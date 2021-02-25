@@ -52,17 +52,21 @@ class product extends Model
 
     public function showNewProducts(Collection $collection){
 
-        $collectionQuery = collect();
 
+
+        $i = 0;
+        $collectAll = collect();
 
         foreach ($collection as $item) {
-
+            $i++;
 
             $collectionGetQuery = collect(
                 [
+
                     'product_id' => $item->products_id,
                     'user_id' => $item->users_id,
                     'product_price' => $item->detail->details_price,
+                    'product_image' => $item->image[0]->images_path,
                     'user_image' => $item->user->users_images_path,
                     'product_is_selled' => $item->products_is_selled,
                     'likes' => $item->like->count(),
@@ -70,20 +74,70 @@ class product extends Model
                 ]
             );
 
-            $collectionQuery->push($collectionGetQuery);
+            $collectAll->push($collectionGetQuery);
+
+            if($i > 4){
+                break;
+            }
+
 
         }
+
+        $collectionQuery = collect(
+            [
+                'newProducts' =>$collectAll
+            ]
+        );
+
 
 
 
         return $collectionQuery;
     }
 
+    public function showNewAllProducts(Collection $collection){
+
+
+
+
+        $collectAll = collect();
+
+        foreach ($collection as $item) {
+
+
+            $collectionGetQuery = collect(
+                [
+
+                    'product_id' => $item->products_id,
+                    'user_id' => $item->users_id,
+                    'product_price' => $item->detail->details_price,
+                    'product_image' => $item->image[0]->images_path,
+                    'user_image' => $item->user->users_images_path,
+                    'product_is_selled' => $item->products_is_selled,
+                    'likes' => $item->like->count(),
+                    'data' => $item->created_at,
+                ]
+            );
+
+            $collectAll->push($collectionGetQuery);
+
+
+
+        }
+
+
+
+
+        return $collectAll;
+    }
+
+
+
+
     public function showCateProducts(Collection $collection, int $cateNum){
 
         $collectionQuery = collect();
         $i = 0;
-
 
         foreach ($collection as $item) {
 
@@ -94,6 +148,7 @@ class product extends Model
                         'user_id' => $item->users_id,
                         'category_id' => $item->detail->categories_id,
                         'category_name' => category::find($item->detail->categories_id)->categories_name,
+                        'product_image' => $item->image[0]->images_path,
                         'product_price' => $item->detail->details_price,
                         'product_is_selled' => $item->products_is_selled,
                         'user_image' => $item->user->users_images_path,

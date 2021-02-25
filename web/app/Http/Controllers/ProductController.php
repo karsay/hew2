@@ -29,18 +29,30 @@ class ProductController extends Controller
             ->orderBy('created_at','desc')
             ->get();
 
-        //return $product->showTopProducts($queryProduct);
         $query->push($product->showNewProducts($queryProduct));
-        $query->push($product->showCateProducts($queryProduct,6));
-        $query->push($product->showCateProducts($queryProduct,5));
-        $query->push($product->showCateProducts($queryProduct,2));
+
+        $collect = collect([
+            'category1' => $product->showCateProducts($queryProduct,6)
+        ]);
+        $query->push($collect);
+
+        $collect = collect([
+            'category2' => $product->showCateProducts($queryProduct,5)
+        ]);
+        $query->push($collect);
+
+        $collect = collect([
+            'category3' => $product->showCateProducts($queryProduct,2)
+        ]);
+        $query->push($collect);
+
 
 
         return $query;
 
     }
 
-    public function showAllProducts(){
+    public function showNewProducts(){
 
 
         $product = new product();
@@ -53,9 +65,10 @@ class ProductController extends Controller
             ->get();
 
 
-        return $product->showNewProducts($queryProduct);
-
+        return $product->showNewAllProducts($queryProduct);
     }
+
+
 
     public function selectProduct($id){
 
