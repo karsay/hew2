@@ -4305,95 +4305,166 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       hoge: null,
-      raspAddress: "192.168.0.26",
-      hostAddress: "192.168.0.14",
+      raspAddress: "192.168.0.18",
+      hostAddress: "192.168.0.16",
       // raspAddress:"192.168.43.108",
       // hostAddress:"192.168.43.6",
+      userName: "",
+      errorName: false,
       flag1: false,
       flag2: false,
       isDisabled: true,
       streamUrl: "",
       loginForm: {
-        userId: 1,
-        inputPassword: null,
+        userId: "",
         fingerPass: null
       },
       returnPassword: null
     };
   },
+  watch: {
+    $route: {
+      handler: function handler() {
+        var _this = this;
+
+        return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+            while (1) {
+              switch (_context.prev = _context.next) {
+                case 0:
+                  _context.next = 2;
+                  return _this.authentication();
+
+                case 2:
+                case "end":
+                  return _context.stop();
+              }
+            }
+          }, _callee);
+        }))();
+      },
+      immediate: true
+    }
+  },
   methods: {
     click: function click() {
-      var _this = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.next = 2;
-                return axios.post("http://".concat(_this.raspAddress, ":5000/shutter"));
-
-              case 2:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee);
-      }))();
-    },
-    // 認証開始
-    authentication: function authentication() {
       var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-        var response;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                _this2.hoge = null;
-                _this2.streamUrl = "http://".concat(_this2.raspAddress, ":5000/video_feed"); // 初期化
+                _context2.next = 2;
+                return axios.post("http://".concat(_this2.raspAddress, ":5000/shutter"));
 
-                _this2.loginForm.userId = null; // ここのipアドレスをラズパイのアドレスに書き換えること
-
-                _context2.next = 5;
-                return axios.post("http://".concat(_this2.raspAddress, ":5000"), {
-                  reqFlag: 'authentication',
-                  userId: null
-                });
-
-              case 5:
-                response = _context2.sent;
-                _this2.loginForm.userId = response.data[0];
-                _this2.loginForm.fingerPass = response.data[1];
-                _this2.msg = "\u3088\u3046\u3053\u305D".concat(_this2.loginForm.userId, "\u3055\u3093");
-                _this2.msg1 = "指を乗せてください"; // 指紋認証
-                // ここのipアドレスをラズパイのアドレスに書き換えること
-
-                _context2.next = 12;
-                return axios.post("http://".concat(_this2.raspAddress, ":5000/fingerprint"), {
-                  userId: _this2.loginForm.userId,
-                  fingerPass: _this2.loginForm.fingerPass,
-                  fingerFlag: 2
-                });
-
-              case 12:
-                _this2.complateFlag = _context2.sent;
-                _this2.hoge = _this2.complateFlag.data;
-                _this2.streamUrl = "";
-
-              case 15:
+              case 2:
               case "end":
                 return _context2.stop();
             }
           }
         }, _callee2);
+      }))();
+    },
+    login: function login() {
+      var _this3 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.next = 2;
+                return _this3.$store.dispatch('auth/login', _this3.loginForm);
+
+              case 2:
+                // トップページに移動する
+                _this3.$router.push('/');
+
+              case 3:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }))();
+    },
+    // 認証開始
+    authentication: function authentication() {
+      var _this4 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+        var response, res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _this4.streamUrl = "http://".concat(_this4.raspAddress, ":5000/stream"); // 初期化
+
+                _this4.loginForm.userId = null;
+                _this4.errorName = false;
+                _this4.flag1 = false;
+                _this4.flag2 = false; // ここのipアドレスをラズパイのアドレスに書き換えること
+
+                _context4.next = 7;
+                return axios.post("http://".concat(_this4.raspAddress, ":5000"), {
+                  reqFlag: 'authentication',
+                  userId: null
+                });
+
+              case 7:
+                response = _context4.sent;
+                _this4.flag1 = true;
+
+                if (!(response.data[0] == "error")) {
+                  _context4.next = 13;
+                  break;
+                }
+
+                _this4.errorName = true;
+                _context4.next = 25;
+                break;
+
+              case 13:
+                _this4.loginForm.userId = response.data[0];
+                _this4.loginForm.fingerPass = response.data[1];
+                _context4.next = 17;
+                return axios.post("/api/getlogininfo", {
+                  'userId': _this4.loginForm.userId
+                });
+
+              case 17:
+                res = _context4.sent;
+                _this4.userName = res.data; // 指紋認証
+                // ここのipアドレスをラズパイのアドレスに書き換えること
+
+                _context4.next = 21;
+                return axios.post("http://".concat(_this4.raspAddress, ":5000/fingerprint"), {
+                  userId: _this4.loginForm.userId,
+                  fingerPass: _this4.loginForm.fingerPass,
+                  fingerFlag: 2
+                });
+
+              case 21:
+                _this4.complateFlag = _context4.sent;
+
+                if (_this4.complateFlag.data == "true") {
+                  _this4.isDisabled = false;
+                }
+
+                _this4.flag2 = true;
+                _this4.streamUrl = "";
+
+              case 25:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4);
       }))();
     }
   }
@@ -4662,28 +4733,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      // raspAddress: "192.168.0.26",
-      // hostAddress: "192.168.0.14",
-      raspAddress: "192.168.43.108",
-      hostAddress: "192.168.43.6",
+      raspAddress: "192.168.0.18",
+      hostAddress: "192.168.0.16",
+      // raspAddress:"192.168.43.108",
+      // hostAddress:"192.168.43.6",
       flag1: false,
       flag2: false,
       isDisabled: true,
       streamUrl: "",
       registForm: {
-        userId: 1
+        userId: ""
       }
     };
   },
@@ -4698,9 +4760,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               switch (_context.prev = _context.next) {
                 case 0:
                   _context.next = 2;
-                  return _this.registration();
+                  return _this.fetchId();
 
                 case 2:
+                  _context.next = 4;
+                  return _this.registration();
+
+                case 4:
                 case "end":
                   return _context.stop();
               }
@@ -4731,68 +4797,92 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee2);
       }))();
     },
-    // 認証開始
-    registration: function registration() {
+    fetchId: function fetchId() {
       var _this3 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
-        var fingerInfo, response;
+        var response;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                _this3.streamUrl = "http://".concat(_this3.raspAddress, ":5000/video_feed"); // 顔登録
-                // ここのipアドレスをラズパイのアドレスに書き換えること
+                _context3.next = 2;
+                return axios.get("/api/fetchId");
 
-                _context3.next = 3;
-                return axios.post("http://".concat(_this3.raspAddress, ":5000"), {
-                  reqFlag: "registration"
-                });
-
-              case 3:
-                _this3.flag1 = true; // 指紋登録
-                // ここのipアドレスをラズパイのアドレスに書き換えること
-
-                _context3.next = 6;
-                return axios.post("http://".concat(_this3.raspAddress, ":5000/fingerprint"), {
-                  fingerFlag: 1
-                });
-
-              case 6:
-                fingerInfo = _context3.sent;
-                _this3.flag2 = true;
-
-                if (!(fingerInfo.data == "error")) {
-                  _context3.next = 14;
-                  break;
-                }
-
-                alert("登録に失敗しました。もう一度やり直してください");
-                _this3.flag1 = false;
-                _this3.flag2 = false;
-                _context3.next = 18;
-                break;
-
-              case 14:
-                _context3.next = 16;
-                return axios.post("http://".concat(_this3.hostAddress, ":5000/authenticationregistration"), {
-                  userId: _this3.registForm.userId,
-                  fingerPass: fingerInfo.data
-                });
-
-              case 16:
+              case 2:
                 response = _context3.sent;
-                _this3.isDisabled = false;
+                _this3.registForm.userId = response.data["users_id"] + 1;
 
-              case 18:
-                _this3.streamUrl = "";
-
-              case 19:
+              case 4:
               case "end":
                 return _context3.stop();
             }
           }
         }, _callee3);
+      }))();
+    },
+    // 認証開始
+    registration: function registration() {
+      var _this4 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+        var fingerInfo, response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _this4.streamUrl = "http://".concat(_this4.raspAddress, ":5000/stream"); // 顔登録
+                // ここのipアドレスをラズパイのアドレスに書き換えること
+
+                _context4.next = 3;
+                return axios.post("http://".concat(_this4.raspAddress, ":5000"), {
+                  reqFlag: "registration"
+                });
+
+              case 3:
+                _this4.flag1 = true; // 指紋登録
+                // ここのipアドレスをラズパイのアドレスに書き換えること
+
+                _context4.next = 6;
+                return axios.post("http://".concat(_this4.raspAddress, ":5000/fingerprint"), {
+                  fingerFlag: 1
+                });
+
+              case 6:
+                fingerInfo = _context4.sent;
+                _this4.flag2 = true;
+
+                if (!(fingerInfo.data == "error")) {
+                  _context4.next = 14;
+                  break;
+                }
+
+                alert("登録に失敗しました。もう一度やり直してください");
+                _this4.flag1 = false;
+                _this4.flag2 = false;
+                _context4.next = 18;
+                break;
+
+              case 14:
+                _context4.next = 16;
+                return axios.post("http://".concat(_this4.hostAddress, ":5000/authenticationregistration"), {
+                  userId: _this4.registForm.userId,
+                  fingerPass: fingerInfo.data
+                });
+
+              case 16:
+                response = _context4.sent;
+                _this4.isDisabled = false;
+
+              case 18:
+                _this4.streamUrl = "";
+
+              case 19:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4);
       }))();
     }
   }
@@ -5336,7 +5426,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n*[data-v-3b6adb30] {\n  text-decoration: none;\n}\n.area[data-v-3b6adb30] {\n  width: 100vw;\n  height: 100%;\n  position: absolute;\n}\niframe[data-v-3b6adb30] {\n  border: none;\n  width: 100%;\n  height: 100%;\n  min-height: 650px;\n  padding: 0;\n  margin: 0;\n}\n.defalt_img[data-v-3b6adb30] {\n  object-fit: cover;\n  width: 100%;\n  height: 100%;\n  min-height: 650px;\n}\n", ""]);
+exports.push([module.i, "\n*[data-v-3b6adb30] {\n  text-decoration: none;\n}\n.area[data-v-3b6adb30] {\n  width: 100%;\n  height: 690px;\n  position: absolute;\n}\niframe[data-v-3b6adb30] {\n  border: none;\n  width: 100%;\n  height: 680px;\n  padding: 0;\n  margin: 0;\n}\n.defalt_img[data-v-3b6adb30] {\n  object-fit: cover;\n  width: 100%;\n  height: 100%;\n}\n", ""]);
 
 // exports
 
@@ -5374,7 +5464,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n*[data-v-364a2fac] {\n  text-decoration: none;\n}\n.area[data-v-364a2fac] {\n  width: 100%;\n  height: 100%;\n  position: absolute;\n}\niframe[data-v-364a2fac] {\n  border: none;\n  width: 100%;\n  height: 100%;\n  min-height: 650px;\n  padding: 0;\n  margin: 0;\n}\n.defalt_img[data-v-364a2fac] {\n  object-fit: cover;\n  width: 100%;\n  height: 100%;\n  min-height: 650px;\n}\n", ""]);
+exports.push([module.i, "\n*[data-v-364a2fac] {\n  text-decoration: none;\n}\n.area[data-v-364a2fac] {\n  width: 100%;\n  height: 100%;\n  position: absolute;\n}\niframe[data-v-364a2fac] {\n  border: none;\n  width: 100%;\n  height: 100%;\n  padding: 0;\n  margin: 0;\n}\n.defalt_img[data-v-364a2fac] {\n  object-fit: cover;\n  width: 100%;\n  height: 100%;\n}\n\n", ""]);
 
 // exports
 
@@ -26879,39 +26969,33 @@ var render = function() {
     "v-container",
     { attrs: { "fill-height": "" } },
     [
-      _c("div", { staticClass: "area", on: { dblclick: _vm.click } }),
-      _vm._v(" "),
       _c(
         "v-card",
         {
-          staticClass: "mx-auto mt-16",
+          staticClass: "mx-auto",
           attrs: {
             width: "100%",
             height: "100%",
             color: "#F0F3F5",
-            "elevation-10": ""
+            "elevation-10": "",
+            "max-height": "680"
           }
         },
         [
+          _c("div", { staticClass: "area", on: { dblclick: _vm.click } }),
+          _vm._v(" "),
           _c(
             "v-row",
             [
               _c("v-col", { attrs: { align: "center" } }, [
-                _vm.streamUrl
-                  ? _c("iframe", {
-                      staticStyle: { border: "0" },
-                      attrs: {
-                        src: _vm.streamUrl,
-                        width: "400",
-                        height: "600",
-                        frameborder: "0",
-                        allowfullscreen: ""
-                      }
-                    })
-                  : _c("img", {
-                      staticClass: "defalt_img",
-                      attrs: { src: "/assets/img/Video.png" }
-                    })
+                _c("iframe", {
+                  staticStyle: { border: "0" },
+                  attrs: {
+                    src: _vm.streamUrl,
+                    frameborder: "0",
+                    allowfullscreen: ""
+                  }
+                })
               ]),
               _vm._v(" "),
               _c(
@@ -26924,7 +27008,7 @@ var render = function() {
                       on: {
                         submit: function($event) {
                           $event.preventDefault()
-                          return _vm.registration($event)
+                          return _vm.login($event)
                         }
                       }
                     },
@@ -26952,13 +27036,27 @@ var render = function() {
                           _vm._v(" "),
                           _c("v-col", [
                             _vm.flag1 == false
-                              ? _c("h2", { staticClass: "red--text hoge" }, [
+                              ? _c("h2", { staticClass: "red--text" }, [
                                   _vm._v("カメラを顔に向けて画面を"),
                                   _c("br"),
                                   _vm._v("ダブルクリックしてください")
                                 ])
-                              : _c("h1", { staticClass: "green--text hoge" }, [
-                                  _vm._v("OK!!!")
+                              : _c("span", [
+                                  _vm.errorName
+                                    ? _c("h2", { staticClass: "red--text" }, [
+                                        _vm._v(
+                                          "登録された顔と一致しませんでした..."
+                                        ),
+                                        _c("br"),
+                                        _vm._v("もう一度やり直してください")
+                                      ])
+                                    : _c("h2", { staticClass: "green--text" }, [
+                                        _vm._v(
+                                          "ようこそ【" +
+                                            _vm._s(_vm.userName) +
+                                            "】さん"
+                                        )
+                                      ])
                                 ])
                           ])
                         ],
@@ -26982,11 +27080,19 @@ var render = function() {
                           _vm._v(" "),
                           _c("v-col", { attrs: { justifu: "center" } }, [
                             _vm.flag2 == false
-                              ? _c("h2", { staticClass: "red--text hoge" }, [
+                              ? _c("h2", { staticClass: "red--text" }, [
                                   _vm._v("指紋を認証してください")
                                 ])
-                              : _c("h1", { staticClass: "green--text hoge" }, [
-                                  _vm._v("OK!!!")
+                              : _c("span", [
+                                  this.complateFlag.data == "true"
+                                    ? _c("h2", { staticClass: "green--text" }, [
+                                        _vm._v("認証成功！！")
+                                      ])
+                                    : _c("h2", { staticClass: "red--text" }, [
+                                        _vm._v("認証失敗..."),
+                                        _c("br"),
+                                        _vm._v("もう一度やり直して下さい")
+                                      ])
                                 ])
                           ])
                         ],
@@ -27218,12 +27324,13 @@ var render = function() {
       _c(
         "v-card",
         {
-          staticClass: "mx-auto mt-16",
+          staticClass: "mx-auto",
           attrs: {
             width: "100%",
             height: "100%",
             color: "#F0F3F5",
-            "elevation-10": ""
+            "elevation-10": "",
+            "max-height": "680"
           }
         },
         [
@@ -27233,21 +27340,14 @@ var render = function() {
             "v-row",
             [
               _c("v-col", { attrs: { align: "center" } }, [
-                _vm.streamUrl
-                  ? _c("iframe", {
-                      staticStyle: { border: "0" },
-                      attrs: {
-                        src: _vm.streamUrl,
-                        width: "400",
-                        height: "600",
-                        frameborder: "0",
-                        allowfullscreen: ""
-                      }
-                    })
-                  : _c("img", {
-                      staticClass: "defalt_img",
-                      attrs: { src: "/assets/img/Video.png" }
-                    })
+                _c("iframe", {
+                  staticStyle: { border: "0" },
+                  attrs: {
+                    src: _vm.streamUrl,
+                    frameborder: "0",
+                    allowfullscreen: ""
+                  }
+                })
               ]),
               _vm._v(" "),
               _c(
@@ -27288,12 +27388,12 @@ var render = function() {
                           _vm._v(" "),
                           _c("v-col", [
                             _vm.flag1 == false
-                              ? _c("h2", { staticClass: "red--text hoge" }, [
+                              ? _c("h2", { staticClass: "red--text" }, [
                                   _vm._v("カメラを顔に向けて画面を"),
                                   _c("br"),
                                   _vm._v("ダブルクリックしてください")
                                 ])
-                              : _c("h1", { staticClass: "green--text hoge" }, [
+                              : _c("h1", { staticClass: "green--text" }, [
                                   _vm._v("OK!!!")
                                 ])
                           ])
@@ -27318,10 +27418,10 @@ var render = function() {
                           _vm._v(" "),
                           _c("v-col", { attrs: { justifu: "center" } }, [
                             _vm.flag2 == false
-                              ? _c("h2", { staticClass: "red--text hoge" }, [
+                              ? _c("h2", { staticClass: "red--text" }, [
                                   _vm._v("指紋を登録してください")
                                 ])
-                              : _c("h1", { staticClass: "green--text hoge" }, [
+                              : _c("h1", { staticClass: "green--text" }, [
                                   _vm._v("OK!!!")
                                 ])
                           ])
@@ -92687,22 +92787,21 @@ var actions = {
       }, _callee);
     }))();
   },
-  login: function login() {
-    var _this = this;
-
+  login: function login(context, data) {
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+      var response;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
               _context2.next = 2;
-              return _this.$store.dispatch('auth/login', _this.loginForm);
+              return axios.post('/api/login', data);
 
             case 2:
-              // トップページに移動する
-              _this.$router.push('/');
+              response = _context2.sent;
+              context.commit('setUser', response.data[0]);
 
-            case 3:
+            case 4:
             case "end":
               return _context2.stop();
           }

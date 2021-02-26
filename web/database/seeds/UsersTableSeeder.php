@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Models\User;
 
 class UsersTableSeeder extends Seeder
 {
@@ -60,5 +61,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => new DateTime(),
             ]
         ]);
+
+        factory(User::class, 50)->create();
     }
 }

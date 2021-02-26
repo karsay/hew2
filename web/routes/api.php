@@ -35,7 +35,7 @@ Route::get('/user', fn() => Auth::user())->name('user');
 Route::post('/getlogininfo','Auth\LoginController@getlogininfo');
 
 Route::get('/topProducts', 'ProductController@topShow');
-Route::get('/allProducts', 'ProductController@showAllProducts');
+Route::get('/allProducts', 'ProductController@showNewProducts');
 Route::get('/products/{id}', 'ProductController@selectProduct');
 Route::post('/sellProduct', 'ProductController@sellProduct');
 
