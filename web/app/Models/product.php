@@ -157,11 +157,12 @@ class product extends Model
                     ]
                 );
 
+                $i++;
                 $collectionQuery->push($collectionGetQuery);
-                if ($i > 2){
+                if ($i > 4){
                     break;
                 }
-                $i++;
+
             }
         }
         return $collectionQuery;
@@ -170,38 +171,57 @@ class product extends Model
     public function detailProduct(Collection $collection){
 
         $collectionGetQuery = collect();
+        $i = 1;
 
-        foreach ($collection as $item) {
+        $collectionImageHoge = collect();
+        if($collection->count() > 0){
 
-
-            $collectionGetQuery = collect(
-                [
-                    'product_id' => $item->products_id,
-                    'user_id' => $item->users_id,
-                    "products_date" => $item->products_date,
-                    "product_title"=> $item->detail->details_title,
-                    "category_id" => $item->detail->categories_id,
-                    'category_name' => category::find($item->detail->categories_id)->categories_name,
-                    "product_description" => $item->detail->details_description,
-                    "product_state" => $item->detail->details_state,
-                    "product_shipping_fee" => $item->detail->details_shipping_fee,
-                    "product_area" => $item->detail->details_area,
-                    "product_date" => $item->detail->shipping_date,
-                    'product_price' => $item->detail->details_price,
-                    "users_gender" => $item->user->users_gender,
-                    "users_birthday" => $item->user->users_birthday,
-                    'user_image' => $item->user->users_images_path,
-                    "users_profile" => $item->user->users_profile,
-                    "image_path1" => $item->image[0]->images_path,
-                    "image_path2" => $item->image[1]->images_path,
-                    "image_path3" => $item->image[2]->images_path,
-                    'likes' => $item->like->count(),
-                    'data' => $item->created_at,
-                ]
-            );
+            foreach ($collection as $item) {
 
 
+                foreach ($item->image as $item1){
+                    $clt = collect(
+                        [
+                            'image_path' . $i => $item->image[$i-1]->images_path
+                        ]
+                    );
+                    $collectionImageHoge->push($clt);
+                }
+
+
+
+                $collectionGetQuery = collect(
+                    [
+                        'product_id' => $item->products_id,
+                        'user_id' => $item->users_id,
+                        "products_date" => $item->products_date,
+                        "product_title"=> $item->detail->details_title,
+                        "category_id" => $item->detail->categories_id,
+                        'category_name' => category::find($item->detail->categories_id)->categories_name,
+                        "product_description" => $item->detail->details_description,
+                        "product_state" => $item->detail->details_state,
+                        "product_shipping_fee" => $item->detail->details_shipping_fee,
+                        "product_area" => $item->detail->details_area,
+                        "product_date" => $item->detail->shipping_date,
+                        'product_price' => $item->detail->details_price,
+                        'user_name' => $item->user->users_name,
+                        "users_gender" => $item->user->users_gender,
+                        "users_birthday" => $item->user->users_birthday,
+                        'user_image' => $item->user->users_images_path,
+                        "users_profile" => $item->user->users_profile,
+                        "product_image" => $collectionImageHoge,
+                        'likes' => $item->like->count(),
+                        'data' => $item->created_at,
+                    ]
+                );
+
+            }
+        }else{
+            $collectionGetQuery = collect([
+                "prodcut" => null
+            ]);
         }
+
 
         return $collectionGetQuery;
 

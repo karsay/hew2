@@ -22,10 +22,7 @@ class ProductController extends Controller
         $product = new product();
         $query = collect();
 
-        $queryProduct = product::with('detail')
-            ->with('user')
-            ->with('image')
-            ->with('like')
+        $queryProduct = product::with(['detail','user','image','like'])
             ->orderBy('created_at','desc')
             ->get();
 
@@ -42,7 +39,7 @@ class ProductController extends Controller
         $query->push($collect);
 
         $collect = collect([
-            'category3' => $product->showCateProducts($queryProduct,2)
+            'category3' => $product->showCateProducts($queryProduct,7)
         ]);
         $query->push($collect);
 
@@ -57,10 +54,7 @@ class ProductController extends Controller
 
         $product = new product();
 
-        $queryProduct = product::with('detail')
-            ->with('user')
-            ->with('image')
-            ->with('like')
+        $queryProduct = product::with(['detail','user','image','like'])
             ->orderBy('created_at','desc')
             ->get();
 
@@ -75,8 +69,7 @@ class ProductController extends Controller
 
         $product = new product();
 
-        $queryProduct = product::with('detail')
-            ->with(['user','image','like'])
+        $queryProduct = product::with(['detail','user','image','like'])
             ->where('products_id','=',$id)
             ->orderBy('created_at','desc')
             ->get();
