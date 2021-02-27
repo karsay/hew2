@@ -45,7 +45,7 @@ export default {
   computed: {
     ...mapGetters('sellProduct', ['getProductItems']),
     description() {
-      return this.getProductItems['detail']
+      return this.getProductItems['description']
     },
     details() {
       return [
