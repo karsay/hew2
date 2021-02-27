@@ -1,5 +1,6 @@
 <template>
   <ProductPreview
+    :images="images"
     :dialog="dialog"
     :dialogDetail="dialogDetail"
     :details="details"
@@ -13,11 +14,17 @@
 <script>
 import ProductPreview from '../organisms/ProductPreview'
 import { mapGetters } from 'vuex'
+// 前のページまたは、vuexから商品の画像を受け取る
 
 export default {
   components: { ProductPreview },
   data() {
     return {
+      images: [
+        "",
+        "",
+        "",
+      ],
       dialog: false,
       dialogDetail: {
         title: "出品完了",
@@ -45,7 +52,7 @@ export default {
   computed: {
     ...mapGetters('sellProduct', ['getProductItems']),
     description() {
-      return this.getProductItems['detail']
+      return this.getProductItems['description']
     },
     details() {
       return [

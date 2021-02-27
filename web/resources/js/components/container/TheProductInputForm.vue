@@ -30,7 +30,7 @@ export default {
       ],
       textareaItem: {
         label: "商品説明",
-        prop: 'detail',
+        prop: 'description',
         value: ""
       }
     }
