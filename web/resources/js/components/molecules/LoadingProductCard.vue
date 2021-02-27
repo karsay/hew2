@@ -2,17 +2,17 @@
   <v-card
     height="238"
     tile
+    :loading="true"
   >
     <v-img
       height="152"
       :src="path"
       :alt="name"
-      @click="toDetail"
     ></v-img>
 
     <v-card-subtitle class="pa-2 text--primary d-flex">
       <v-card-text class="pa-0 d-flex my-auto">
-        {{ price }}yen
+        {{ price }}
       </v-card-text>
       <v-card-text class="pa-0 text-right">
         <TheToggleHeart />
@@ -26,29 +26,15 @@
 
 <script>
 import TheToggleHeart from '../container/TheToggleHeart'
-// 商品カード
 
 export default {
-  components: { TheToggleHeart },
+  components: {
+    TheToggleHeart
+  },
   props: {
-    id: Number,
     path: String,
-    price: String,
     name: String,
-  },
-  data() {
-    return {
-      productId: this.id
-    }
-  },
-  methods: {
-    toDetail() {
-      this.$router.push(`/product-list/${this.productId}`)
-    },
+    price: String,
   },
 }
 </script>
-
-<style lang="scss" scoped>
-
-</style>
