@@ -31,7 +31,7 @@ import TheToggleHeart from '../container/TheToggleHeart'
 export default {
   components: { TheToggleHeart },
   props: {
-    id: String,
+    id: Number,
     path: String,
     price: String,
     name: String,
