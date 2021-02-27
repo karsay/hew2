@@ -6,6 +6,7 @@
       @close-dialog="closeDialog"
     />
     <ProductDetail
+      :images="images"
       :details="details"
       :description="description"
       :buttons="buttons"
@@ -24,6 +25,7 @@ export default {
     HandleDialog,
   },
   props: {
+    images: Array,
     dialog: Boolean,
     dialogDetail: Object,
     details: Array,
