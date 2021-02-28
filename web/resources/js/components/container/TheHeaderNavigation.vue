@@ -1,13 +1,9 @@
 <template>
   <HeaderNavigation
-    :is-login-Status="getIsLoginStatus"
     :title="title"
-    :buttons="buttons"
     :drawer="getDrawer"
     @is-drawer="isDrawer"
     @to-top="toTop"
-    @to-login="toLogin"
-    @to-sell-product="toSellProduct"
   />
 </template>
 
@@ -22,25 +18,6 @@ export default {
   data() {
     return {
       title: 'Relief Market',
-      buttons: [
-        {
-          text: "カテゴリ",
-          icon: "mdi-store"
-        },
-        {
-          text: "出品",
-          icon: "mdi-camera"
-        },
-        {
-          text: "取引",
-          icon: "mdi-message-text"
-        },
-        
-        {
-          text: "通知",
-          icon: "mdi-bell"
-        },
-      ]
     }
   },
   methods: {
@@ -48,15 +25,8 @@ export default {
     toTop() {
       this.$router.push({ path: '/' }).catch(err => {})
     },
-    toLogin() {
-      this.$router.push({ path: '/login' }).catch(err => {})
-    },
-    toSellProduct() {
-      this.$router.push({ path: '/sell-product' }).catch(err => {})
-    }
   },
   computed: {
-    ...mapGetters("auth", ["getIsLoginStatus"]),
     ...mapGetters("navigation", ["getDrawer"]),
   }
 }
