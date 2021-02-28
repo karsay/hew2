@@ -44,8 +44,7 @@ export default {
       await (() => {
         this.dialog = false
       })
-
-      this.$router.push('/product-list/?page=1')
+      this.$router.push('/')
     },
   },
   computed: {
