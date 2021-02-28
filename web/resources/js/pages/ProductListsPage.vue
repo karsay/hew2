@@ -1,6 +1,6 @@
 <template>
 <div>
-    <v-img src="" alt="" srcset="" height="240" class="primary_dark" />
+    <TheNarrowDownSearch />
 
     <v-card class="pb-12 card card__position">
 
@@ -17,10 +17,12 @@
 </template>
 
 <script>
+import TheNarrowDownSearch from '../components/container/TheNarrowDownSearch'
 import Pagenation from './../components/molecules/Pagenation'
 
   export default {
     components: {
+      TheNarrowDownSearch,
       Pagenation,
     },
     props: {
