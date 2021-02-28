@@ -34,10 +34,10 @@ Route::get('/user', fn() => Auth::user())->name('user');
 // ログイン時のユーザ情報取得
 Route::post('/getlogininfo','Auth\LoginController@getlogininfo');
 
-Route::get('/topProducts', 'ProductController@topShow');
-Route::get('/allProducts', 'ProductController@showNewProducts');
+Route::get('/topproducts', 'ProductController@topShow');
+Route::get('/allproducts', 'ProductController@showNewProducts');
 Route::get('/products/{id}', 'ProductController@selectProduct');
-Route::post('/sellProduct', 'ProductController@sellProduct');
+Route::post('/sellproduct', 'ProductController@sellProduct');
 
 
 

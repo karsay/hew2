@@ -28,18 +28,36 @@ class ProductController extends Controller
 
         $query->push($product->showNewProducts($queryProduct));
 
+        [$collectionQuery, $categoryName] = $product->showCateProducts($queryProduct,6);
+
         $collect = collect([
-            'category1' => $product->showCateProducts($queryProduct,6)
+            'category1' => [
+                "category_name"=> $categoryName,
+                "products" => $collectionQuery
+            ]
         ]);
         $query->push($collect);
 
+
+        [$collectionQuery, $categoryName] = $product->showCateProducts($queryProduct,5);
+
         $collect = collect([
-            'category2' => $product->showCateProducts($queryProduct,5)
+            'category2' => [
+                "category_name"=> $categoryName,
+                "products" => $collectionQuery
+            ]
         ]);
         $query->push($collect);
 
+
+
+        [$collectionQuery, $categoryName] = $product->showCateProducts($queryProduct,7);
+
         $collect = collect([
-            'category3' => $product->showCateProducts($queryProduct,7)
+            'category3' => [
+                "category_name"=> $categoryName,
+                "products" => $collectionQuery
+            ]
         ]);
         $query->push($collect);
 
