@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Models\product;
 use App\Models\image;
 use App\Models\detail;
 use App\Models\category;
 use App\Models\user;
-
+use Illuminate\Foundation\Console\Presets\React;
+use Symfony\Component\VarDumper\Cloner\Data;
 
 class ProductController extends Controller
 {
@@ -80,6 +82,20 @@ class ProductController extends Controller
 
     }
 
+    public function storeImage(Request $request){
+        for($i = 0; $i < 3; $i++)
+        {
+            $image = $request->input('file' . $i);
+            $image = str_replace('data:image/jpeg;base64,', '', $image);
+            $image = str_replace(' ', '+', $image);
+            $imageName = md5($image).'.'.'jpeg';
+            $imagePath = 'public/' . $imageName;
+            Storage::put($imagePath, base64_decode($image));
+            $imagePaths[] = str_replace('public', '/storage', $imagePath);
+        }
+        return $imagePaths;
+    }
+
 
     public function sellProduct(Request $request){
         $product = new product();
@@ -100,18 +116,14 @@ class ProductController extends Controller
             return  $product->insertProduct($request, $query->products_id);
 
         }catch (\Exception $e){
-            return ollect(
+            return collect(
                 [
                     "saveresult" => false,
                     "resultDtail" => $e
-
                 ]
             );
         }
 
-
     }
-
-
 
 }
