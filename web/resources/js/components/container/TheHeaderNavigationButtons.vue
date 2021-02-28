@@ -1,0 +1,94 @@
+<template>
+  <HeaderNavigationButtons
+    :category="category"
+    :notification="notification"
+    :isLogin="isLogin"
+    @to-sell-product="toSellProduct"
+    @to-login="toLogin"
+    @logout="logout"
+    @to-product-list="toProductList"
+  />
+</template>
+
+<script>
+import HeaderNavigationButtons from '../molecules/HeaderNavigationButtons'
+
+export default {
+  components: {
+    HeaderNavigationButtons
+  },
+  data() {
+    return {
+      category: [
+        {
+          id: 0,
+          name: "レディース"
+        },
+        {
+          id: 1,
+          name: "メンズ"
+        },
+        {
+          id: 2,
+          name: "キッズ"
+        },
+        {
+          id: 3,
+          name: "インテリア",
+        },
+        {
+          id: 4,
+          name: "スポーツ",
+        },
+        {
+          id: 5,
+          name: "本・音楽・ゲーム"
+        },
+        {
+          id: 6,
+          name: "家電・スマホ・カメラ"
+        }
+      ],
+      notification: [
+        {
+          id: 0,
+          name: "通知"
+        },
+        {
+          id: 1,
+          name: "通知"
+        },
+      ]
+    }
+  },
+  methods: {
+    toSellProduct() {
+      this.$router.push({ path: '/sell-product' }).catch(err => {})
+    },
+    toLogin() {
+      this.$router.push({ path: '/login' }).catch(err => {})
+    },
+    toProductList(categoryId) {
+      this.$router.push({
+        name: 'productList',
+        params: {
+          category: categoryId
+        }
+      }).catch(err => {})
+    },
+    async logout () {
+      await this.$store.dispatch('auth/logout')
+      this.$router.push('/')
+    }
+  },
+  computed: {
+    isLogin () {
+      return this.$store.getters['auth/check']
+    },
+  }
+}
+</script>
+
+<style scoped>
+
+</style>
