@@ -1,5 +1,6 @@
 <template>
   <ProductDetail
+    :images="images"
     :details="details"
     :description="description"
     :buttons="buttons"
@@ -9,11 +10,17 @@
 
 <script>
 import ProductDetail from '../organisms/ProductDetail.vue'
+// apiで商品の画像をもらう（予定）
 
 export default {
   components: { ProductDetail },
   data() {
     return {
+      images: [
+        "",
+        "",
+        "",
+      ],
       details: [
         {
           label: "商品名",

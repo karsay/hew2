@@ -32,29 +32,32 @@ const routes = [
     component: RegisterForm
   },
   {
-    path: '/product-list/',
+    path: '/product-list/:category',
+    name: 'productList',
     component: ProductListsPage,
     props: route => {
       const page = route.query.page
-      return { page: /^[1-9][0-9]*$/.test(page) ? page * 1 : 1 }
+      return {
+        page: /^[1-9][0-9]*$/.test(page) ? page * 1 : 1,
+        category: route.params.categoryId
+      }
     },
   },
   {
-    path: '/product-list/:id',
+    path: '/product-list/:product/detail',
+    name: 'productDetail',
     component: ProductDetailPage,
-    props: true,
+    props: route => ({
+      product: route.params.productId,
+    }),
   },
   {
-    path: `/product-list/:id/buy`,
+    path: `/product-list/:product/detail/buy`,
     name: 'buy',
     component: BuyPhasePage,
     props: route => ({
       details: route.params.details
     })
-  },
-  {
-    path: '/product-list',
-    redirect: '/product-list/?page=1',
   },
   {
     // 720pxなのでsell/urlでform, check->previewに起きたら変える, pictureでわけてもいいかも、、

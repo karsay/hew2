@@ -1,7 +1,9 @@
 <template>
   <v-container class="pt-0 d-flex justify-center">
     <v-sheet width="720" color="#fafafa" class="px-6">
-      <v-img fixed src="" width="100%" height="448" class="img" />
+      <CarouselImage
+        :images="images"
+      />
       <v-card class="py-6 px-6 card card__position">
         <v-row>
           <v-col cols="6">
@@ -49,17 +51,20 @@
 </template>
 
 <script>
+import CarouselImage from '../molecules/CarouselImage'
 import ProductDetailItem from './../molecules/ProductDetailItem'
 import TheToggleHeart from '../container/TheToggleHeart'
 import AdjacentButtons from '../molecules/AdjacentButtons'
 
 export default {
   components: {
+    CarouselImage,
     ProductDetailItem,
     TheToggleHeart,
     AdjacentButtons
   },
   props: {
+    images: Array,
     details: Array,
     description: String,
     buttons: Object
@@ -93,7 +98,5 @@ export default {
   }
 }
 
-.img {
-  background-color: #ddd;
-}
+
 </style>

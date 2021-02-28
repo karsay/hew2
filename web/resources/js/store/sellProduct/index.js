@@ -14,7 +14,7 @@ const state = {
   inputItems: {
     name: '',
     price: '',
-    detail: '',
+    description: '',
   }
 }
 

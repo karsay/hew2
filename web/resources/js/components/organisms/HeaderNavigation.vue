@@ -5,8 +5,7 @@
     class="primary"
   >
     <v-container>
-      <v-row
-      >
+      <v-row>
         <v-col cols="4" class="pa-0 d-flex">
           <v-app-bar-nav-icon
             @click="isDrawer(drawer)"
@@ -26,55 +25,22 @@
           </v-toolbar-items>
         </v-col>
       </v-row>
-      <v-row>
-        <v-btn
-          class="mr-2"
-          v-for="button in buttons"
-          :key="button.text"
-          :depressed="true"
-          :class="'primary_light white--text'"
-          @click="toSellProduct"
-        >
-          <v-icon class="mr-1">{{ button.icon }}</v-icon>
-          {{ button.text }}
-        </v-btn>
-        <v-spacer></v-spacer>
-        <v-btn
-          v-if="isLogin"
-          :depressed="true"
-          @click="logout"
-          class="secondary"
-        >
-          <v-icon
-            class="mr-1"
-          >mdi-logout</v-icon>
-          ログアウト
-        </v-btn>
-        <v-btn
-          v-else
-          :depressed="true"
-          @click="toLogin"
-          class="secondary"
-        >
-          <v-icon
-            class="mr-1"
-          >mdi-account</v-icon>
-          ログイン/新規登録
-        </v-btn>
-      </v-row>
+      <TheHeaderNavigationButtons />
     </v-container>
   </v-app-bar>
 </template>
 
 <script>
 import TheProductSearch from '../container/TheProductSearch'
+import TheHeaderNavigationButtons from '../container/TheHeaderNavigationButtons'
 
 export default {
-  components: { TheProductSearch },
+  components: {
+    TheProductSearch,
+    TheHeaderNavigationButtons
+  },
   props: {
-    isLoginStatus: Boolean,
     title: String,
-    buttons: Array,
     drawer: Boolean
   },
   methods: {
@@ -84,22 +50,7 @@ export default {
     toTop() {
       this.$emit('to-top')
     },
-    toLogin() {
-      this.$emit('to-login')
-    },
-    toSellProduct() {
-      this.$emit('to-sell-product')
-    },
-    async logout () {
-      await this.$store.dispatch('auth/logout')
-      this.$router.push('/')
-    }
   },
-  computed: {
-    isLogin () {
-      return this.$store.getters['auth/check']
-    },
-  }
 }
 </script>
 
