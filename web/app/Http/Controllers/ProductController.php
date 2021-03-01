@@ -130,6 +130,30 @@ class ProductController extends Controller
 
     }
 
+    public function searchNarrowDown(Request $request){
+
+
+    }
+
+    public function searchProducts(Request $request){
+
+
+        $keyword = $request->input('keywords');
+
+        $queryProduct = product::with(['detail','user','image','like'])
+            ->whereHas('detail', function($query) use($keyword){
+                $query->where('details_title', 'like', '%' . $keyword . '%');
+            })
+            ->orderBy('created_at','desc')
+            ->get();
+
+        $product = new product();
+
+        return $product->showNewAllProducts($queryProduct);
+//        return $queryProduct;
+
+    }
+
 
 
 }

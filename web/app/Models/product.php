@@ -64,6 +64,7 @@ class product extends Model
                 [
 
                     'product_id' => $item->products_id,
+                    "product_title"=> $item->detail->details_title,
                     'product_price' => $item->detail->details_price,
                     'product_image' => $item->image[0]->images_path,
                     'product_is_selled' => $item->products_is_selled,
@@ -96,8 +97,6 @@ class product extends Model
     public function showNewAllProducts(Collection $collection){
 
 
-
-
         $collectAll = collect();
 
         foreach ($collection as $item) {
@@ -107,6 +106,7 @@ class product extends Model
                 [
 
                     'product_id' => $item->products_id,
+                    "product_title"=> $item->detail->details_title,
                     'product_price' => $item->detail->details_price,
                     'product_image' => $item->image[0]->images_path,
                     'product_is_selled' => $item->products_is_selled,
@@ -120,7 +120,6 @@ class product extends Model
 
 
         }
-
 
 
 
@@ -146,6 +145,7 @@ class product extends Model
                 $collectionGetQuery = collect(
                     [
                         'product_id' => $item->products_id,
+                        "product_title"=> $item->detail->details_title,
                         'product_image' => $item->image[0]->images_path,
                         'product_price' => $item->detail->details_price,
                         'product_is_selled' => $item->products_is_selled,
@@ -224,6 +224,8 @@ class product extends Model
 
     }
 
+
+
     public function insertProduct($request, $productId){
 
         $collect = collect();
@@ -294,6 +296,35 @@ class product extends Model
 
 
         return $collect;
+    }
+
+
+    public function search(Collection $collection){
+
+
+        $collectAll = collect();
+
+
+        foreach ($collection as $item) {
+            $collectionGetQuery = collect(
+                [
+
+                    'product_id' => $item->products_id,
+                    "product_title"=> $item->detail->details_title,
+                    'product_price' => $item->detail->details_price,
+                    'product_image' => $item->image[0]->images_path,
+                    'product_is_selled' => $item->products_is_selled,
+                    'likes' => $item->like->count(),
+                    'data' => $item->created_at,
+                ]
+            );
+
+            $collectAll->push($collectionGetQuery);
+
+
+        }
+
+        return $collectAll;
     }
 
 
