@@ -5,7 +5,7 @@
         v-for="i in 5"
         :key="i"
       >
-      <TheLoadingProductCard />
+      <LoadingProductCard />
       </v-col>
     </template>
 
@@ -27,13 +27,13 @@
 
 <script>
 import ProductCard from './../molecules/ProductCard'
-import TheLoadingProductCard from './TheLoadingProductCard'
+import LoadingProductCard from '../molecules/LoadingProductCard'
 // 新着アイテム
 
 export default {
   components: {
     ProductCard,
-    TheLoadingProductCard
+    LoadingProductCard
   },
   props: {
     isLoading: Boolean,
