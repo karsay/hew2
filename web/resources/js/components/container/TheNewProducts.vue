@@ -11,11 +11,10 @@
 
     <template v-else>
       <v-col
-        v-for="product in products"
+        v-for="product in newProducts"
         :key="product.product_id"
       >
         <ProductCard
-          :isLoading="isLoading"
           :id="product.product_id"
           :path="''"
           :price="priceAmend(product.product_price)"
@@ -36,27 +35,15 @@ export default {
     ProductCard,
     TheLoadingProductCard
   },
-  data() {
-    return {
-      isLoading: true,
-      products: []
-    }
+  props: {
+    isLoading: Boolean,
+    newProducts: Array,
   },
   methods: {
     priceAmend(price) {
       const formatter = new Intl.NumberFormat('ja-JP')
       return formatter.format(price)
     },
-  },
-  created: async function() {
-    await axios.get('api/topProducts')
-    .then(res => {
-      this.products = res.data[0].newProducts
-      this.isLoading = false
-    })
-    .catch(err => (
-      console.log(err.message)
-    ))
   },
 }
 </script>
