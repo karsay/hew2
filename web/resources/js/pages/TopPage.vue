@@ -62,55 +62,17 @@ export default {
         newProduct: "新着アイテム",
         pickUpCategory: "ピックアップカテゴリ",
       },
-      val: new Array(5),
-      productImage: {
-        path: '',
-        name: 'productName'
-      },
-      pickUpProducts: [
-        {
-          id: 1,
-          category: 'カテゴリ1',
-          products: [
-            {
-              imagePath: '',
-              imageName: '',
-              name: 'productName',
-              price: '1,000',
-              heart: 33
-            }
-          ]
-        },
-        {
-          id: 2,
-          category: 'カテゴリ2',
-          products: [
-            {
-              imagePath: '',
-              imageName: '',
-              name: 'productName',
-              price: '1,000',
-              heart: 33
-            }
-          ]
-        },
-        {
-          id: 3,
-          category: 'カテゴリ3',
-          products: [
-            {
-              imagePath: '',
-              imageName: '',
-              name: 'productName',
-              price: '1,000',
-              heart: 33
-            }
-          ]
-        },
-      ],
-      
+      newProduct: [],
+      pickUpCategory: []
     }
-  }
+  },
+  // created: async function() {
+  //   await axios.get('api/topProducts')
+  //   .then(res => {
+  //     this.newProduct = res.data[0].newProduct
+  //     this.pickUpCategory
+  //   })
+  // }
 }
 </script>
 
