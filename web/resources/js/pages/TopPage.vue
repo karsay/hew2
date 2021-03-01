@@ -8,7 +8,10 @@
         <v-card-title class="pl-0">
           {{ sectionTitle.newProduct }}
         </v-card-title>
-        <TheNewProducts />
+        <TheNewProducts
+          :isLoading="isLoading"
+          :newProducts="newProducts"
+        />
       </v-container>
 
       <v-divider></v-divider>
@@ -17,7 +20,10 @@
         <v-card-title class="pl-0">
           {{ sectionTitle.pickUpCategory }}
         </v-card-title>
-        <ThePickUpProducts />
+        <ThePickUpProducts
+          :isLoading="isLoading"
+          :pickUpProducts="pickUpProducts"
+        />
       </v-container>
 
       <v-divider></v-divider>
@@ -58,21 +64,27 @@ export default {
   },
   data() {
     return {
+      isLoading: true,
       sectionTitle: {
         newProduct: "新着アイテム",
         pickUpCategory: "ピックアップカテゴリ",
       },
-      newProduct: [],
-      pickUpCategory: []
+      newProducts: [],
+      pickUpProducts: []
     }
   },
-  // created: async function() {
-  //   await axios.get('api/topProducts')
-  //   .then(res => {
-  //     this.newProduct = res.data[0].newProduct
-  //     this.pickUpCategory
-  //   })
-  // }
+  created: async function() {
+    await axios.get('api/topproducts')
+    .then(res => {
+      this.newProducts = res.data[0].newProducts
+      this.pickUpProducts = [
+        { ...res.data[1].category1 },
+        { ...res.data[2].category2 },
+        { ...res.data[3].category3 },
+      ]
+      this.isLoading = false
+    })
+  }
 }
 </script>
 
