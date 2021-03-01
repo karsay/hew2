@@ -6,7 +6,7 @@
           v-for="i in 5"
           :key="i"
         >
-        <TheLoadingProductCard />
+        <LoadingProductCard />
         </v-col>
       </v-row>
     </template>
@@ -39,13 +39,13 @@
 </template>
 
 <script>
-import ProductCard from './../molecules/ProductCard'
-import TheLoadingProductCard from './TheLoadingProductCard'
+import ProductCard from '../molecules/ProductCard'
+import LoadingProductCard from '../molecules/LoadingProductCard'
 
 export default {
   components: {
     ProductCard,
-    TheLoadingProductCard
+    LoadingProductCard
   },
   props: {
     isLoading: Boolean,
