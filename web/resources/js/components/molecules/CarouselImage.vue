@@ -1,11 +1,13 @@
 <template>
-  <v-carousel v-model="model" hide-delimiter-background hide-delimiters>
+  <v-carousel
+    v-model="model"
+    hide-delimiter-background
+    hide-delimiters
+  >
     <v-carousel-item
       v-for="(image, i) in images"
       :key="i"
       :src="image"
-      fixed
-      width="100%"
       class="img"
     >
     </v-carousel-item>

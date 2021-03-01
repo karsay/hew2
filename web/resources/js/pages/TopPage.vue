@@ -74,7 +74,7 @@ export default {
     }
   },
   created: async function() {
-    await axios.get('api/topproducts')
+    await axios.get('/api/topproducts')
     .then(res => {
       this.newProducts = res.data[0].newProducts
       this.pickUpProducts = [

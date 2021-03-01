@@ -1,9 +1,12 @@
 <template>
   <v-container class="pt-0 d-flex justify-center">
     <v-sheet width="720" color="#fafafa" class="px-6">
-      <CarouselImage
-        :images="images"
-      />
+      <div class="carousel">
+        <CarouselImage
+          :images="images"
+          class="carousel__position"
+        />
+      </div>
       <v-card class="py-6 px-6 card card__position">
         <v-row>
           <v-col cols="6">
@@ -20,7 +23,9 @@
 
           <v-col cols="6" class="d-flex flex-column">
             <v-card-subtitle class="pa-0 d-flex">
-              <p class="text-body-1 py-1">userName</p>
+              <p class="text-body-1 py-1">
+                {{ userName }}
+              </p>
               <v-spacer></v-spacer>
 
               <TheToggleHeart />
@@ -65,6 +70,10 @@ export default {
   },
   props: {
     images: Array,
+    userName: {
+      type: String,
+      default: 'userName'
+    },
     details: Array,
     description: String,
     buttons: Object
@@ -81,6 +90,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.carousel {
+  height: 500px;
+
+  &__position {
+    position: fixed;
+    width: 672px;
+  }
+}
+
 .card {
   border-radius: 8px !important;
 
