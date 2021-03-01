@@ -20,7 +20,7 @@
         >
         </v-select>
       </v-col>
-      <v-col cols="3" class="d-flex py-4">
+      <v-col class="d-flex py-4">
         <div
           v-for="radioItem in radioItems"
           :key="radioItem.label"
