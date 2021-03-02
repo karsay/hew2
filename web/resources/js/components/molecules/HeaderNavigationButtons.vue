@@ -1,29 +1,14 @@
 <template>
   <v-row>
-    <v-menu offset-y>
-      <template #activator="{ on }">
-        <v-btn
-          class="mr-2"
-          :depressed="true"
-          :class="'primary_light white--text'"
-          v-on="on"
-        >
-          <v-icon class="mr-1">mdi-store</v-icon>
-          カテゴリ
-        </v-btn>
-      </template>
-      <v-list
-        nav
-      >
-        <v-list-item
-          v-for="item in category"
-          :key="item.id"
-          @click="toProductList(item.id)"
-        >
-          {{ item.name }}
-        </v-list-item>
-      </v-list>
-    </v-menu>
+    <v-btn
+      class="mr-2"
+      :depressed="true"
+      :class="'primary_light white--text'"
+      @click="toProductList"
+    >
+      <v-icon class="mr-1">mdi-store</v-icon>
+      商品一覧
+    </v-btn>
 
     <v-btn
       class="mr-2"
@@ -106,7 +91,6 @@ export default {
   data() {
     return {
       isNotification: false,
-      isCategory: false,
     }
   },
   methods: {
@@ -122,8 +106,8 @@ export default {
     test(value) {
       console.log(value);
     },
-    toProductList(categoryId) {
-      this.$emit('to-product-list', categoryId)
+    toProductList() {
+      this.$emit('to-product-list')
     }
   },
 }
