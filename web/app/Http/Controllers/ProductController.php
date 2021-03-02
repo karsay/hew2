@@ -130,6 +130,36 @@ class ProductController extends Controller
 
     }
 
+    public function searchNarrowDown(Request $request){
+
+
+    }
+
+    public function searchProducts(Request $request){
+
+
+        $keyword = $request->input('keywords');
+
+
+        $queryProduct = product::with(['detail','user','image','like'])
+            ->whereHas('detail', function($query) use($keyword){
+                $search_split = mb_convert_kana($keyword, 's');
+                $search_split2 = preg_split('/[\s]+/', $search_split);
+
+                foreach ($search_split2 as $value){
+                    $query->where('details_title', 'like', '%' . $value . '%');
+                }
+
+            })
+            ->orderBy('created_at','desc')->get();
+
+        $product = new product();
+
+        return $product->showNewAllProducts($queryProduct);
+//        return $queryProduct;
+
+    }
+
 
 
 }
