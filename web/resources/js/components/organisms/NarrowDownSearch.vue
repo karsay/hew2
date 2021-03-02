@@ -1,6 +1,29 @@
 <template>
   <v-sheet color="primary_dark" class="py-6 px-4">
-    <v-row>
+    <v-row class="pb-6">
+      <v-col cols="2" class="d-flex flex-column">
+        <div>
+          <div class="text-h5 white--text">
+            キーワード
+          </div>
+          <ProductSearch
+            class="pt-0"
+            :input="input"
+            @search="search"
+            @input-handle="inputHandle"
+          />
+        </div>
+        <v-spacer></v-spacer>
+        <v-btn
+          width="102"
+          color="white"
+          depressed
+          class="px-4 mt-auto primary--text"
+          @click="search"
+        >
+          検索
+        </v-btn>
+      </v-col>
       <v-col cols="2" class="pb-0">
         <v-select
           v-for="selectItem in selectItems"
@@ -47,37 +70,28 @@
         </div>
       </v-col>
     </v-row>
-    <v-row>
-      <v-col class="d-flex pt-0 pb-6" cols="2">
-        <v-btn
-          min-width="102"
-          color="white"
-          depressed
-          class="px-4 py-2 primary--text"
-          @click="search"
-        >
-          検索
-        </v-btn>
-      </v-col>
-    </v-row>
   </v-sheet>
 </template>
 
 <script>
+import ProductSearch from '../molecules/ProductSearch'
+
 export default {
+  components: {
+    ProductSearch,
+  },
   props: {
+    input: '',
     selectItems: Array,
     radioItems: Array
   },
-  data() {
-    return {
-      value: null
-    }
-  },
   methods: {
     search() {
-      this.$emit('search')
+      this.$emit('search', this.input)
     },
+    inputHandle(input) {
+      this.$emit('input-handle', input)
+    }
   },
 }
 </script>
