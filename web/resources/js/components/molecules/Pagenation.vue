@@ -3,7 +3,7 @@
     <v-btn
       v-if="! isFirstPage"
       :ripple="{ class: 'primary--text'}"
-      :to="`?page=${currentPage - 1}`"
+      @click="pagenation"
     >
       <v-icon>
         mdi-chevron-left
@@ -14,7 +14,7 @@
     <v-btn
       v-if="! isLastPage"
       :ripple="{ class: 'primary--text'}"
-      :to="`?page=${currentPage + 1}`"
+      @click="pagenation"
     >
       next
       <v-icon>
@@ -36,6 +36,17 @@ export default {
       type: Number,
       required: true
     }
+  },
+  methods: {
+    pagenation() {
+      this.$router.push({
+        name: 'productList',
+        query: {
+          productName: this.$route.query.productName,
+          page: this.currentPage,
+        }
+      })
+    },
   },
   computed: {
     isFirstPage () {
