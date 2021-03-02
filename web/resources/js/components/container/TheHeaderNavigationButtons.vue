@@ -1,6 +1,5 @@
 <template>
   <HeaderNavigationButtons
-    :category="category"
     :notification="notification"
     :isLogin="isLogin"
     @to-sell-product="toSellProduct"
@@ -19,36 +18,36 @@ export default {
   },
   data() {
     return {
-      category: [
-        {
-          id: 0,
-          name: "レディース"
-        },
-        {
-          id: 1,
-          name: "メンズ"
-        },
-        {
-          id: 2,
-          name: "キッズ"
-        },
-        {
-          id: 3,
-          name: "インテリア",
-        },
-        {
-          id: 4,
-          name: "スポーツ",
-        },
-        {
-          id: 5,
-          name: "本・音楽・ゲーム"
-        },
-        {
-          id: 6,
-          name: "家電・スマホ・カメラ"
-        }
-      ],
+      // category: [
+      //   {
+      //     id: 0,
+      //     name: "レディース"
+      //   },
+      //   {
+      //     id: 1,
+      //     name: "メンズ"
+      //   },
+      //   {
+      //     id: 2,
+      //     name: "キッズ"
+      //   },
+      //   {
+      //     id: 3,
+      //     name: "インテリア",
+      //   },
+      //   {
+      //     id: 4,
+      //     name: "スポーツ",
+      //   },
+      //   {
+      //     id: 5,
+      //     name: "本・音楽・ゲーム"
+      //   },
+      //   {
+      //     id: 6,
+      //     name: "家電・スマホ・カメラ"
+      //   }
+      // ],
       notification: [
         {
           id: 0,
@@ -68,11 +67,15 @@ export default {
     toLogin() {
       this.$router.push({ path: '/login' }).catch(err => {})
     },
-    toProductList(categoryId) {
+    toProductList() {
       this.$router.push({
         name: 'productList',
         params: {
-          category: categoryId
+          category: 'search'
+        },
+        query: {
+          keywords: null,
+          page: 1
         }
       }).catch(err => {})
     },
