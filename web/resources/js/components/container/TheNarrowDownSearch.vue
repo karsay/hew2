@@ -164,7 +164,7 @@ export default {
           keywords: narrowDown.keywords ? narrowDown.keywords : null,
           page: 1
         },
-      })
+      }).catch(err => {})
       this.resetItems()
     },
   },
