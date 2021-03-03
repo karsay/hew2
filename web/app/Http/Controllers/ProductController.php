@@ -136,13 +136,12 @@ class ProductController extends Controller
         $category_key = $request->input('category_key');
         $state_key = $request->input('state_key');
         $sort_key = $request->input('sort_key');
-        $price_key = $request->input('price_key');
         $sales_key = $request->input('sales_key');
         $shipping_fee_key = $request->input('shipping_fee_key');
 
 
         $queryProduct = product::with(['detail','user','image','like'])
-            ->whereHas('detail', function($query) use($keyword, $category_key,$state_key, $sort_key, $price_key, $shipping_fee_key){
+            ->whereHas('detail', function($query) use($keyword, $category_key,$state_key, $sort_key, $shipping_fee_key){
                 if($keyword != null){
                     $search_split = mb_convert_kana($keyword, 's');
                     $search_split2 = preg_split('/[\s]+/', $search_split);
@@ -152,11 +151,11 @@ class ProductController extends Controller
                     }
                 }
 
-                if($category_key != 0){
+                if($category_key != 'search'){
                     $query->where('categories_id', '=', $category_key);
                 }
 
-                if($state_key != 0){
+                if($state_key != 'search'){
                     $query->where('details_state', '=', $state_key-1);
                 }
 
@@ -183,64 +182,26 @@ class ProductController extends Controller
 
 
         $product = new product();
-
         $sortQuery = $product->showNewAllProducts($queryProduct);
 
-
-        if($sort_key == 1){
-            if($price_key == 1){
-                $sortQuery = $sortQuery->sort(function($first, $second) {
-                        if ($first['date'] == $second['date']) {
-                            return $first['product_price'] < $second['product_price'] ? 1 : -1;
-                        }
-                        return $first['date'] < $second['date'] ? 1 : -1;
-                    });
-            }elseif ($price_key == 2){
-                $sortQuery = $sortQuery->sort(function($first, $second) {
-                    if ($first['date'] == $second['date']) {
-                        return $first['product_price'] < $second['product_price'] ? -1 : 1;
-                    }
-                    return $first['date'] < $second['date'] ? 1 : -1;
-                });
-            }else{
+        switch ($sort_key){
+            case 1:
                 $sortQuery = $sortQuery->sortByDesc('date');
-            }
-        }elseif ($sort_key == 2){
-            if($price_key == 1){
-                $sortQuery = $sortQuery->sort(function($first, $second) {
-                    if ($first['date'] == $second['date']) {
-                        return $first['product_price'] < $second['product_price'] ? 1 : -1;
-                    }
-                    return $first['date'] < $second['date'] ? -1 : 1;
-                });
-            }elseif ($price_key == 2){
-                $sortQuery = $sortQuery->sort(function($first, $second) {
-                    if ($first['date'] == $second['date']) {
-                        return $first['product_price'] < $second['product_price'] ? -1 : 1;
-                    }
-                    return $first['date'] < $second['date'] ? -1 : 1;
-                });
-            }
-            else{
+                break;
+
+            case 2:
                 $sortQuery = $sortQuery->sortBy('date');
-            }
+                break;
 
-        }else{
-            if($price_key == 1){
+            case 3:
                 $sortQuery = $sortQuery->sortByDesc('product_price');
-            }elseif ($price_key == 2){
+                break;
+
+            case 4:
                 $sortQuery = $sortQuery->sortBy('product_price');
-            }
+                break;
+
         }
-
-
-
-
-
-
-
-
-
 
         return $sortQuery->values()->all();
     }
