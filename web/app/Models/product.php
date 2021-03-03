@@ -69,7 +69,7 @@ class product extends Model
                     'product_image' => $item->image[0]->images_path,
                     'product_is_selled' => $item->products_is_selled,
                     'likes' => $item->like->count(),
-                    'data' => $item->created_at,
+                    'date' => $item->products_date,
                 ]
             );
 
@@ -111,7 +111,7 @@ class product extends Model
                     'product_image' => $item->image[0]->images_path,
                     'product_is_selled' => $item->products_is_selled,
                     'likes' => $item->like->count(),
-                    'data' => $item->created_at,
+                    'date' => $item->products_date,
                 ]
             );
 
@@ -150,7 +150,7 @@ class product extends Model
                         'product_price' => $item->detail->details_price,
                         'product_is_selled' => $item->products_is_selled,
                         'likes' => $item->like->count(),
-                        'data' => $item->created_at,
+                        'date' => $item->products_date,
                     ]
                 );
 
@@ -208,7 +208,7 @@ class product extends Model
                         "users_profile" => $item->user->users_profile,
                         "product_image" => $collectionImageHoge,
                         'likes' => $item->like->count(),
-                        'data' => $item->created_at,
+                        'date' => $item->products_date,
                     ]
                 );
 
@@ -315,7 +315,7 @@ class product extends Model
                     'product_image' => $item->image[0]->images_path,
                     'product_is_selled' => $item->products_is_selled,
                     'likes' => $item->like->count(),
-                    'data' => $item->created_at,
+                    'date' => $item->products_date,
                 ]
             );
 
