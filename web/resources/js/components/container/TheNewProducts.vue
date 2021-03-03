@@ -11,6 +11,7 @@
 
     <template v-else>
       <v-col
+        class="card_size"
         v-for="product in newProducts"
         :key="product.product_id"
       >
@@ -18,7 +19,7 @@
           :id="product.product_id"
           :path="''"
           :price="priceAmend(product.product_price)"
-          :name="'商品名'"
+          :name="product.product_title"
         />
       </v-col>
     </template>
@@ -49,5 +50,7 @@ export default {
 </script>
 
 <style scoped>
-
+.card_size {
+  width: calc(100% / 5);
+}
 </style>

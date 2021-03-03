@@ -23,13 +23,13 @@
         <v-col
           v-for="product in pickUpProduct.products"
           :key="product.product_id"
-          class="py-0"
+          class="py-0 card_size"
         >
           <ProductCard
             :id="product.product_id"
             :path="''"
             :price="priceAmend(product.product_price)"
-            :name="'商品名'"
+            :name="product.product_title"
           />
         </v-col>
       </v-row>
@@ -61,5 +61,7 @@ export default {
 </script>
 
 <style scoped>
-
+.card_size {
+  width: calc(100% / 5);
+}
 </style>
