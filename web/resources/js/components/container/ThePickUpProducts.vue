@@ -27,7 +27,7 @@
         >
           <ProductCard
             :id="product.product_id"
-            :path="''"
+            :path="`/storage/${product.product_image}`"
             :price="priceAmend(product.product_price)"
             :name="product.product_title"
           />
