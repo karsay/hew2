@@ -7,7 +7,7 @@
     <v-carousel-item
       v-for="(image, i) in images"
       :key="i"
-      :src="image"
+      :src="`/storage/${image.image_path1}`"
       class="img"
     >
     </v-carousel-item>

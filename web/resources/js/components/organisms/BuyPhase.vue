@@ -5,52 +5,56 @@
       :dialogDetail="dialogDetail"
       @close-dialog="closeDialog"
     />
-    <v-card width="720" elevation="1">
-      <v-img width="100%" height="270" class="bg"></v-img>
+    <v-sheet width="720" color="#fafafa" class="px-6">
 
-      <v-card-title>
-        <h5 class="text-h5 primary--text">購入確認</h5>
-      </v-card-title>
-      <v-row class="d-flex mx-1 my-0">
-        <v-col
-          cols="6"
-          class="py-2"
-          v-for="detail in details"
-          :key="detail.label"
-        >
-          <v-card-text class="pa-0">
-            <ProductDetailItem
-              :label="detail.label"
-              :productItem="detail.productItem"
-            />
-          </v-card-text>
-        </v-col>
-      </v-row>
+      <div class="image-box">
+      </div>
+      <v-card width="720" elevation="1" class="card__position">
 
-      <v-row class="my-0">
-        <v-col cols="12" class="py-2">
-          <v-card class="mx-4 pa-0" elevation="2">
-            <v-card-actions>
-              <PaymentMethod
-                :radio="radio"
-                @is-radio="isRadio"
+        <v-card-title>
+          <h5 class="text-h5 primary--text">購入確認</h5>
+        </v-card-title>
+        <v-row class="d-flex mx-1 my-0">
+          <v-col
+            cols="6"
+            class="py-2"
+            v-for="detail in details"
+            :key="detail.label"
+          >
+            <v-card-text class="pa-0">
+              <ProductDetailItem
+                :label="detail.label"
+                :productItem="detail.productItem"
               />
-            </v-card-actions>
-          </v-card>
-        </v-col>
-      </v-row>
+            </v-card-text>
+          </v-col>
+        </v-row>
 
-      <v-row class="my-0">
-        <v-col cols="6" class="pt-1">
-          <AdjacentButtons
-            class="px-4"
-            @on-click="showDialog"
-            :buttons="buttons"
-          />
-        </v-col>
-      </v-row>
-    </v-card>
+        <v-row class="my-0">
+          <v-col cols="12" class="py-2">
+            <v-card class="mx-4 pa-0" elevation="2">
+              <v-card-actions>
+                <PaymentMethod
+                  :radio="radio"
+                  @is-radio="isRadio"
+                />
+              </v-card-actions>
+            </v-card>
+          </v-col>
+        </v-row>
+
+        <v-row class="my-0">
+          <v-col cols="6" class="pt-1">
+            <AdjacentButtons
+              class="px-4"
+              @on-click="showDialog"
+              :buttons="buttons"
+            />
+          </v-col>
+        </v-row>
+      </v-card>
     
+    </v-sheet>
   </v-container>
 </template>
 
@@ -59,6 +63,7 @@ import ProductDetailItem from '../molecules/ProductDetailItem'
 import AdjacentButtons from '../molecules/AdjacentButtons'
 import PaymentMethod from '../molecules/PaymentMethod'
 import HandleDialog from '../molecules/HandleDialog'
+
 
 export default {
   components: {
@@ -106,8 +111,17 @@ export default {
 }
 
 // あとで消す
-.bg {
+.image-box {
+  width: 100%;
+  height: 100%;
+  background: url('/assets/img/credit_card.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
   background-color: #ddd;
 }
 
+.card__position {
+  position: relative;
+}
 </style>
