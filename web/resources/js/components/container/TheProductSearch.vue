@@ -1,6 +1,8 @@
 <template>
   <ProductSearch
-    @on-submit="onSubmit"
+    :input="input"
+    @input-handle="inputHandle"
+    @search="search"
   />
 </template>
 
@@ -9,11 +11,30 @@ import ProductSearch from '../molecules/ProductSearch'
 
 export default {
   components: { ProductSearch },
+  data() {
+    return {
+      input: ''
+    }
+  },
   methods: {
-    onSubmit(keywords) {
+    search(keywords) {
       // apiで商品を検索
-      console.log('keywords', keywords)
+      console.log('keywords', this.input)
+      this.$router.push({
+        name: 'productList',
+        params: {
+          category: 'search'
+        },
+        query: {
+          keywords: this.input,
+          page: 1
+        }
+      })
+      this.input = ''
     },
+    inputHandle(input) {
+      this.input = input
+    }
   },
 }
 </script>

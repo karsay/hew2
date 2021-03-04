@@ -100,25 +100,6 @@ class ProductController extends Controller
 
     }
 
-    // public function storeImage(Request $request){
-    //     $imageModel = new Image();
-    //     for($i = 0; $i < 3; $i++)
-    //     {
-    //         $image = $request->input('file' . $i);
-    //         $image = str_replace('data:image/jpeg;base64,', '', $image);
-    //         $image = str_replace(' ', '+', $image);
-    //         $imageName = md5($image).'.'.'jpeg';
-    //         $imagePath = 'public/' . $imageName;
-    //         Storage::put($imagePath, base64_decode($image));
-    //         $imagePaths[] = str_replace('public', '/storage', $imagePath);
-
-    //         $imageModel->images_path = $imagePath;
-    //         $imageModel->products_id = $request->input("productsId");
-    //     }
-    //     return $imagePaths;
-    // }
-
-
     public function sellProduct(Request $request){
         $product = new product();
 
@@ -147,11 +128,87 @@ class ProductController extends Controller
         }
 
     }
+
     public function searchNarrowDown(Request $request){
 
+        $keyword = $request->input('keywords');
+        $category_key = $request->input('category_key');
+        $state_key = $request->input('state_key');
+        $sort_key = $request->input('sort_key');
+        $sales_key = $request->input('sales_key');
+        $shipping_fee_key = $request->input('shipping_fee_key');
+
+
+        $queryProduct = product::with(['detail','user','image','like'])
+            ->whereHas('detail', function($query) use($keyword, $category_key,$state_key, $sort_key, $shipping_fee_key){
+                if($keyword != null){
+                    $search_split = mb_convert_kana($keyword, 's');
+                    $search_split2 = preg_split('/[\s]+/', $search_split);
+
+                    foreach ($search_split2 as $value){
+                        $query->where('details_title', 'like', '%' . $value . '%');
+                    }
+                }
+
+                if($category_key != 'search'){
+                    $query->where('categories_id', '=', $category_key);
+                }
+
+                if($state_key != 'search'){
+                    $query->where('details_state', '=', $state_key-1);
+                }
+
+
+                if($shipping_fee_key == 1){
+                    $query->where('details_shipping_fee', '=', 0);
+                }elseif ($shipping_fee_key==2){
+                    $query->where('details_shipping_fee', '=', 1);
+                }
+
+
+            })
+
+            ->where(function($query) use($sales_key){
+                if($sales_key == 1){
+                    $query->where("products_is_selled", "=", 0);
+                }elseif ($sales_key == 2){
+                    $query->where("products_is_selled", "=", 1);
+                }
+            })
+
+            ->get();
+
+
+
+        $product = new product();
+        $sortQuery = $product->showNewAllProducts($queryProduct);
+
+        switch ($sort_key){
+            case 1:
+                $sortQuery = $sortQuery->sortByDesc('date');
+                break;
+
+            case 2:
+                $sortQuery = $sortQuery->sortBy('date');
+                break;
+
+            case 3:
+                $sortQuery = $sortQuery->sortByDesc('product_price');
+                break;
+
+            case 4:
+                $sortQuery = $sortQuery->sortBy('product_price');
+                break;
+
+        }
+
+        return $sortQuery->values()->all();
     }
 
+
+
     public function searchProducts(Request $request){
+
 
         $keyword = $request->input('keywords');
 
@@ -174,5 +231,5 @@ class ProductController extends Controller
 //        return $queryProduct;
 
     }
-
 }
+

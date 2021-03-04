@@ -6,8 +6,9 @@
 
       <v-container class="py-10 px-6">
         <v-card-title class="pl-0">
-          新着アイテム
+          検索結果
         </v-card-title>
+        <TheProductLists />
 
         <Pagenation :current-page="currentPage" :last-page="lastPage" />
       </v-container>
@@ -18,11 +19,13 @@
 
 <script>
 import TheNarrowDownSearch from '../components/container/TheNarrowDownSearch'
+import TheProductLists from '../components/container/TheProductLists'
 import Pagenation from './../components/molecules/Pagenation'
 
   export default {
     components: {
       TheNarrowDownSearch,
+      TheProductLists,
       Pagenation,
     },
     props: {
@@ -38,6 +41,11 @@ import Pagenation from './../components/molecules/Pagenation'
         currentPage: 0,
         lastPage: 0,
         pageVal: 0
+      }
+    },
+    computed: {
+      searchTitle() {
+        return this.$route.params.category
       }
     },
     methods: {

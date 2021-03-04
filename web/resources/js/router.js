@@ -38,6 +38,7 @@ const routes = [
     props: route => {
       const page = route.query.page
       return {
+        keywords: route.query.keywords,
         page: /^[1-9][0-9]*$/.test(page) ? page * 1 : 1,
         category: route.params.categoryId
       }

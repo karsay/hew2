@@ -37,6 +37,13 @@ const state = {
     "1~3日",
     "3~5日",
     "5日以上",
+  ],
+
+  sort: [
+    "新しい",
+    "古い",
+    "高い",
+    "低い"
   ]
 }
 
@@ -47,7 +54,6 @@ const getters = {
   shippingFrom: state => state.shippingFrom,
   shippingDays: state => state.shippingDays,
 }
-
 
 export default {
   namespaced: true,

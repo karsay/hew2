@@ -18,7 +18,7 @@
         <TheToggleHeart />
       </v-card-text>
     </v-card-subtitle>
-    <v-card-title class="pt-0 pl-2 pb-2">
+    <v-card-title class="pt-0 pl-2 pb-2 text-h6 product_title">
       {{ name }}
     </v-card-title>
   </v-card>
@@ -55,5 +55,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.product_title {
+  display: block;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 </style>

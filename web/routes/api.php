@@ -37,8 +37,9 @@ Route::post('/getlogininfo','Auth\LoginController@getlogininfo');
 // 出品時の画像保存
 Route::post('/storeimage','ProductController@storeImage');
 
-Route::get('/topProducts', 'ProductController@topShow');
-Route::get('/allProducts', 'ProductController@showNewProducts');
+
+Route::get('/top-products', 'ProductController@topShow');
+Route::get('/all-products', 'ProductController@showNewProducts');
 Route::get('/products/{id}', 'ProductController@selectProduct');
 Route::post('/sell-product', 'ProductController@sellProduct');
 
