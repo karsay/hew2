@@ -176,14 +176,13 @@ class product extends Model
         if($collection->count() > 0){
 
             foreach ($collection as $item) {
-
-
                 foreach ($item->image as $item1){
                     $clt = collect(
                         [
-                            'image_path' . $i => $item->image[$i-1]->images_path
+                            'image_path' => $item->image[$i-1]->images_path
                         ]
                     );
+                    $i++;
                     $collectionImageHoge->push($clt);
                 }
 
