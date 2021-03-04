@@ -30,18 +30,36 @@ class ProductController extends Controller
 
         $query->push($product->showNewProducts($queryProduct));
 
+        [$collectionQuery, $categoryName] = $product->showCateProducts($queryProduct,6);
+
         $collect = collect([
-            'category1' => $product->showCateProducts($queryProduct,6)
+            'category1' => [
+                "category_name"=> $categoryName,
+                "products" => $collectionQuery
+            ]
         ]);
         $query->push($collect);
 
+
+        [$collectionQuery, $categoryName] = $product->showCateProducts($queryProduct,5);
+
         $collect = collect([
-            'category2' => $product->showCateProducts($queryProduct,5)
+            'category2' => [
+                "category_name"=> $categoryName,
+                "products" => $collectionQuery
+            ]
         ]);
         $query->push($collect);
 
+
+
+        [$collectionQuery, $categoryName] = $product->showCateProducts($queryProduct,7);
+
         $collect = collect([
-            'category3' => $product->showCateProducts($queryProduct,7)
+            'category3' => [
+                "category_name"=> $categoryName,
+                "products" => $collectionQuery
+            ]
         ]);
         $query->push($collect);
 
@@ -82,19 +100,23 @@ class ProductController extends Controller
 
     }
 
-    public function storeImage(Request $request){
-        for($i = 0; $i < 3; $i++)
-        {
-            $image = $request->input('file' . $i);
-            $image = str_replace('data:image/jpeg;base64,', '', $image);
-            $image = str_replace(' ', '+', $image);
-            $imageName = md5($image).'.'.'jpeg';
-            $imagePath = 'public/' . $imageName;
-            Storage::put($imagePath, base64_decode($image));
-            $imagePaths[] = str_replace('public', '/storage', $imagePath);
-        }
-        return $imagePaths;
-    }
+    // public function storeImage(Request $request){
+    //     $imageModel = new Image();
+    //     for($i = 0; $i < 3; $i++)
+    //     {
+    //         $image = $request->input('file' . $i);
+    //         $image = str_replace('data:image/jpeg;base64,', '', $image);
+    //         $image = str_replace(' ', '+', $image);
+    //         $imageName = md5($image).'.'.'jpeg';
+    //         $imagePath = 'public/' . $imageName;
+    //         Storage::put($imagePath, base64_decode($image));
+    //         $imagePaths[] = str_replace('public', '/storage', $imagePath);
+
+    //         $imageModel->images_path = $imagePath;
+    //         $imageModel->products_id = $request->input("productsId");
+    //     }
+    //     return $imagePaths;
+    // }
 
 
     public function sellProduct(Request $request){
@@ -123,6 +145,33 @@ class ProductController extends Controller
                 ]
             );
         }
+
+    }
+    public function searchNarrowDown(Request $request){
+
+    }
+
+    public function searchProducts(Request $request){
+
+        $keyword = $request->input('keywords');
+
+
+        $queryProduct = product::with(['detail','user','image','like'])
+            ->whereHas('detail', function($query) use($keyword){
+                $search_split = mb_convert_kana($keyword, 's');
+                $search_split2 = preg_split('/[\s]+/', $search_split);
+
+                foreach ($search_split2 as $value){
+                    $query->where('details_title', 'like', '%' . $value . '%');
+                }
+
+            })
+            ->orderBy('created_at','desc')->get();
+
+        $product = new product();
+
+        return $product->showNewAllProducts($queryProduct);
+//        return $queryProduct;
 
     }
 

@@ -5,17 +5,16 @@
         v-for="i in 5"
         :key="i"
       >
-      <TheLoadingProductCard />
+      <LoadingProductCard />
       </v-col>
     </template>
 
     <template v-else>
       <v-col
-        v-for="product in products"
+        v-for="product in newProducts"
         :key="product.product_id"
       >
         <ProductCard
-          :isLoading="isLoading"
           :id="product.product_id"
           :path="''"
           :price="priceAmend(product.product_price)"
@@ -28,35 +27,23 @@
 
 <script>
 import ProductCard from './../molecules/ProductCard'
-import TheLoadingProductCard from './TheLoadingProductCard'
+import LoadingProductCard from '../molecules/LoadingProductCard'
 // 新着アイテム
 
 export default {
   components: {
     ProductCard,
-    TheLoadingProductCard
+    LoadingProductCard
   },
-  data() {
-    return {
-      isLoading: true,
-      products: []
-    }
+  props: {
+    isLoading: Boolean,
+    newProducts: Array,
   },
   methods: {
     priceAmend(price) {
       const formatter = new Intl.NumberFormat('ja-JP')
       return formatter.format(price)
     },
-  },
-  created: async function() {
-    await axios.get('api/topProducts')
-    .then(res => {
-      this.products = res.data[0].newProducts
-      this.isLoading = false
-    })
-    .catch(err => (
-      console.log(err.message)
-    ))
   },
 }
 </script>

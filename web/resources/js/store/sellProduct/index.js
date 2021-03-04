@@ -45,8 +45,8 @@ const getters = {
 }
 
 const mutations = {
-  setImageItems: (state, { prop, selected }) => {
-    state.selectItems[prop] = selected
+  setImageItems: (state, { prop, value }) => {
+    state.imageItems[prop] = value
   },
   setSelectItems: (state, { prop, selected }) => {
     state.selectItems[prop] = selected

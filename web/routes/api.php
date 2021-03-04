@@ -34,15 +34,18 @@ Route::get('/user', fn() => Auth::user())->name('user');
 // ログイン時のユーザ情報取得
 Route::post('/getlogininfo','Auth\LoginController@getlogininfo');
 
-
-
 // 出品時の画像保存
 Route::post('/storeimage','ProductController@storeImage');
 
 Route::get('/topProducts', 'ProductController@topShow');
 Route::get('/allProducts', 'ProductController@showNewProducts');
 Route::get('/products/{id}', 'ProductController@selectProduct');
-Route::post('/sellProduct', 'ProductController@sellProduct');
+Route::post('/sell-product', 'ProductController@sellProduct');
+
+Route::post('/search', 'ProductController@searchProducts');
+Route::post('/search/narrow-down', 'ProductController@searchNarrowDown');
+
+
 
 
 

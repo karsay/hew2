@@ -8,7 +8,10 @@
         <v-card-title class="pl-0">
           {{ sectionTitle.newProduct }}
         </v-card-title>
-        <TheNewProducts />
+        <TheNewProducts
+          :isLoading="isLoading"
+          :newProducts="newProducts"
+        />
       </v-container>
 
       <v-divider></v-divider>
@@ -17,7 +20,10 @@
         <v-card-title class="pl-0">
           {{ sectionTitle.pickUpCategory }}
         </v-card-title>
-        <ThePickUpProducts />
+        <ThePickUpProducts
+          :isLoading="isLoading"
+          :pickUpProducts="pickUpProducts"
+        />
       </v-container>
 
       <v-divider></v-divider>
@@ -58,58 +64,26 @@ export default {
   },
   data() {
     return {
+      isLoading: true,
       sectionTitle: {
         newProduct: "新着アイテム",
         pickUpCategory: "ピックアップカテゴリ",
       },
-      val: new Array(5),
-      productImage: {
-        path: '',
-        name: 'productName'
-      },
-      pickUpProducts: [
-        {
-          id: 1,
-          category: 'カテゴリ1',
-          products: [
-            {
-              imagePath: '',
-              imageName: '',
-              name: 'productName',
-              price: '1,000',
-              heart: 33
-            }
-          ]
-        },
-        {
-          id: 2,
-          category: 'カテゴリ2',
-          products: [
-            {
-              imagePath: '',
-              imageName: '',
-              name: 'productName',
-              price: '1,000',
-              heart: 33
-            }
-          ]
-        },
-        {
-          id: 3,
-          category: 'カテゴリ3',
-          products: [
-            {
-              imagePath: '',
-              imageName: '',
-              name: 'productName',
-              price: '1,000',
-              heart: 33
-            }
-          ]
-        },
-      ],
-      
+      newProducts: [],
+      pickUpProducts: []
     }
+  },
+  created: async function() {
+    await axios.get('/api/topproducts')
+    .then(res => {
+      this.newProducts = res.data[0].newProducts
+      this.pickUpProducts = [
+        { ...res.data[1].category1 },
+        { ...res.data[2].category2 },
+        { ...res.data[3].category3 },
+      ]
+      this.isLoading = false
+    })
   }
 }
 </script>

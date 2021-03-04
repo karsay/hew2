@@ -7,6 +7,8 @@ use http\Env\Request;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use App\Models\image;
 
 class product extends Model
 {
@@ -64,10 +66,9 @@ class product extends Model
                 [
 
                     'product_id' => $item->products_id,
-                    'user_id' => $item->users_id,
+                    "product_title"=> $item->detail->details_title,
                     'product_price' => $item->detail->details_price,
                     'product_image' => $item->image[0]->images_path,
-                    'user_image' => $item->user->users_images_path,
                     'product_is_selled' => $item->products_is_selled,
                     'likes' => $item->like->count(),
                     'data' => $item->created_at,
@@ -98,8 +99,6 @@ class product extends Model
     public function showNewAllProducts(Collection $collection){
 
 
-
-
         $collectAll = collect();
 
         foreach ($collection as $item) {
@@ -109,10 +108,9 @@ class product extends Model
                 [
 
                     'product_id' => $item->products_id,
-                    'user_id' => $item->users_id,
+                    "product_title"=> $item->detail->details_title,
                     'product_price' => $item->detail->details_price,
                     'product_image' => $item->image[0]->images_path,
-                    'user_image' => $item->user->users_images_path,
                     'product_is_selled' => $item->products_is_selled,
                     'likes' => $item->like->count(),
                     'data' => $item->created_at,
@@ -127,7 +125,6 @@ class product extends Model
 
 
 
-
         return $collectAll;
     }
 
@@ -139,19 +136,21 @@ class product extends Model
         $collectionQuery = collect();
         $i = 0;
 
+        $categoryName = '';
+
         foreach ($collection as $item) {
 
             if($cateNum == $item->detail->categories_id){
+
+                $categoryName = category::find($item->detail->categories_id)->categories_name;
+
                 $collectionGetQuery = collect(
                     [
                         'product_id' => $item->products_id,
-                        'user_id' => $item->users_id,
-                        'category_id' => $item->detail->categories_id,
-                        'category_name' => category::find($item->detail->categories_id)->categories_name,
+                        "product_title"=> $item->detail->details_title,
                         'product_image' => $item->image[0]->images_path,
                         'product_price' => $item->detail->details_price,
                         'product_is_selled' => $item->products_is_selled,
-                        'user_image' => $item->user->users_images_path,
                         'likes' => $item->like->count(),
                         'data' => $item->created_at,
                     ]
@@ -165,7 +164,7 @@ class product extends Model
 
             }
         }
-        return $collectionQuery;
+        return [$collectionQuery, $categoryName];
     }
 
     public function detailProduct(Collection $collection){
@@ -227,6 +226,8 @@ class product extends Model
 
     }
 
+
+
     public function insertProduct($request, $productId){
 
         $collect = collect();
@@ -250,13 +251,18 @@ class product extends Model
 
 
             try {
-                foreach ($request->image as $item) {
+                foreach ($request->image as $item)
+                {
                     $image = new image();
+                    $replaceImage = str_replace('data:image/jpeg;base64,', '', $item);
+                    $replaceImage = str_replace(' ', '+', $replaceImage);
+                    $imageName = md5($replaceImage).'.'.'jpeg';
+                    $imagePath = 'public/' . $imageName;
+                    Storage::put($imagePath, base64_decode($replaceImage));
+                    $image->images_path = $imageName;
                     $image->products_id = $productId;
-                    $image->images_path = $item["images_path"];
                     $image->images_date = Carbon::now();
                     $image->save();
-
                 }
 
                 $collectResult = collect(
@@ -297,6 +303,35 @@ class product extends Model
 
 
         return $collect;
+    }
+
+
+    public function search(Collection $collection){
+
+
+        $collectAll = collect();
+
+
+        foreach ($collection as $item) {
+            $collectionGetQuery = collect(
+                [
+
+                    'product_id' => $item->products_id,
+                    "product_title"=> $item->detail->details_title,
+                    'product_price' => $item->detail->details_price,
+                    'product_image' => $item->image[0]->images_path,
+                    'product_is_selled' => $item->products_is_selled,
+                    'likes' => $item->like->count(),
+                    'data' => $item->created_at,
+                ]
+            );
+
+            $collectAll->push($collectionGetQuery);
+
+
+        }
+
+        return $collectAll;
     }
 
 

@@ -64,7 +64,7 @@ export default {
   data() {
     return {
       raspAddress: "192.168.0.19",
-      hostAddress: "192.168.0.16",
+      hostAddress: "192.168.0.20",
       // raspAddress:"192.168.43.108",
       // hostAddress:"192.168.43.6",
       flag1:false,

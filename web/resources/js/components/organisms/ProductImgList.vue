@@ -23,7 +23,7 @@
                 <v-icon color="primary" size="48" v-if="flag == false"
                   >mdi-camera-plus</v-icon
                 >
-                <v-img v-else :src="imagePaths[0]" width="104" height="104" />
+                <v-img v-else :src="'data:image/jpeg;base64,' + b64Imgs[0]" width="104" height="104" />
               </v-btn>
             </template>
 
@@ -54,7 +54,7 @@
                           >
                         </v-col>
                         <v-col>
-                          <h1 class="green--text">残り{{ cnt }}枚</h1>
+                          <h1 class="green--text">残り{{ 3 - cnt }}枚</h1>
                         </v-col>
                       </v-row>
 
@@ -89,7 +89,7 @@
                           rounded
                           x-large
                           width="250"
-                          @click="dialog.value = false; storeImage()"
+                          @click="dialog.value = false;"
                         >
                           登録する
                         </v-btn>
@@ -106,11 +106,11 @@
         </v-card>
 
         <v-card class="mr-4" elevation="2">
-          <v-img :src="imagePaths[1]" width="104" height="104" />
+          <v-img :src="'data:image/jpeg;base64,' + b64Imgs[1]" width="104" height="104" />
         </v-card>
 
         <v-card class="mr-4" elevation="2">
-          <v-img :src="imagePaths[2]" width="104" height="104" />
+          <v-img :src="'data:image/jpeg;base64,' + b64Imgs[2]" width="104" height="104" />
         </v-card>
       </div>
     </v-card>
@@ -124,8 +124,7 @@ export default {
   data() {
     return {
       b64Imgs: [],
-      imagePaths: [],
-      cnt: 3,
+      cnt: 0,
       raspAddress: "192.168.0.19",
       // raspAddress:"192.168.43.108",
       streamUrl: "",
@@ -140,28 +139,17 @@ export default {
     async toPicture() {
       this.streamUrl = `http://${this.raspAddress}:5000/stream`;
 
-      while (this.cnt > 0) {
+      while (this.cnt < 3) {
         var response = await axios.post(
           `http://${this.raspAddress}:5000/product_shooting`
         );
         this.b64Imgs.push(response.data);
-        this.cnt--;
+        this.$store.commit('sellProduct/setImageItems', { prop: `image_path${this.cnt + 1}`, value: 'data:image/jpeg;base64,' + response.data })
+        this.cnt++;
       }
 
       this.flag = true;
       this.isDisabled = false;
-    },
-    async storeImage() {
-      const formData = new FormData();
-      formData.append("file0", this.b64Imgs[0]);
-      formData.append("file1", this.b64Imgs[1]);
-      formData.append("file2", this.b64Imgs[2]);
-
-      var response = await axios.post(`/api/storeimage`, formData);
-      for (var i = 0; i < 3; i++)
-      {
-        this.imagePaths.push(response.data[i]);
-      }
     },
     async click() {
       await axios.post(`http://${this.raspAddress}:5000/shutter`);

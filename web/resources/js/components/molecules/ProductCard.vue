@@ -43,7 +43,12 @@ export default {
   },
   methods: {
     toDetail() {
-      this.$router.push(`/product-list/${this.productId}`)
+      this.$router.push({
+        name: 'productDetail',
+        params: {
+          product: this.productId
+        }
+      })
     },
   },
 }
