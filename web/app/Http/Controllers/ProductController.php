@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Models\product;
 use App\Models\image;
 use App\Models\detail;
 use App\Models\category;
 use App\Models\user;
-
+use Illuminate\Foundation\Console\Presets\React;
+use Symfony\Component\VarDumper\Cloner\Data;
 
 class ProductController extends Controller
 {
@@ -98,7 +100,6 @@ class ProductController extends Controller
 
     }
 
-
     public function sellProduct(Request $request){
         $product = new product();
 
@@ -118,15 +119,13 @@ class ProductController extends Controller
             return  $product->insertProduct($request, $query->products_id);
 
         }catch (\Exception $e){
-            return ollect(
+            return collect(
                 [
                     "saveresult" => false,
                     "resultDtail" => $e
-
                 ]
             );
         }
-
 
     }
 
@@ -232,7 +231,5 @@ class ProductController extends Controller
 //        return $queryProduct;
 
     }
-
-
-
 }
+

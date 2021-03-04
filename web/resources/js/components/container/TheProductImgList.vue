@@ -17,8 +17,8 @@ export default {
   },
   methods: {
     toPicture() {
-      this.$router.push('picture')
-    }
+      // this.$router.push('picture')
+    },
   },
 }
 </script>

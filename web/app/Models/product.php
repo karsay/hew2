@@ -7,6 +7,8 @@ use http\Env\Request;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use App\Models\image;
 
 class product extends Model
 {
@@ -249,13 +251,18 @@ class product extends Model
 
 
             try {
-                foreach ($request->image as $item) {
+                foreach ($request->image as $item)
+                {
                     $image = new image();
+                    $replaceImage = str_replace('data:image/jpeg;base64,', '', $item);
+                    $replaceImage = str_replace(' ', '+', $replaceImage);
+                    $imageName = md5($replaceImage).'.'.'jpeg';
+                    $imagePath = 'public/' . $imageName;
+                    Storage::put($imagePath, base64_decode($replaceImage));
+                    $image->images_path = $imageName;
                     $image->products_id = $productId;
-                    $image->images_path = $item["images_path"];
                     $image->images_date = Carbon::now();
                     $image->save();
-
                 }
 
                 $collectResult = collect(
