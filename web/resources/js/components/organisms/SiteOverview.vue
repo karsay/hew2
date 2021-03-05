@@ -9,9 +9,8 @@
     <v-row class="pt-0">
       <v-col cols="6">
         <v-img
-          src=""
+          src="/assets/img/iot_device.jpg"
           height="359"
-          class="primary"
         ></v-img>
       </v-col>
 
