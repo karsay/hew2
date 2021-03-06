@@ -2,35 +2,48 @@
 
 const state = {
   input: '',
+  isLoading: true,
   errorMessage: null,
   narrowDownData: {},
   products: []
 }
 
 const getters = {
-  products:state => state.products
+  products: state => state.products.slice(0, 20),
+  isLoading: state => state.isLoading
 }
 
 const mutations = {
-  setInput({ input }, keywords) {
-    input = keywords
+  setIsLoading(state, bool) {
+    state.isLoading = bool
+  },
+
+  setInput(state, keywords) {
+    state.input = keywords
   },
   setProducts(state, data) {
     state.products = data
   },
-  setNarrowDownData({ narrowDownData }, keys) {
-    narrowDownData = keys
+  setNarrowDownData(state, keys) {
+    state.narrowDownData = keys
   }
 }
 
 const actions = {
-  async search({ commit }, keywords) {
-    const res = await axios.post('/api/search', keywords)
-    commit('setProducts', res.data)
+  async search({ commit }, input) {
+    commit('setIsLoading', true)
+    const res = await axios.post('/api/search', { keywords: input })
+    const payloadData = res.data
+    commit('setIsLoading', false)
+    commit('setProducts', payloadData)
   },
   async narrowDownSearch({ commit }, data) {
-    const res = await axios.post('/search/narrow-down', data)
-    commit('setProducts', res.data)
+    console.log(data)
+    commit('setIsLoading', true)
+    const res = await axios.post('/api/search/narrow-down', data)
+    const payloadData = res.data
+    commit('setProducts', payloadData)
+    commit('setIsLoading', false)
   }
 }
 
