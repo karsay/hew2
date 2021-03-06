@@ -151,7 +151,7 @@ class ProductController extends Controller
                 }
 
                 if($category_key != 'search'){
-                    $query->where('categories_id', '=', $category_key+=1);
+                    $query->where('categories_id', '=', $category_key);
                 }
 
                 if($state_key != 'search'){
