@@ -1,19 +1,27 @@
 <template>
-  <ProductLists :products="storeProducts" />
+  <ProductLists
+    :products="products"
+    :isLoading="isLoading"
+  />
 </template>
 
 <script>
 import ProductLists from '../organisms/ProductLists'
+import { mapGetters } from 'vuex'
 
 export default {
   components: {
     ProductLists,
   },
-  computed: {
-    sotreProducts() {
-      return this.$store.getters['search/products'].slice(19)
+  data() {
+    return {
+      loading: true
     }
-  }
+  },
+  computed: {
+    ...mapGetters('search', ['products', 'isLoading'])
+  },
+
 }
 </script>
 
