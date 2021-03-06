@@ -148,22 +148,26 @@ export default {
         this.radioItems[i].selected.key = 0
       }
     },
-    async search(keywords) {
+    search() {
       // api
-      await this.$store.dispatch(
+      if(this.input != '') {
+        resetItems()
+      }
+
+      this.$store.dispatch(
         'search/narrowDownSearch',
         {
-          keywords: keywords,
+          keywords: this.input,
           ...this.narrowDownData
         }
       )
       this.$router.push({
         name: 'productList',
         params: {
-          category: narrowDown.category_key
+          category: this.narrowDownData.category_key
         },
         query: {
-          keywords: narrowDown.keywords ? narrowDown.keywords : null,
+          keywords: this.narrowDownData.keywords ? this.narrowDownData.keywords : null,
           page: 1
         },
       }).catch(err => {})
