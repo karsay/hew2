@@ -3,21 +3,33 @@
 const state = {
   input: '',
   isLoading: true,
-  errorMessage: null,
+  showProducts: [],
+  pageSize: 20,
+  length: 1,
   narrowDownData: {},
   products: []
 }
 
 const getters = {
-  products: state => state.products.slice(0, 20),
+  products: state => state.products,
+  showProducts: state => state.showProducts,
+  length: state => state.length,
   isLoading: state => state.isLoading
 }
 
 const mutations = {
+  setPage(state, pageNumber) {
+    state.showProducts = state.products.slice(
+      state.pageSize * (pageNumber -1),
+      state.pageSize * (pageNumber)
+    )
+  },
+  setPageLength(state, productsLength) {
+    state.length = Math.ceil(productsLength / state.pageSize)
+  },
   setIsLoading(state, bool) {
     state.isLoading = bool
   },
-
   setInput(state, keywords) {
     state.input = keywords
   },
@@ -33,16 +45,16 @@ const actions = {
   async search({ commit }, input) {
     commit('setIsLoading', true)
     const res = await axios.post('/api/search', { keywords: input })
-    const payloadData = res.data
+    commit('setPageLength', res.data.length)
+    commit('setProducts', res.data)
     commit('setIsLoading', false)
-    commit('setProducts', payloadData)
   },
   async narrowDownSearch({ commit }, data) {
     console.log(data)
     commit('setIsLoading', true)
     const res = await axios.post('/api/search/narrow-down', data)
-    const payloadData = res.data
-    commit('setProducts', payloadData)
+    commit('setPageLength', res.data.length)
+    commit('setProducts', res.data)
     commit('setIsLoading', false)
   }
 }
