@@ -1,7 +1,7 @@
 <template>
   <v-container class="pt-0 d-flex justify-center">
     <v-sheet width="720" color="#fafafa" class="px-6">
-      <div class="carousel">
+      <div class="carousel pt-4">
         <CarouselImage
           :images="images"
           class="carousel__position"

@@ -17,9 +17,8 @@ export default {
     }
   },
   methods: {
-    search(keywords) {
+    search() {
       // apiで商品を検索
-      console.log('keywords', this.input)
       this.$router.push({
         name: 'productList',
         params: {
@@ -30,6 +29,7 @@ export default {
           page: 1
         }
       })
+      this.$store.dispatch('search/search', this.input)
       this.input = ''
     },
     inputHandle(input) {

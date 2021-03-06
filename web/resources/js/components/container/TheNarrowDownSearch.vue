@@ -10,7 +10,7 @@
 
 <script>
 import NarrowDownSearch from '../organisms/NarrowDownSearch'
-import { mapState } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 
 export default {
   components: { NarrowDownSearch },
@@ -148,20 +148,26 @@ export default {
         this.radioItems[i].selected.key = 0
       }
     },
-    search(keywords) {
+    search() {
       // api
-
-      const narrowDown = {
-        keywords: keywords,
-        ...this.narrowDownData
+      if(this.input != '') {
+        resetItems()
       }
+
+      this.$store.dispatch(
+        'search/narrowDownSearch',
+        {
+          keywords: this.input,
+          ...this.narrowDownData
+        }
+      )
       this.$router.push({
         name: 'productList',
         params: {
-          category: narrowDown.category_key
+          category: this.narrowDownData.category_key
         },
         query: {
-          keywords: narrowDown.keywords ? narrowDown.keywords : null,
+          keywords: this.narrowDownData.keywords ? this.narrowDownData.keywords : null,
           page: 1
         },
       }).catch(err => {})

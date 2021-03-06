@@ -5,6 +5,7 @@ import auth from './auth'
 import userInfo from './userInfo'
 import sellProduct from './sellProduct'
 import productStatus from  './productStatus'
+import search from './search'
 import navigation from './navigation'
 
 Vue.use(Vuex)
@@ -15,6 +16,7 @@ const store = new Vuex.Store({
     userInfo,
     sellProduct,
     productStatus,
+    search,
     navigation,
   }
 })

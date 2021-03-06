@@ -151,11 +151,11 @@ class ProductController extends Controller
                 }
 
                 if($category_key != 'search'){
-                    $query->where('categories_id', '=', $category_key);
+                    $query->where('categories_id', '=', $category_key+=1);
                 }
 
                 if($state_key != 'search'){
-                    $query->where('details_state', '=', $state_key-1);
+                    $query->where('details_state', '=', $state_key);
                 }
 
 
@@ -184,19 +184,19 @@ class ProductController extends Controller
         $sortQuery = $product->showNewAllProducts($queryProduct);
 
         switch ($sort_key){
-            case 1:
+            case 0:
                 $sortQuery = $sortQuery->sortByDesc('date');
                 break;
 
-            case 2:
+            case 1:
                 $sortQuery = $sortQuery->sortBy('date');
                 break;
 
-            case 3:
+            case 2:
                 $sortQuery = $sortQuery->sortByDesc('product_price');
                 break;
 
-            case 4:
+            case 3:
                 $sortQuery = $sortQuery->sortBy('product_price');
                 break;
 
