@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-img src="" alt="" srcset="" height="240" class="primary_dark" />
+    <v-img src="/assets/svg/header.svg" />
 
     <v-card class="pb-12 card card__position">
 

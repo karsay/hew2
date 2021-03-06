@@ -76,7 +76,7 @@ export default {
       const data = res.data
       this.userName = data.user_name
       this.description = data.product_description
-      // this.images = data.product_image
+      this.images = data.product_image
       this.details = [
         { 
           label: "商品名",

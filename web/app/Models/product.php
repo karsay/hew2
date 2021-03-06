@@ -7,6 +7,8 @@ use http\Env\Request;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use App\Models\image;
 
 class product extends Model
 {
@@ -69,7 +71,7 @@ class product extends Model
                     'product_image' => $item->image[0]->images_path,
                     'product_is_selled' => $item->products_is_selled,
                     'likes' => $item->like->count(),
-                    'data' => $item->created_at,
+                    'date' => $item->products_date,
                 ]
             );
 
@@ -111,7 +113,7 @@ class product extends Model
                     'product_image' => $item->image[0]->images_path,
                     'product_is_selled' => $item->products_is_selled,
                     'likes' => $item->like->count(),
-                    'data' => $item->created_at,
+                    'date' => $item->products_date,
                 ]
             );
 
@@ -150,7 +152,7 @@ class product extends Model
                         'product_price' => $item->detail->details_price,
                         'product_is_selled' => $item->products_is_selled,
                         'likes' => $item->like->count(),
-                        'data' => $item->created_at,
+                        'date' => $item->products_date,
                     ]
                 );
 
@@ -174,14 +176,13 @@ class product extends Model
         if($collection->count() > 0){
 
             foreach ($collection as $item) {
-
-
                 foreach ($item->image as $item1){
                     $clt = collect(
                         [
-                            'image_path' . $i => $item->image[$i-1]->images_path
+                            'image_path' => $item->image[$i-1]->images_path
                         ]
                     );
+                    $i++;
                     $collectionImageHoge->push($clt);
                 }
 
@@ -208,7 +209,7 @@ class product extends Model
                         "users_profile" => $item->user->users_profile,
                         "product_image" => $collectionImageHoge,
                         'likes' => $item->like->count(),
-                        'data' => $item->created_at,
+                        'date' => $item->products_date,
                     ]
                 );
 
@@ -249,13 +250,18 @@ class product extends Model
 
 
             try {
-                foreach ($request->image as $item) {
+                foreach ($request->image as $item)
+                {
                     $image = new image();
+                    $replaceImage = str_replace('data:image/jpeg;base64,', '', $item);
+                    $replaceImage = str_replace(' ', '+', $replaceImage);
+                    $imageName = md5($replaceImage).'.'.'jpeg';
+                    $imagePath = 'public/' . $imageName;
+                    Storage::put($imagePath, base64_decode($replaceImage));
+                    $image->images_path = $imageName;
                     $image->products_id = $productId;
-                    $image->images_path = $item["images_path"];
                     $image->images_date = Carbon::now();
                     $image->save();
-
                 }
 
                 $collectResult = collect(
@@ -315,7 +321,7 @@ class product extends Model
                     'product_image' => $item->image[0]->images_path,
                     'product_is_selled' => $item->products_is_selled,
                     'likes' => $item->like->count(),
-                    'data' => $item->created_at,
+                    'date' => $item->products_date,
                 ]
             );
 

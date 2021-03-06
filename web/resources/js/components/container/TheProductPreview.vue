@@ -20,11 +20,6 @@ export default {
   components: { ProductPreview },
   data() {
     return {
-      images: [
-        "",
-        "",
-        "",
-      ],
       dialog: false,
       dialogDetail: {
         title: "出品完了",
@@ -37,9 +32,24 @@ export default {
     }
   },
   methods: {
-    showDialog(e) {
-      e.stopPropagation()
-      this.dialog = true
+    async showDialog(e) {
+      const response = await axios.post('/api/sell-product', {
+        users_id:1,
+        // users_id:this.userId,
+        details_title:this.getProductItems['name'],
+        categories_id:this.category.indexOf(this.getProductItems['category']) + 1,
+        details_description:this.getProductItems['description'],
+        details_price:this.getProductItems['price'],
+        details_state:this.state.indexOf(this.getProductItems['state']),
+        details_shipping_fee:this.shippingCost.indexOf(this.getProductItems['shippingCost']),
+        details_area:this.shippingFrom.indexOf(this.getProductItems['shippingFrom']),
+        shipping_date:this.shippingDays.indexOf(this.getProductItems['shippingDays']),
+        image: this.images
+      })
+      console.log(response)
+
+      // e.stopPropagation()
+      // this.dialog = true
     },
     async closeDialog() {
       await (() => {
@@ -50,9 +60,31 @@ export default {
     },
   },
   computed: {
+    ...mapGetters('sellProduct', ['getImageItem']),
     ...mapGetters('sellProduct', ['getProductItems']),
     description() {
       return this.getProductItems['description']
+    },
+    userId(){
+      return this.$store.getters['auth/userid']
+    },
+    images() {
+      return [this.getImageItem["image_path1"], this.getImageItem["image_path2"], this.getImageItem["image_path3"]];
+    },
+    state(){
+      return this.$store.getters['productStatus/state']
+    },
+    category(){
+      return this.$store.getters['productStatus/category']
+    },
+    shippingCost(){
+      return this.$store.getters['productStatus/shippingCost']
+    },
+    shippingFrom(){
+      return this.$store.getters['productStatus/shippingFrom']
+    },
+    shippingDays(){
+      return this.$store.getters['productStatus/shippingDays']
     },
     details() {
       return [

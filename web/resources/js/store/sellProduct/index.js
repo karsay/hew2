@@ -4,6 +4,11 @@
 
 const state = {
   flag: false,
+  imageItems: {
+    image_path1:'',
+    image_path2:'',
+    image_path3:''
+  },
   selectItems: {
     category: '',
     state: '',
@@ -19,6 +24,12 @@ const state = {
 }
 
 const getters = {
+  getImageItem: state => (
+    state.imageItems
+  ),
+  getSelectItem: state => (
+    state.selectItems
+  ),
   getSelectItem: state => (
     state.selectItems
   ),
@@ -34,6 +45,9 @@ const getters = {
 }
 
 const mutations = {
+  setImageItems: (state, { prop, value }) => {
+    state.imageItems[prop] = value
+  },
   setSelectItems: (state, { prop, selected }) => {
     state.selectItems[prop] = selected
   },

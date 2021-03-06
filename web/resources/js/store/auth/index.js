@@ -43,7 +43,8 @@ const actions = {
 const getters = {
   // getIsLoginStatus: state => !! state.isLoginStatus,
   check: state => !! state.user,
-  username: state => state.user ? state.user.users_name : ''
+  username: state => state.user ? state.user.users_name : '',
+  userid: state => state.user ? state.user.users_id : ''
 }
 
 export default {

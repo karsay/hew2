@@ -10,7 +10,7 @@
 
 <script>
 import NarrowDownSearch from '../organisms/NarrowDownSearch'
-import { mapState } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 
 export default {
   components: { NarrowDownSearch },
@@ -31,53 +31,28 @@ export default {
         },
         {
           prop: 'state',
-          selected: { key: 0, item: "未選択" },
+          selected: { key: 'search', item: "未選択" },
           subText: "商品の状態",
           items: [
             {
-              key: 0,
+              key: 'search',
+              item: "未選択"
+            },
+          ],
+        },
+        {
+          prop: 'sort',
+          selected: { key: 'search', item: "未選択" },
+          subText: "日付・価格順",
+          items: [
+            {
+              key: 'search',
               item: "未選択"
             },
           ],
         },
       ],
       radioItems: [
-        {
-          label: "並び順",
-          selected: { key: 0 },
-          items: [
-            {
-              key: 0,
-              item: "未選択",
-            },
-            {
-              key: 1,
-              item: "新しい",
-            },
-            {
-              key: 2,
-              item: "古い",
-            }
-          ]
-        },
-        {
-          label: "価格",
-          selected: { key: 0 },
-          items: [
-            {
-              key: 0,
-              item: "未選択",
-            },
-            {
-              key: 1,
-              item: "高い",
-            },
-            {
-              key: 2,
-              item: "低い",
-            }
-          ]
-        },
         {
           label: "販売状況",
           selected: { key: 0 },
@@ -118,7 +93,7 @@ export default {
     }
   },
   computed: {
-    ...mapState('productStatus', ['category', 'state']),
+    ...mapState('productStatus', ['category', 'state', 'sort']),
     selectItems() {
       let selectItems = this.selectItem
       for (let i = 0; i < this.category.length; i ++) {
@@ -139,16 +114,24 @@ export default {
           }
         ]
       }
+      for (let i = 0; i < this.sort.length; i++) {
+        selectItems[2].items = [
+          ...selectItems[2].items,
+          {
+            key: i,
+            item: this.sort[i]
+          }
+        ]
+      }
       return selectItems
     },
     narrowDownData() {
       return {
         category_key: this.selectItems[0].selected.key,
         state_key: this.selectItems[1].selected.key,
-        sort_key: this.radioItems[0].selected.key,
-        price_key: this.radioItems[1].selected.key,
-        sales_key: this.radioItems[2].selected.key,
-        shipping_fee_key: this.radioItems[3].selected.key,
+        sort_key: this.selectItems[2].selected.key,
+        sales_key: this.radioItems[0].selected.key,
+        shipping_fee_key: this.radioItems[1].selected.key,
       }
     }
   },
@@ -159,19 +142,21 @@ export default {
     resetItems() {
       this.input = ''
       for (let i = 0; i < this.selectItem.length; i++) {
-        this.selectItem[i].selected = { key: 0, item: "未選択" }
+        this.selectItem[i].selected = { key: 'search', item: "未選択" }
       }
       for (let i = 0; i < this.radioItems.length; i++) {
         this.radioItems[i].selected.key = 0
       }
     },
-    search(keywords) {
+    async search(keywords) {
       // api
-
-      const narrowDown = {
-        keywords: keywords,
-        ...this.narrowDownData
-      }
+      await this.$store.dispatch(
+        'search/narrowDownSearch',
+        {
+          keywords: keywords,
+          ...this.narrowDownData
+        }
+      )
       this.$router.push({
         name: 'productList',
         params: {
@@ -181,7 +166,7 @@ export default {
           keywords: narrowDown.keywords ? narrowDown.keywords : null,
           page: 1
         },
-      })
+      }).catch(err => {})
       this.resetItems()
     },
   },
