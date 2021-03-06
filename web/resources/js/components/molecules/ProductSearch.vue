@@ -22,7 +22,7 @@ export default {
   },
   methods: {
     search() {
-      this.$emit('search', this.input)
+      this.$emit('search')
     },
     inputHandle(e) {
       this.$emit('input-handle', e)
