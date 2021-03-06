@@ -88,13 +88,13 @@ export default {
     ProductSearch,
   },
   props: {
-    input: '',
+    input: String,
     selectItems: Array,
     radioItems: Array
   },
   methods: {
     search() {
-      this.$emit('search', this.input)
+      this.$emit('search')
     },
     inputHandle(input) {
       this.$emit('input-handle', input)
