@@ -1,13 +1,13 @@
 <template>
   <ProductLists
-    :products="products"
+    :products="showProducts"
     :isLoading="isLoading"
   />
 </template>
 
 <script>
 import ProductLists from '../organisms/ProductLists'
-import { mapGetters } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   components: {
@@ -18,8 +18,19 @@ export default {
       loading: true
     }
   },
+  methods: {
+    ...mapMutations('search', ['setPage']),
+    firstPage(num) {
+      this.setPage(num)
+    },
+  },
   computed: {
-    ...mapGetters('search', ['products', 'isLoading'])
+    ...mapGetters('search', ['showProducts', 'isLoading']),
+  },
+  watch: {
+    isLoading() {
+      if (this.isLoading == false) { this.firstPage(1) }
+    },
   },
 
 }
