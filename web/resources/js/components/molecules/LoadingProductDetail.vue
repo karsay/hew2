@@ -1,7 +1,7 @@
 <template>
   <v-container class="pt-0 d-flex justify-center">
     <v-sheet width="720" color="#fafafa" class="px-6">
-      <div class="img">
+      <div class="img pt-4">
         <v-img
           class="img__position"
         ></v-img>
