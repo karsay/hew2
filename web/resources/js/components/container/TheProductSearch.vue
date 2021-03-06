@@ -17,10 +17,9 @@ export default {
     }
   },
   methods: {
-    async search(keywords) {
+    search() {
       // apiで商品を検索
-      // console.log('keywords', this.input)
-      await this.$router.push({
+      this.$router.push({
         name: 'productList',
         params: {
           category: 'search'
@@ -30,7 +29,7 @@ export default {
           page: 1
         }
       })
-      this.$store.dispatch('search/search', keywords)
+      this.$store.dispatch('search/search', this.input)
       this.input = ''
     },
     inputHandle(input) {
