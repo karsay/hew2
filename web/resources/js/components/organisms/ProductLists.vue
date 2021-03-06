@@ -1,20 +1,18 @@
 <template>
-  <!-- <v-row>
+  <div>
     <template v-if="isLoading">
+    <v-row>
       <v-col
         v-for="i in 5"
         :key="i"
       >
       <LoadingProductCard />
       </v-col>
-    </template> -->
+    </v-row>
+    </template>
 
-    <!-- <template v-else> -->
-      <div>
-        <v-row
-          v-for="i in 5"
-          :key="i"
-        >
+    <template v-else>
+        <v-row>
           <v-col
             class="card_size"
             v-for="product in products"
@@ -28,22 +26,22 @@
             />
           </v-col>
         </v-row>
-      </div>
-    <!-- </template>
-  </v-row> -->
+    </template>
+  </div>
 </template>
 
 <script>
 import ProductCard from '../molecules/ProductCard'
-// import LoadingProductCard from '../molecules/LoadingProductCard'
+import LoadingProductCard from '../molecules/LoadingProductCard'
 
 export default {
   components: {
     ProductCard,
-    // LoadingProductCard
+    LoadingProductCard
   },
   props: {
     products: Array,
+    isLoading: Boolean
   },
   methods: {
     priceAmend(price) {
@@ -56,6 +54,7 @@ export default {
 
 <style scoped>
 .card_size {
-  width: calc(100% / 5);
+  max-width: 20%;
+  width: 20%;
 }
 </style>
