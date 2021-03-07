@@ -26,6 +26,7 @@
           link
           v-for="navButtonList in navButtonLists"
           :key="navButtonList.text"
+          @click="toSelectPage(navButtonList.prop)"
         >
           <v-list-item-icon>
             <v-icon>{{ navButtonList.icon }}</v-icon>
@@ -89,6 +90,9 @@ export default {
     isDrawer(e) {
       this.$emit('is-drawer', e)
     },
+    toSelectPage(page) {
+      this.$emit('to-select-page', page)
+    }
   },
   computed: {
     username () {

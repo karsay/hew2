@@ -5,6 +5,7 @@
     :nav-dropdown="navDropdown"
     :drawer="getDrawer"
     @is-drawer="isDrawer"
+    @to-select-page="toSelectPage"
   />
 </template>
 
@@ -21,23 +22,28 @@ export default {
       navButtonLists: [
         {
           icon: "mdi-account-circle",
-          text: "プロフィール"
+          text: "プロフィール",
+          prop: 'profile',          
         },
         {
           icon: "mdi-heart",
-          text: "いいね一覧"
+          text: "いいね一覧",
+          prop: 'profile',
         },
         {
           icon: "mdi-package-up",
-          text: "出品情報"
+          text: "出品情報",
+          prop: 'profile',
         },
         {
           icon: "mdi-package-down",
-          text: "購入情報"
+          text: "購入情報",
+          prop: 'profile',
         },
         {
           icon: "mdi-email",
-          text: "お問い合わせ"
+          text: "お問い合わせ",
+          prop: 'profile',
         },
       ],
       navDropdown: {
@@ -57,7 +63,12 @@ export default {
     }
   },
   methods: {
-    ...mapMutations('navigation', ['isDrawer'])
+    ...mapMutations('navigation', ['isDrawer']),
+    toSelectPage(page) {
+      this.$router.push({
+        name: page,
+      }).catch(err => {})
+    }
   },
   computed: {
     ...mapGetters('navigation', ['getDrawer'])
