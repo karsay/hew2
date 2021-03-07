@@ -3,11 +3,10 @@
 const state = {
   input: '',
   isLoading: true,
-  showProducts: [],
   pageSize: 20,
   length: 1,
-  narrowDownData: {},
-  products: []
+  products: [],
+  showProducts: [],
 }
 
 const getters = {
@@ -36,12 +35,16 @@ const mutations = {
   setProducts(state, data) {
     state.products = data
   },
-  setNarrowDownData(state, keys) {
-    state.narrowDownData = keys
-  }
 }
 
 const actions = {
+  async allProductsSearch({ commit }) {
+    commit('setIsLoading', true)
+    const res = await axios.get('/api/all-products')
+    commit('setPageLength', res.data.length)
+    commit('setProducts', res.data)
+    commit('setIsLoading', false)
+  },
   async search({ commit }, input) {
     commit('setIsLoading', true)
     const res = await axios.post('/api/search', { keywords: input })
