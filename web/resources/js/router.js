@@ -12,6 +12,7 @@ import SellProductPage from './pages/SellProductPage.vue'
 import ProductPreviewPage from './pages/ProductPreviewPage.vue'
 import ProductPicturePage from './pages/ProductPicturePage.vue'
 import ProductsTransactionPage from './pages/ProductsTransactionPage.vue'
+import UserProfilePage from './pages/UserProfilePage.vue'
 
 Vue.use(VueRouter)
 
@@ -83,6 +84,11 @@ const routes = [
   {
     path: '/sell-product/picture',
     component: ProductPicturePage
+  },
+  {
+    path: '/profile',
+    name: 'profile',
+    component: UserProfilePage,
   }
 ]
 
