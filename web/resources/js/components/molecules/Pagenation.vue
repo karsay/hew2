@@ -1,5 +1,5 @@
 <template>
-  <div class="text-center pt-4">
+  <div class="text-center pt-6">
     <v-pagination
       v-model="page"
       :length="length"
