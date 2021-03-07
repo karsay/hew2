@@ -168,10 +168,6 @@ export default {
           ...this.narrowDownData
         }
       )
-      console.log({
-          keywords: this.input,
-          ...this.narrowDownData
-        })
 
       if(this.input != '') {
         this.resetItems()
