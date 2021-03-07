@@ -6,7 +6,7 @@
 
       <v-container class="py-10 px-6">
         <v-card-title class="pl-0">
-          検索結果
+          {{ searchTitle }}
         </v-card-title>
         <TheProductLists />
 
@@ -45,37 +45,11 @@ import Pagenation from './../components/molecules/Pagenation'
     },
     computed: {
       searchTitle() {
-        return this.$route.params.category
+        return this.$route.query.keywords
+        ? this.$route.query.keywords + '：検索結果'
+        : '検索結果'
       }
     },
-    methods: {
-      /* api完成後 */
-      async fetchProductsData() {
-        // const res = await axios.get(`/api/photos/?page=${this.page}`)
-
-        // 仮レスポンス
-        const res = {
-          data: {
-            data: [],
-            currentPage: this.pageVal += 1,
-            lastPage: 10
-          }
-        }
-
-        this.products = res.data.data
-        this.currentPage = res.data.currentPage
-        this.lastPage = res.data.lastPage
-      },
-
-    },
-    watch: {
-      $route: {
-        async handler () {
-          await this.fetchProductsData()
-        },
-        immediate: true
-      }
-    }
   }
 </script>
 
