@@ -50,7 +50,6 @@ const actions = {
     commit('setIsLoading', false)
   },
   async narrowDownSearch({ commit }, data) {
-    console.log(data)
     commit('setIsLoading', true)
     const res = await axios.post('/api/search/narrow-down', data)
     commit('setPageLength', res.data.length)
