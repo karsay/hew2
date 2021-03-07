@@ -16,6 +16,11 @@ class product extends Model
     protected $table = 'products';
     protected $primaryKey = 'products_id';
 
+    protected $fillable = ['product_is_selled', 'product_is_deleted'];
+
+    protected $casts = [
+        'product_is_selled' => 'integer',
+    ];
 
     public function user()
     {
@@ -36,6 +41,10 @@ class product extends Model
 
     public  function likeCount(){
         return $this->like()->count();
+    }
+
+    public  function history(){
+        return $this->hasOne('App\Models\history','products_id');
     }
 
 
@@ -327,6 +336,109 @@ class product extends Model
 
             $collectAll->push($collectionGetQuery);
 
+
+        }
+
+        return $collectAll;
+    }
+
+    public function updateBuy($productId, $userId){
+
+
+        $queryProduct = product::find($productId);
+        $queryProduct->products_is_selled = 1;
+        $queryProduct->save();
+
+
+        $result = collect();
+        try {
+            $history = new history();
+            $history->products_id = $productId;
+            $history->users_id = $userId;
+            $history->histories_date = Carbon::now();
+            $history->histories_is_paid = true;
+            $history->histories_shipping_state = 1;
+            $history->save();
+
+            $result = collect(
+                [
+                    "result" => true,
+                ]
+            );
+        }catch (\Exception $e){
+            $result = collect(
+                [
+                    "result" => false,
+                ]
+            );
+        }
+
+        return $result;
+
+
+    }
+
+
+    public function buyerInfo($collection){
+
+        $collectAll = collect();
+
+        foreach ($collection as $item) {
+            $collectionGetQuery = collect(
+                [
+
+                    'product_id' => $item->product->products_id,
+                    'product_price' => $item->product->detail->details_price,
+                    'product_image' => $item->product->image[0]->images_path,
+                    'product_is_selled' => $item->product->products_is_selled,
+                    'likes' => $item->product->like->count(),
+                    'date' => $item->product->products_date,
+                    'user_id' => $item->product->user->users_id,
+                    'user_name' => $item->product->user->users_name,
+
+                ]
+            );
+
+            $collectAll->push($collectionGetQuery);
+
+        }
+
+        return $collectAll;
+    }
+
+
+    public function sellerInfo($collection){
+
+        $collectAll = collect();
+
+
+        foreach ($collection as $item) {
+
+            if ($item->history != null){
+                $sellerUserId = $item->history->users_id;
+                $sellerUserName = $item->history->user->users_name;
+            }else{
+                $sellerUserId = null;
+                $sellerUserName = null;
+            }
+
+
+            $collectionGetQuery = collect(
+                [
+
+                    'product_id' => $item->products_id,
+                    'product_price' => $item->detail->details_price,
+                    'product_image' => $item->image[0]->images_path,
+                    'product_is_selled' => $item->products_is_selled,
+                    'likes' => $item->like->count(),
+                    'date' => $item->products_date,
+                    'user_id' => $sellerUserId,
+                    'user_name' => $sellerUserName,
+
+                ]
+            );
+
+            $collectAll->push($collectionGetQuery);
 
         }
 

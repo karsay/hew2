@@ -46,6 +46,14 @@ Route::post('/sell-product', 'ProductController@sellProduct');
 Route::post('/search', 'ProductController@searchProducts');
 Route::post('/search/narrow-down', 'ProductController@searchNarrowDown');
 
+Route::post('/buy-product', 'ProductController@buyProduct');
+
+
+Route::post('transition/user-transition','TransitionController@userTransition');
+Route::post('transition/chat','TransitionController@tradeMessage');
+
+
+
 
 
 

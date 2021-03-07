@@ -231,5 +231,20 @@ class ProductController extends Controller
 //        return $queryProduct;
 
     }
+
+
+    public function buyProduct(Request $request){
+
+        $userId = $request->input('user_id');
+        $productId = $request->input('product_id');
+
+
+        $product = new product();
+
+        return  $product->updateBuy($productId, $userId);
+        return $queryProduct;
+
+    }
+
 }
 
