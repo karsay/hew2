@@ -1,31 +1,50 @@
 <template>
-  <v-card-actions>
-    <v-btn
-      icon
-    >
-      <v-icon>mdi-message-image</v-icon>
-    </v-btn>
-    <v-text-field
-      outlined
-    >
-      <template #append-outer>
-        <v-btn
-          text
-          color="primary"
-        >
-          送信
-        </v-btn>
-      </template>
-    </v-text-field>
-  </v-card-actions>
+  <v-toolbar elevation="2" class="px-0">
+    <div class="inpu-size">
+      <v-text-field
+        dense
+        class="d-flex align-center"
+        outlined
+        hide-details
+        :value="input"
+        @change="handleInput"
+        @keyup.enter="sendMessage"
+      >
+        <template v-slot:append-outer>
+          <v-btn
+            text
+            height="36"
+            width="64"
+            class="my-auto"
+            color="primary"
+            @click="sendMessage"
+          >
+            送信
+          </v-btn>
+        </template>
+      </v-text-field>
+    </div>
+  </v-toolbar>
 </template>
 
 <script>
 export default {
-  
+  props: {
+    input: String,
+  },
+  methods: {
+    handleInput(e) {
+      this.$emit('handle-input', e)
+    },
+    sendMessage() {
+      this.$emit('send-message')
+    }
+  },
 }
 </script>
 
 <style scoped>
-
+.inpu-size {
+  width: 100%;
+}
 </style>
