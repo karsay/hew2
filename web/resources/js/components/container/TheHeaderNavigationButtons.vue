@@ -6,6 +6,7 @@
     @to-login="toLogin"
     @logout="logout"
     @to-product-list="toProductList"
+    @to-transaction="toTransaction"
   />
 </template>
 
@@ -48,6 +49,11 @@ export default {
           page: 1
         }
       }).catch(err => {})
+    },
+    toTransaction() {
+      this.$router.push({
+        name: 'transaction'
+      })
     },
     async logout () {
       await this.$store.dispatch('auth/logout')
