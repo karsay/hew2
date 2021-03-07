@@ -21,6 +21,16 @@ export default {
     ...mapMutations('search', ['setPage']),
     changePage(pageNumber) {
       this.setPage(pageNumber)
+      this.$router.push({
+        name: 'productList',
+        params: {
+          ...this.$route.params
+        },
+        query: {
+          ...this.$route.query,
+          page: pageNumber
+        }
+      })
     } 
   },
   computed: {
