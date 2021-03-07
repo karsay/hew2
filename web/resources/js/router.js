@@ -11,6 +11,7 @@ import BuyPhasePage from './pages/BuyPhasePage.vue'
 import SellProductPage from './pages/SellProductPage.vue'
 import ProductPreviewPage from './pages/ProductPreviewPage.vue'
 import ProductPicturePage from './pages/ProductPicturePage.vue'
+import ProductsTransactionPage from './pages/ProductsTransactionPage.vue'
 
 Vue.use(VueRouter)
 
@@ -30,6 +31,11 @@ const routes = [
   {
     path: '/register-form',
     component: RegisterForm
+  },
+  {
+    path: '/transaction/',
+    name: 'transaction',
+    component: ProductsTransactionPage
   },
   {
     path: '/product-list/:category',
@@ -82,6 +88,9 @@ const routes = [
 
 const router = new VueRouter({
   mode: 'history',
+  scrollBehavior () {
+    return { x: 0, y: 0}
+  },
   routes
 })
 

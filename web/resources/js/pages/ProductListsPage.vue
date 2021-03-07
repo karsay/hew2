@@ -6,11 +6,11 @@
 
       <v-container class="py-10 px-6">
         <v-card-title class="pl-0">
-          検索結果
+          {{ searchTitle }}
         </v-card-title>
         <TheProductLists />
 
-        <Pagenation :current-page="currentPage" :last-page="lastPage" />
+        <ThePagenation />
       </v-container>
 
     </v-card>
@@ -19,63 +19,22 @@
 
 <script>
 import TheNarrowDownSearch from '../components/container/TheNarrowDownSearch'
+import ThePagenation from '../components/container/ThePagenation.vue'
 import TheProductLists from '../components/container/TheProductLists'
-import Pagenation from './../components/molecules/Pagenation'
 
   export default {
     components: {
       TheNarrowDownSearch,
       TheProductLists,
-      Pagenation,
-    },
-    props: {
-      page: {
-        type: Number,
-        required: false,
-        default: 1
-      }
-    },
-    data() {
-      return {
-        products: [],
-        currentPage: 0,
-        lastPage: 0,
-        pageVal: 0
-      }
+      ThePagenation,
     },
     computed: {
       searchTitle() {
-        return this.$route.params.category
+        return this.$route.query.keywords
+        ? this.$route.query.keywords + '：検索結果'
+        : '検索結果'
       }
     },
-    methods: {
-      /* api完成後 */
-      async fetchProductsData() {
-        // const res = await axios.get(`/api/photos/?page=${this.page}`)
-
-        // 仮レスポンス
-        const res = {
-          data: {
-            data: [],
-            currentPage: this.pageVal += 1,
-            lastPage: 10
-          }
-        }
-
-        this.products = res.data.data
-        this.currentPage = res.data.currentPage
-        this.lastPage = res.data.lastPage
-      },
-
-    },
-    watch: {
-      $route: {
-        async handler () {
-          await this.fetchProductsData()
-        },
-        immediate: true
-      }
-    }
   }
 </script>
 

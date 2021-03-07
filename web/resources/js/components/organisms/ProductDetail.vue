@@ -15,7 +15,7 @@
             </v-card-title>
             <ProductDetailItem
               v-for="detail in details"
-              :key="detail.prop"
+              :key="detail.label"
               :label="detail.label"
               :productItem="detail.productItem"
             />
