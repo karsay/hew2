@@ -1,28 +1,56 @@
 <template>
-  <v-toolbar color="primary_dark" height="72" dark>
-    <!-- <div class="py-6 d-flex"> -->
-      <v-avatar
-        size="48"
-        color="white"
-      >
-      </v-avatar>
-      <v-toolbar-title class="ml-6">
-        {{ name }}
-      </v-toolbar-title>
+  <v-toolbar color="primary_dark" dark>
+    <v-avatar
+      size="48"
+      color="white"
+    >
+    </v-avatar>
+    <v-toolbar-title class="ml-6">
+      {{ name }}
+    </v-toolbar-title>
 
-    <!-- </div> -->
+    <template v-slot:extension elevation="2">
+      <v-tabs
+        :value="tab"
+        @change="tabChange"
+        class="px-0"
+      >
+        <v-tabs-slider color="white"></v-tabs-slider>
+
+        <v-tab
+          class="tab-size"
+          v-for="item in items"
+          :key="item.tab"
+        >
+          {{ item.tab }}
+        </v-tab>
+      </v-tabs>
+    </template>
   </v-toolbar>
 </template>
 
 <script>
 export default {
+  props: {
+    tab: Number,
+    items: Array
+  }, 
   data() {
     return {
-      name: 'userName'
+      name: 'userName',
     }
-  }
+  },
+  methods: {
+    tabChange(e) {
+      this.$emit('tab-change', e)
+    },
+  },
 }
 </script>
 
 <style scoped>
+.tab-size {
+  margin-left: 0 !important;
+  width: 50%;
+}
 </style>
