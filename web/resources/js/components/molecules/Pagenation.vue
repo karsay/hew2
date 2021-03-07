@@ -1,5 +1,5 @@
 <template>
-  <div class="text-center">
+  <div class="text-center pt-6">
     <v-pagination
       v-model="page"
       :length="length"
@@ -9,27 +9,19 @@
 </template>
 
 <script>
-import { mapGetters, mapState, mapMutations } from 'vuex'
-
 export default {
+  props: {
+    length: Number,
+  },
   data() {
     return {
       page: 1
     }
   },
   methods: {
-    ...mapMutations('search', ['setPage']),
     changePage(pageNumber) {
-      this.setPage(pageNumber)
+      this.$emit('change-page', pageNumber)
     } 
   },
-  computed: {
-    ...mapState('search', ['pageSize']),
-    ...mapGetters('search', ['length'])
-  }
 }
 </script>
-
-<style scoped>
-
-</style>

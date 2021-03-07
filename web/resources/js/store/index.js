@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 
 import auth from './auth'
 import userInfo from './userInfo'
+import chat from './chat'
 import sellProduct from './sellProduct'
 import productStatus from  './productStatus'
 import search from './search'
@@ -14,6 +15,7 @@ const store = new Vuex.Store({
   modules: {
     auth,
     userInfo,
+    chat,
     sellProduct,
     productStatus,
     search,

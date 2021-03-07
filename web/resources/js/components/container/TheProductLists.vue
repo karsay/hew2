@@ -32,7 +32,9 @@ export default {
       if (this.isLoading == false) { this.firstPage(1) }
     },
   },
-
+  created() {
+    this.$store.dispatch('search/allProductsSearch')
+  }
 }
 </script>
 

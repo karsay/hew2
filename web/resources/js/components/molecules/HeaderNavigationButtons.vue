@@ -24,7 +24,7 @@
       class="mr-2"
       :depressed="true"
       :class="'primary_light white--text'"
-      @click="toSellProduct"
+      @click="toTransaction"
     >
       <v-icon class="mr-1">mdi-message-text</v-icon>
       取引
@@ -108,6 +108,9 @@ export default {
     },
     toProductList() {
       this.$emit('to-product-list')
+    },
+    toTransaction() {
+      this.$emit('to-transaction')
     }
   },
 }
