@@ -10,7 +10,7 @@
         </v-card-title>
         <TheProductLists />
 
-        <Pagenation :current-page="currentPage" :last-page="lastPage" />
+        <ThePagenation />
       </v-container>
 
     </v-card>
@@ -19,29 +19,14 @@
 
 <script>
 import TheNarrowDownSearch from '../components/container/TheNarrowDownSearch'
+import ThePagenation from '../components/container/ThePagenation.vue'
 import TheProductLists from '../components/container/TheProductLists'
-import Pagenation from './../components/molecules/Pagenation'
 
   export default {
     components: {
       TheNarrowDownSearch,
       TheProductLists,
-      Pagenation,
-    },
-    props: {
-      page: {
-        type: Number,
-        required: false,
-        default: 1
-      }
-    },
-    data() {
-      return {
-        products: [],
-        currentPage: 0,
-        lastPage: 0,
-        pageVal: 0
-      }
+      ThePagenation,
     },
     computed: {
       searchTitle() {
