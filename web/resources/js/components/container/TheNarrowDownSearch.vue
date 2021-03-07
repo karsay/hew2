@@ -148,30 +148,34 @@ export default {
         this.radioItems[i].selected.key = 0
       }
     },
-    search() {
+    async search() {
       // api
-      if(this.input != '') {
-        resetItems()
-      }
-
-      this.$store.dispatch(
-        'search/narrowDownSearch',
-        {
-          keywords: this.input,
-          ...this.narrowDownData
-        }
-      )
       this.$router.push({
         name: 'productList',
         params: {
           category: this.narrowDownData.category_key
         },
         query: {
-          keywords: this.narrowDownData.keywords ? this.narrowDownData.keywords : null,
+          keywords: this.input ? this.input : null,
           page: 1
         },
       }).catch(err => {})
-      this.resetItems()
+
+      await this.$store.dispatch(
+        'search/narrowDownSearch',
+        {
+          keywords: this.input,
+          ...this.narrowDownData
+        }
+      )
+      console.log({
+          keywords: this.input,
+          ...this.narrowDownData
+        })
+
+      if(this.input != '') {
+        this.resetItems()
+      }
     },
   },
 }
