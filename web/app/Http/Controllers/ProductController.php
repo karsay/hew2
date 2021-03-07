@@ -132,7 +132,7 @@ class ProductController extends Controller
     public function searchNarrowDown(Request $request){
 
         $keyword = $request->input('keywords');
-        $category_key = $request->input('category_key');
+        $category_key = $request->input('category_key') + 1;
         $state_key = $request->input('state_key');
         $sort_key = $request->input('sort_key');
         $sales_key = $request->input('sales_key');
