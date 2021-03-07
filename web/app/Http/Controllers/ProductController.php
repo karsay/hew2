@@ -132,7 +132,7 @@ class ProductController extends Controller
     public function searchNarrowDown(Request $request){
 
         $keyword = $request->input('keywords');
-        $category_key = $request->input('category_key');
+        $category_key = $request->input('category_key') + 1;
         $state_key = $request->input('state_key');
         $sort_key = $request->input('sort_key');
         $sales_key = $request->input('sales_key');
@@ -151,7 +151,7 @@ class ProductController extends Controller
                 }
 
                 if($category_key != 'search'){
-                    $query->where('categories_id', '=', $category_key+=1);
+                    $query->where('categories_id', '=', $category_key);
                 }
 
                 if($state_key != 'search'){
