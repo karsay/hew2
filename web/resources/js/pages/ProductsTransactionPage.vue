@@ -1,12 +1,14 @@
 <template>
-  <div>
-    product transaction page
-  </div>
+  <v-container>
+    <ChatView />
+  </v-container>
 </template>
 
 <script>
+import ChatView from '../components/organisms/ChatView'
+
 export default {
-  
+  components: { ChatView },
 }
 </script>
 
