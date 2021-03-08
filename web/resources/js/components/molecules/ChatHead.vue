@@ -1,5 +1,5 @@
 <template>
-  <v-toolbar color="primary_dark" dark>
+  <v-toolbar color="primary_dark" max-height="112" min-height="112" dark>
     <v-avatar
       size="48"
       color="white"
@@ -9,7 +9,7 @@
       {{ name }}
     </v-toolbar-title>
 
-    <template v-slot:extension elevation="2">
+    <template v-slot:extension elevation="2" height="48">
       <v-tabs
         :value="tab"
         @change="tabChange"
@@ -48,7 +48,8 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+
 .tab-size {
   margin-left: 0 !important;
   width: 50%;
