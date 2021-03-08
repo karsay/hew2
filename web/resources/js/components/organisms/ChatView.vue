@@ -1,5 +1,5 @@
 <template>
-  <v-card elevation='1' width="420" class="d-flex flex-column">
+  <v-card elevation='1' width="420" class="d-flex flex-column card-size">
     <ChatHead :tab="tab" @tab-change="tabChange" :items="items" />
     <v-tabs-items :value="tab" @change="tabChange">
       <v-tab-item
@@ -53,5 +53,10 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+.card-size {
+  max-height: 613px;
+  min-height: 613px;
+  overflow: hidden;
+}
 </style>
