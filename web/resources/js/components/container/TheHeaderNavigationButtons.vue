@@ -12,6 +12,7 @@
 
 <script>
 import HeaderNavigationButtons from '../molecules/HeaderNavigationButtons'
+import { mapGetters } from 'vuex'
 
 export default {
   components: {
@@ -51,6 +52,7 @@ export default {
       }).catch(err => {})
     },
     toTransaction() {
+      this.$store.dispatch('chat/getUserData', this.userid)
       this.$router.push({
         name: 'transaction'
       })
@@ -61,6 +63,7 @@ export default {
     }
   },
   computed: {
+    ...mapGetters('auth', ['userid']),
     isLogin () {
       return this.$store.getters['auth/check']
     },
