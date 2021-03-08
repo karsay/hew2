@@ -397,6 +397,7 @@ class product extends Model
                     'histories_shipping_state' => $item->histories_shipping_state,
                     'user_id' => $item->product->user->users_id,
                     'user_name' => $item->product->user->users_name,
+                    'user_image' => $item->product->user->users_images_path
 
                 ]
             );
@@ -420,10 +421,12 @@ class product extends Model
                 $sellerUserId = $item->history->users_id;
                 $sellerUserName = $item->history->user->users_name;
                 $sellerShippingState = $item->history->histories_shipping_state;
+                $sellerUserImage = $item->history->user->users_images_path;
             }else{
                 $sellerUserId = null;
                 $sellerUserName = null;
                 $sellerShippingState = null;
+                $sellerUserImage = null;
             }
 
 
@@ -440,6 +443,7 @@ class product extends Model
                     'histories_shipping_state' => $sellerShippingState,
                     'user_id' => $sellerUserId,
                     'user_name' => $sellerUserName,
+                    'user_image' => $sellerUserImage
 
 
                 ]
