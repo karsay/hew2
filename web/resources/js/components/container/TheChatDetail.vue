@@ -37,7 +37,7 @@ export default {
     },
     toProductDetail() {
       this.$router.push({
-        name: 'productDetail',
+        name: 'productStateDetail',
         params: {
           product: this.selectData.product_id
         }

@@ -3,52 +3,11 @@
 const state = {
   message: [],
   userData: [
-    // {
-    //   date:"2021-02-05",
-    //   histories_shipping_state:"1",
-    //   likes:0,
-    //   product_id:26,
-    //   product_image:"image23.jpg",
-    //   product_is_selled:1,
-    //   product_price:3000,
-    //   user_id:43,
-    //   user_name:"佐々木 里佳",
-    // },
-    // {
-    //   date:"2020-09-09",
-    //   histories_shipping_state:"2",
-    //   likes:0,
-    //   product_id:24,
-    //   product_image:"image21.jpg",
-    //   product_is_selled:1,
-    //   product_price:500,
-    //   user_id:13,
-    //   user_name:"斉藤 桃子",
-    // },
-    // {
-    //   date:"2021-02-10",
-    //   histories_shipping_state:"3",
-    //   likes:0,
-    //   product_id:33,
-    //   product_image:"IMG-0244.JPG",
-    //   product_is_selled:1,
-    //   product_price:300,
-    //   user_id:23,
-    //   user_name:"渡辺 陽子",
-
-    // }
   ],
   selectData: {
-    // date:"2021-02-05",
-    // histories_shipping_state:"1",
-    // likes:0,
-    // product_id:26,
-    // product_image:"image23.jpg",
-    // product_is_selled:1,
-    // product_price:3000,
-    // user_id:43,
-    // user_name:"佐々木 里佳"
   },
+  boughtProduct: [],
+  soldProduct: [],
   length: 0,
   stepState: '1',
   steps: [
@@ -60,9 +19,37 @@ const state = {
 }
 
 const getters = {
+  tradingProduct: state => (
+    state.boughtProduct ? state.boughtProduct.filter(({ histories_shipping_state }) => (
+      histories_shipping_state !== "3"
+    )) : []
+  ),
+  tradedProduct: state => (
+    state.boughtProduct ? state.boughtProduct.filter(({ histories_shipping_state }) => (
+      histories_shipping_state === "3"
+    )) : []
+  ),
+  inProduction: state => (
+    state.soldProduct ? state.soldProduct.filter(({ histories_shipping_state }) => (
+      histories_shipping_state === "0"
+    )) : []
+  ),
+  productionInProgress: state => (
+    state.soldProduct ? state.soldProduct.filter(({ histories_shipping_state }) => (
+      histories_shipping_state === "1" || histories_shipping_state === "2"
+    )) : []
+  ),
+  afterProduction: state => (
+    state.soldProduct ? state.soldProduct.filter(({ histories_shipping_state }) => (
+      histories_shipping_state === "3"
+    )) : []
+  ),
+  userName: state => state.selectData ? state.selectData.user_name : '',
+  userIcon: state => state.selectData ? state.selectData.user_image : '',
+  productName: state => state.selectData ? state.selectData.product_name : '',
   message: state => state.message,
   userData: state => state.userData ? state.userData : '',
-  selectData: state => state.selectData ? state.selectData : state.userData[0],
+  selectData: state => state.selectData,
   stepState: state => state.selectData ? state.selectData.histories_shipping_state : '',
   productDetail: state => state.productDetail,
   steps: state => state.steps,
@@ -71,11 +58,18 @@ const getters = {
 }
 
 const mutations = {
+  setBoughtProduct(state, data) {
+    state.boughtProduct = data ? data : []
+  },
+  setSoldProduct(state, data) {
+    state.soldProduct = data ? data : []
+  },
   setSelectData(state, data) {
     state.selectData = data
   },
   setUserData(state, data) {
     state.userData = data
+    state.selectData = data[0]
   },
   setStepState(state, step) {
     state.selectData.histories_shipping_state = step
@@ -96,17 +90,17 @@ const mutations = {
 
 const actions = {
   async updateShippingState({ commit }, data) {
-    console.log(data);
     await axios.post('/api/shipping-state/update', { product_id: data.id })
     commit('setStepState', data.step)
   },
   async getUserData({ commit }, id) {
     const res = await axios.post('/api/transition/user-transition', { user_id: id })
-    console.log(res.data)
     commit('setUserData', [
       ...res.data[0].buy,
       ...res.data[1].sell,
     ])
+    commit('setBoughtProduct', [...res.data[0].buy])
+    commit('setSoldProduct', [...res.data[1].sell])
   },
   async getProductDetail({ commit }, productId) {
     const res = await axios.get(`/api/products/${productId}`)

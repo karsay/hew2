@@ -1,13 +1,17 @@
 <template>
   <v-toolbar color="primary_dark" max-height="112" min-height="112" dark>
     <v-avatar
+      :src="`/storage/${userIcon}`"
       size="48"
       color="white"
     >
     </v-avatar>
-    <v-toolbar-title class="ml-6">
-      {{ name }}
-    </v-toolbar-title>
+      <v-toolbar-title class="ml-6">
+        {{ productName }}
+      <v-card-subtitle class="pa-0 white--text">
+        {{ userName }}
+      </v-card-subtitle>
+      </v-toolbar-title>
 
     <template v-slot:extension elevation="2">
       <v-tabs
@@ -32,14 +36,12 @@
 <script>
 export default {
   props: {
+    userIcon: String,
     tab: Number,
-    items: Array
+    items: Array,
+    productName: String,
+    userName: String
   }, 
-  data() {
-    return {
-      name: 'userName',
-    }
-  },
   methods: {
     tabChange(e) {
       this.$emit('tab-change', e)
@@ -51,7 +53,7 @@ export default {
 <style lang="scss" scoped>
 
 .tab-size {
-  margin-left: 0 !important;
-  width: 50%;
+  margin: 0 auto;
+  width: 100%
 }
 </style>

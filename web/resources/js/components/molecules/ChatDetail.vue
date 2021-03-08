@@ -65,6 +65,7 @@
       <v-stepper-content step="3">
         <v-btn
           v-if="selectData.product_is_selled == 1"
+          @click="setStep(4)"
           color="primary"
         >complete</v-btn>
         <v-btn
@@ -99,15 +100,9 @@ export default {
     },
     setStep(step) {
       console.log(step);
-      this.$emit('set-step', String(step))
+      this.$emit('set-step', typeof step == "string" ? step : String(step))
     }
   },
-    mounted () {
-    console.log('ChildComponentは表示状態です')
-  },
-  beforeDestroy () {
-    console.log('ChildComponentは非表示状態です')
-  }
 }
 </script>
 
