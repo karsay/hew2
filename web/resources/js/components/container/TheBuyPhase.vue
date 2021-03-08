@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import BuyPhase from '../organisms/BuyPhase'
 
 export default {
@@ -36,9 +37,14 @@ export default {
     isRadio() {
       this.radio = !this.radio
     },
-    showDialog(e) {
-        e.stopPropagation()
-        this.dialog = true
+    async showDialog(e) {
+      e.stopPropagation()
+      await axios.post('/api/buy-product',
+      {
+        user_id: this.userid,
+        product_id: this.$route.params.product
+      })
+      this.dialog = true
     },
     async closeDialog() {
       await (() => {
@@ -48,6 +54,7 @@ export default {
     },
   },
   computed: {
+    ...mapGetters('auth', ['userid']),
     details() {
       return this.$route.params.details
     }
