@@ -1,29 +1,29 @@
 <template>
-  <v-card elevation='1' width="420" class="card-size d-flex flex-column">
+  <v-card elevation='1' width="420" class="d-flex flex-column">
     <ChatHead :tab="tab" @tab-change="tabChange" :items="items" />
-      <v-tabs-items :value="tab" @change="tabChange" class="sheet-size">
+      <v-tabs-items :value="tab" @change="tabChange">
         <v-tab-item
           v-for="item in items"
           :key="item.tab"
         >
-          <component :is="item.content"></component>
+          <v-sheet class="sheet-size d-flex flex-column">
+            <component :is="item.content"></component>
+          </v-sheet>
         </v-tab-item>
       </v-tabs-items>
-    <TheChatActions />
+    <!-- <TheChatActions /> -->
   </v-card>
 </template>
 
 <script>
-import TheChatActions from '../container/TheChatActions'
 import ChatHead from '../molecules/ChatHead'
-import ChatBody from '../molecules/ChatBody'
+import TheChatBody from '../container/TheChatBody'
 import TheChatDetail from '../container/TheChatDetail'
 
 export default {
   components: {
     ChatHead,
-    TheChatActions,
-    ChatBody,
+    TheChatBody,
     TheChatDetail
   },
   data() {
@@ -32,7 +32,7 @@ export default {
       items: [
         {
           tab: 'チャット',
-          content: 'chat-body',
+          content: 'TheChatBody',
         },
         {
           tab: '商品詳細',
@@ -50,10 +50,4 @@ export default {
 </script>
 
 <style scoped>
-.card-size {
-  height: 100%;
-}
-.sheet-size {
-  height: 100%;
-}
 </style>
