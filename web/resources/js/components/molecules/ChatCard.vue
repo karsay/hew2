@@ -1,8 +1,8 @@
 <template>
   <div>
     <v-card class="d-flex ma-4 card-style" flat @click="selectData">
-      <v-img :src="`/storage/${data.product_image}`" contain height="150" width="150" class="bg"></v-img>
-      <div class="detail-size">
+      <v-img :src="`/storage/${data.product_image}`" class="bg"></v-img>
+      <div class="detail-size pl-2">
         <v-chip
           :class="[ data.product_is_selled == 0 ? 'secondary' : 'primary' ]"
           label
@@ -25,22 +25,6 @@
 export default {
   props: {
     data: Object,
-    // product_image: {
-    //   type: String,
-    //   default: 'test.jpg'
-    // },
-    // product_title: {
-    //   type: String,
-    //   default: '商品名'
-    // },
-    // user_name: {
-    //   type: String,
-    //   default: 'ユーザー名'
-    // },
-    // product_is_selled: {
-    //   type: Number,
-    //   default: 1
-    // }
   },
   methods: {
     selectData() {
@@ -60,6 +44,8 @@ export default {
 }
 
 .bg {
-  background-color: #fafafa;
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
 }
 </style>

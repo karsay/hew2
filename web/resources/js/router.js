@@ -6,6 +6,7 @@ import Login from './pages/Login.vue'
 import Register from './pages/Register.vue'
 import RegisterForm from './pages/RegisterForm.vue'
 import ProductListsPage from './pages/ProductListsPage.vue'
+import ProductStateDetailPage from './pages/ProductStateDetailPage.vue'
 import ProductDetailPage from './pages/ProductDetailPage.vue'
 import BuyPhasePage from './pages/BuyPhasePage.vue'
 import SellProductPage from './pages/SellProductPage.vue'
@@ -55,6 +56,14 @@ const routes = [
     path: '/product-list/:product/detail',
     name: 'productDetail',
     component: ProductDetailPage,
+    props: route => ({
+      product: route.params.productId,
+    }),
+  },
+  {
+    path: '/transaction/:product/detail',
+    name: 'productStateDetail',
+    component: ProductStateDetailPage,
     props: route => ({
       product: route.params.productId,
     }),
