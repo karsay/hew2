@@ -9,7 +9,7 @@
       {{ name }}
     </v-toolbar-title>
 
-    <template v-slot:extension elevation="2" height="48">
+    <template v-slot:extension elevation="2">
       <v-tabs
         :value="tab"
         @change="tabChange"
