@@ -1,5 +1,5 @@
 <template>
-  <v-toolbar elevation="2" class="px-0">
+  <v-toolbar elevation="2" class="px-0 toolbar-size" absolute bottom>
     <div class="inpu-size">
       <v-text-field
         dense
@@ -44,6 +44,9 @@ export default {
 </script>
 
 <style scoped>
+.toolbar-size {
+  width: 100%;
+}
 .inpu-size {
   width: 100%;
 }

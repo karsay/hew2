@@ -1,7 +1,7 @@
 <template>
   <v-container class="d-flex justify-center">
     <ChatView />
-    <ChatListCard />
+    <ChatListCard class="ml-4" />
   </v-container>
 </template>
 

@@ -1,5 +1,5 @@
 <template>
-  <ChatActions
+  <ChatActionProduct
     :input="input"
     @handle-input="handleInput"
     @send-message="sendMessage"
@@ -7,10 +7,11 @@
 </template>
 
 <script>
-import ChatActions from '../molecules/ChatActions'
+import ChatActionProduct from '../molecules/ChatActionProduct'
 export default {
+  name: 'TheChatActionProduct',
   components: {
-    ChatActions,
+    ChatActionProduct,
   },
   data() {
     return {

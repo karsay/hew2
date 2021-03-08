@@ -1,38 +1,76 @@
 <template>
-  <div class="size">
-    <div class="d-flex images">
-      <v-img
-        v-for="image in images"
-        :key="image.image_path"
-        :src="'/storage/' + image.image_path" width="150" height="150"></v-img>
+  <div>
+    <v-img
+      :src="'/storage/image17.jpg'"
+      class="product-img"
+      @click="toProductDetail"
+    ></v-img>
+    <div class="text-caption text--secondary pa-1">
+      ※ 画像をクリックすると商品詳細ページへ遷移します。
     </div>
-    <v-col cols="12" class="d-flex flex-wrap">
-      <ChatDetailItem
-        v-for="detail in details"
-        :key="detail.label"
-        :label="detail.label"
-        :productItem="detail.productItem"
-      />
-      <div class="card__textarea pa-2">
-        <p class="text-body-1">
-          {{ description }}
-        </p>
-      </div>
-    </v-col>
+
+    <div>
+
+    <v-stepper
+      v-model="stepState"
+      vertical
+    >
+      <v-stepper-step
+        :complete="steps[0].id > 1"
+        step="1"
+      >
+        {{ steps[0].state }}
+      </v-stepper-step>
+      <v-stepper-content step="1">
+        <v-btn @click="stepState = 2" color="primary">complete</v-btn>
+      </v-stepper-content>
+
+      <v-stepper-step
+        :complete="steps[1].id > 2"
+        step="2"
+      >
+        {{ steps[1].state }}
+      </v-stepper-step>
+      <v-stepper-content step="2">
+        <v-btn @click="stepState = 3" color="primary">complete</v-btn>
+      </v-stepper-content>
+      
+      <v-stepper-step
+        :complete="steps[2].id > 3"
+        step="3"
+      >
+        {{ steps[2].state }}
+      </v-stepper-step>
+      <v-stepper-content step="3">
+        <v-btn color="primary">complete</v-btn>
+      </v-stepper-content>
+    </v-stepper>
+  </div>
   </div>
 </template>
 
 <script>
-import ChatDetailItem from '../molecules/ChatDetailItem'
+// ユーザーidと商品データに入っているユーザーのidが一致しなければボタンを押せないようにする
+
 
 export default {
-  components: {
-    ChatDetailItem,
-  },
   props: {
-    description: String,
-    details: Array,
-    images: Array
+    steps: Array,
+  },
+  data() {
+    return {
+      stepState: 1
+    }
+  },
+  // computed: {
+  //   getStepState() {
+      
+  //   }
+  // },
+  methods: {
+    toProductDetail() {
+      this.$emit('to-product-detail')
+    },
   },
     mounted () {
     console.log('ChildComponentは表示状態です')
@@ -43,11 +81,10 @@ export default {
 }
 </script>
 
-<style scoped>
-.images {
-  overflow: scroll;
-}
-.item-size {
-  width: 40%;
+<style lang="scss" scoped>
+.product-img {
+  cursor: pointer;
+  object-fit: cover;
+  height: 200px;
 }
 </style>
