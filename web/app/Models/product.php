@@ -431,7 +431,7 @@ class product extends Model
                 [
 
                     'product_id' => $item->products_id,
-                    'product_name' => $item->product->detail->details_title,
+                    'product_name' => $item->detail->details_title,
                     'product_price' => $item->detail->details_price,
                     'product_image' => $item->image[0]->images_path,
                     'product_is_selled' => $item->products_is_selled,
