@@ -1,14 +1,16 @@
 <template>
   <ChatDetail
     :steps="steps"
-    @set-step-state="setStepState"
+    :stepState="stepState"
+    :selectData="selectData"
+    @set-step="setStep"
     @to-product-detail="toProductDetail"
   />
 </template>
 
 <script>
 import ChatDetail from '../molecules/ChatDetail'
-import { mapState, mapMutations } from 'vuex'
+import { mapState, mapMutations, mapGetters } from 'vuex'
 
 export default {
   name: 'TheChatDetail',
@@ -17,17 +19,29 @@ export default {
   },
   data() {
     return {
-      test: "aaa",
+
     }
   },
   computed: {
     ...mapState('chat', ['steps']),
+    ...mapGetters('chat', ['selectData', 'stepState'])
   },
   methods: {
-    ...mapMutations('search', ['setStepState']),
+    ...mapMutations('chat', ['setStepState']),
+    setStep(step) {
+      const data = {
+        id: this.selectData.product_id,
+        step: step
+      }
+      this.$store.dispatch('chat/updateShippingState', data)
+    },
     toProductDetail() {
-      console.log('商品詳細へ遷移します');
-      // this.$router.push()
+      this.$router.push({
+        name: 'productDetail',
+        params: {
+          product: this.selectData.product_id
+        }
+      })
     },
     priceAmend(price) {
       const formatter = new Intl.NumberFormat('ja-JP')

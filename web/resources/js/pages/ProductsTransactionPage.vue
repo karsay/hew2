@@ -1,18 +1,18 @@
 <template>
   <v-container class="d-flex justify-center">
     <ChatView />
-    <ChatListCard class="ml-4" />
+    <TheChatListCard class="ml-4" />
   </v-container>
 </template>
 
 <script>
-import ChatListCard from '../components/organisms/ChatListCard.vue'
+import TheChatListCard from '../components/container/TheChatListCard'
 import ChatView from '../components/organisms/ChatView'
 
 export default {
   components: {
     ChatView,
-    ChatListCard
+    TheChatListCard,
   },
 }
 </script>

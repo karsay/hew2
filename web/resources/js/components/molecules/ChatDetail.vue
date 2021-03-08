@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-img
-      :src="'/storage/image17.jpg'"
+      :src="`/storage/${selectData.product_image}`"
       class="product-img"
       @click="toProductDetail"
     ></v-img>
@@ -12,7 +12,8 @@
     <div>
 
     <v-stepper
-      v-model="stepState"
+      :value="stepState"
+      @change="setStep"
       vertical
     >
       <v-stepper-step
@@ -22,7 +23,17 @@
         {{ steps[0].state }}
       </v-stepper-step>
       <v-stepper-content step="1">
-        <v-btn @click="stepState = 2" color="primary">complete</v-btn>
+        <v-btn
+          v-if="selectData.product_is_selled == 0"
+          @click="setStep(2)"
+          color="primary"
+        >complete</v-btn>
+        <v-btn
+          v-else-if="selectData.product_is_selled == 1"
+          @click="setStep(2)"
+          disabled
+          color="primary"
+        >wait</v-btn>
       </v-stepper-content>
 
       <v-stepper-step
@@ -32,7 +43,17 @@
         {{ steps[1].state }}
       </v-stepper-step>
       <v-stepper-content step="2">
-        <v-btn @click="stepState = 3" color="primary">complete</v-btn>
+        <v-btn
+          v-if="selectData.product_is_selled == 1"
+          @click="setStep(3)"
+          color="primary"
+        >complete</v-btn>
+        <v-btn
+          v-else-if="selectData.product_is_selled == 0"
+          @click="setStep(3)"
+          disabled
+          color="primary"
+        >wait</v-btn>
       </v-stepper-content>
       
       <v-stepper-step
@@ -42,7 +63,15 @@
         {{ steps[2].state }}
       </v-stepper-step>
       <v-stepper-content step="3">
-        <v-btn color="primary">complete</v-btn>
+        <v-btn
+          v-if="selectData.product_is_selled == 1"
+          color="primary"
+        >complete</v-btn>
+        <v-btn
+          v-else-if="selectData.product_is_selled == 0"
+          disabled
+          color="primary"
+        >wait</v-btn>
       </v-stepper-content>
     </v-stepper>
   </div>
@@ -56,21 +85,22 @@
 export default {
   props: {
     steps: Array,
+    stepState: String,
+    selectData: Object
   },
   data() {
     return {
-      stepState: 1
     }
   },
-  // computed: {
-  //   getStepState() {
-      
-  //   }
-  // },
+
   methods: {
     toProductDetail() {
       this.$emit('to-product-detail')
     },
+    setStep(step) {
+      console.log(step);
+      this.$emit('set-step', String(step))
+    }
   },
     mounted () {
     console.log('ChildComponentは表示状態です')

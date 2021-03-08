@@ -4,7 +4,6 @@
       <div>
         <v-avatar
           :src="`/storage/${icon}`"
-          color="primary"
           size="112"
         ></v-avatar>
       </div>
