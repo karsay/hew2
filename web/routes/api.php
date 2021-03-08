@@ -50,6 +50,8 @@ Route::post('/buy-product', 'ProductController@buyProduct');
 
 Route::post('transition/user-transition','TransitionController@userTransition');
 Route::post('transition/chat','TransitionController@tradeMessage');
+Route::post('transition','TransitionController@showTradeMessage');
+
 
 Route::post('shipping-state/update','HistoryController@shippingStateUpdate');
 
