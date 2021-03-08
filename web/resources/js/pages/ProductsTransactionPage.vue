@@ -1,5 +1,5 @@
 <template>
-  <v-container class="container d-flex justify-center align-center">
+  <v-container class="d-flex justify-center">
     <ChatView />
     <ChatListCard />
   </v-container>
@@ -18,7 +18,4 @@ export default {
 </script>
 
 <style scoped>
-.container {
-  height: 80vh;
-}
 </style>
