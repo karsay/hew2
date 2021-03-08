@@ -24,7 +24,11 @@
       <v-card-title class="pa-0 primary--text">
         自己紹介
       </v-card-title>
-      
+      <v-card-text class="card__textarea mt-4 pa-2">
+        <p class="text-body-1">
+          {{ usersProfile }}
+        </p>
+      </v-card-text>
     </div>
   </v-card>
 </template>
@@ -44,10 +48,19 @@ export default {
       type: String,
       default: 'test.jpg'
     },
+    usersProfile: String
   },
 }
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+.card__textarea {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 200px;
+  overflow: scroll;
+  border: 1px solid rgba($color: #000000, $alpha: .37);
+  border-radius: 4px;
+}
 </style>
