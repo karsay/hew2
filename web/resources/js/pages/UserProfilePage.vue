@@ -8,7 +8,7 @@
         </v-col>
 
         <v-col cols="6">
-          <TheUserProfile />
+          <TheNoticeFromOperation />
         </v-col>
       </v-row>
       <v-divider class="my-10"></v-divider>
@@ -21,10 +21,14 @@
 
 <script>
 import TheUserProfile from '../components/container/TheUserProfile'
+import TheNoticeFromOperation from '../components/container/TheNoticeFromOperation'
 
 
 export default {
-  components: { TheUserProfile },
+  components: {
+    TheUserProfile,
+    TheNoticeFromOperation
+  },
   
 }
 </script>

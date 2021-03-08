@@ -1,7 +1,9 @@
 <template>
   <UserProfile
     :userName="username"
+    :icon="userIcon"
     :usersBirthday="usersBirthday"
+    :usersProfile="usersProfile"
   />
 </template>
 
@@ -14,7 +16,15 @@ export default {
     UserProfile
   },
   computed: {
-    ...mapGetters('auth', ['username', 'usersBirthday'])
+    ...mapGetters(
+      'auth',
+      [
+        'username',
+        'usersBirthday',
+        'usersProfile',
+        'userIcon'
+      ]
+    )
   }
 }
 </script>

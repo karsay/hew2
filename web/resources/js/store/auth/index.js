@@ -44,7 +44,9 @@ const getters = {
   // getIsLoginStatus: state => !! state.isLoginStatus,
   check: state => !! state.user,
   username: state => state.user ? state.user.users_name : '',
+  userIcon: state => state.user ? state.user.users_images_path: '',
   usersBirthday: state =>　state.user ? state.user.users_birthday.split('-') : ['','',''],
+  usersProfile: state => state.user ? state.user.users_profile : '',
   userid: state => state.user ? state.user.users_id : ''
 }
 
