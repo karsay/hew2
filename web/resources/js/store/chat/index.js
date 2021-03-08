@@ -3,6 +3,11 @@
 const state = {
   message: [],
   length: 0,
+  steps: [
+    { id: 1, state: '商品を発送' },
+    { id: 2, state: '商品の受取' },
+    { id: 3, state: '出品者を評価' },
+  ],
   productDetail: {
     "product_id": 23,
     "user_id": 4,
@@ -30,6 +35,7 @@ const state = {
             "image_path": "image20.jpg"
         }
     ],
+    "date": "2020-11-16"
   },
   images: []
 }
@@ -37,11 +43,15 @@ const state = {
 const getters = {
   message: state => state.message,
   productDetail: state => state.productDetail,
+  steps: state => state.steps,
   images: state => state.images,
   length: state => state.length,
 }
 
 const mutations = {
+  setStepState(state, step) {
+    state.stepState = step
+  },
   setImages(state, images) {
     state.images = images
   },
