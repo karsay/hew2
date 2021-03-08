@@ -441,6 +441,7 @@ class product extends Model
                     'user_id' => $sellerUserId,
                     'user_name' => $sellerUserName,
 
+
                 ]
             );
 
