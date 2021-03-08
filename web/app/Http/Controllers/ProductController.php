@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\history;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -132,11 +133,18 @@ class ProductController extends Controller
     public function searchNarrowDown(Request $request){
 
         $keyword = $request->input('keywords');
-        $category_key = $request->input('category_key') + 1;
+        if(strcmp($request->input('category_key'), 'search') == 0 ){
+            $category_key = $request->input('category_key');
+        }
+        else{
+            $category_key = $request->input('category_key')+1;
+        }
+
         $state_key = $request->input('state_key');
         $sort_key = $request->input('sort_key');
         $sales_key = $request->input('sales_key');
         $shipping_fee_key = $request->input('shipping_fee_key');
+
 
 
         $queryProduct = product::with(['detail','user','image','like'])
@@ -231,5 +239,20 @@ class ProductController extends Controller
 //        return $queryProduct;
 
     }
+
+
+    public function buyProduct(Request $request){
+
+        $userId = $request->input('user_id');
+        $productId = $request->input('product_id');
+
+
+        $product = new product();
+
+        return  $product->updateBuy($productId, $userId);
+        return $queryProduct;
+
+    }
+
 }
 

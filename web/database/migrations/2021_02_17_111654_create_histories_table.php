@@ -14,7 +14,7 @@ class CreateHistoriesTable extends Migration
     public function up()
     {
         Schema::create('histories', function (Blueprint $table) {
-            $table->bigIncrements('histories_id',10);
+            $table->unsignedBigInteger('products_id')->length(10);
             $table->unsignedBigInteger('users_id')->length(8);
             $table->foreign('users_id')->references('users_id')->on('users');//長さの書き方違いの可能性あり
             $table->date('histories_date')->format('YYYY/MM/DD');
