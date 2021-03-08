@@ -1,5 +1,5 @@
 <template>
-  <v-card elevation="1">
+  <v-card elevation="1" min-width="332" max-width="332">
     <v-toolbar color="primary_dark" class="title ma-0" dark>
       <v-toolbar-title class="ma-0">
         取引相手一覧

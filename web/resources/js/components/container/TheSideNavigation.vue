@@ -31,16 +31,6 @@ export default {
           prop: 'profile',
         },
         {
-          icon: "mdi-package-up",
-          text: "出品情報",
-          prop: 'profile',
-        },
-        {
-          icon: "mdi-package-down",
-          text: "購入情報",
-          prop: 'profile',
-        },
-        {
           icon: "mdi-email",
           text: "お問い合わせ",
           prop: 'profile',

@@ -1,6 +1,13 @@
 <template>
   <v-card elevation='1' width="420" class="d-flex flex-column card-size">
-    <ChatHead :tab="tab" @tab-change="tabChange" :items="items" />
+    <ChatHead
+      :userIcon="userIcon"
+      :tab="tab"
+      @tab-change="tabChange"
+      :items="items"
+      :userName="userName"
+      :productName="productName"
+    />
     <v-tabs-items :value="tab" @change="tabChange">
       <v-tab-item
         v-for="item in items"
@@ -20,6 +27,7 @@ import ChatHead from '../molecules/ChatHead'
 import TheChatBody from '../container/TheChatBody'
 import TheChatDetail from '../container/TheChatDetail'
 import TheChatActionSend from '../container/TheChatActionSend'
+import { mapGetters } from 'vuex'
 
 export default {
   components: {
@@ -33,17 +41,15 @@ export default {
       tab: 0,
       items: [
         {
-          tab: 'チャット',
-          content: 'TheChatBody',
-          button: 'TheChatActionSend',
-        },
-        {
           tab: '商品状況',
           content: 'TheChatDetail',
           button: ''
         }
       ]
     }
+  },
+  computed: {
+    ...mapGetters('chat', ['userName', 'productName', 'userIcon'])
   },
   methods: {
     tabChange(e) {
