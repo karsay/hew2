@@ -443,7 +443,10 @@ class product extends Model
                     'histories_shipping_state' => $sellerShippingState,
                     'user_id' => $sellerUserId,
                     'user_name' => $sellerUserName,
-                    'user_image' => $sellerUserImage
+                    'user_image' => $sellerUserImage,
+                    'buyer_id' => $item->users_id,
+                    'buyer_name' => $item->user->users_name,
+                    'buyer_image' => $item->user->users_images_path
 
 
                 ]
